@@ -4,6 +4,7 @@ import { Container } from './styles';
 import { useAuth } from '../../../providers/auth';
 import SideDrawer from '../SideDrawer/index';
 import NavMenu from '../NavMenu';
+import LogoMarca from '../LogoMarca';
 
 const Toolbar = () => {
 
@@ -17,9 +18,7 @@ const Toolbar = () => {
                 <IconeBotao open="open"/>
             </div>
             <div className="area-logoMarca">
-                <div className="logoMarca">
-                    <h1>TopRoleplay</h1>
-                </div>
+                <LogoMarca/>
             </div>
             <div className="area-menu">
                 <NavMenu/>

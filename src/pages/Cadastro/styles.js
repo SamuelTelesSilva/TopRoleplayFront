@@ -33,11 +33,12 @@ export const Main = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    
+    margin: 25px 0px 25px 0px;
 
     .aux-cont{
         width: 650px;
-        height: 300px;
+        height: 100%;
+
     }
 
     .area-form{
@@ -85,15 +86,10 @@ export const Main = styled.div`
         margin-left: 5px;
     }
 
-    .area-info{
-        display: flex;
-        color: white;
-        font-size: 14px;
-        margin-top: 10px;
-    }
-    
 
+    
     @media screen and (max-width: 640px){
+        
 
         .aux-cont{
             display: block;
@@ -107,7 +103,7 @@ export const Main = styled.div`
         }
 
         .button-cadastrar{
-            margin-top: 10px;
+            margin-bottom: 10px;
             margin-left: 0px;
         }
 
@@ -121,6 +117,5 @@ export const Main = styled.div`
 
 export const Footer = styled.div`
     grid-area: F;
-    background: linear-gradient(to right, var(--corFundoPrincipal), var(--corSecundaria));
-
+    background: var(--corSecundaria);
 `;

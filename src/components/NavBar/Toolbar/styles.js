@@ -3,15 +3,18 @@ import styled from 'styled-components';
 export const Container = styled.div`
     grid-area: H;
     display: flex;
-    background: var(--corSecundaria);
+    background: linear-gradient(to right, var(--corFundoPrincipal), var(--corSecundaria));
     width: 100%;
     height: 100%;
     justify-content: space-between;
+    align-items: center;
+    
 
     .area-icon-button{
         width: 50px;
         height: 50px;
-        margin: 5px 0px 5px 1px;
+        margin: 0px 0px 0px 1px;
+        
     }
 
     .area-logoMarca{
@@ -19,12 +22,8 @@ export const Container = styled.div`
         justify-content: center;
         align-items: center;
         border: 1px solid white;
-        margin-left: 20px;
+        margin-left: 5%;
         border-radius: 5px;
-    }
-
-    .logoMarca{
-        color: white;
     }
 
     .area-menu{
@@ -34,8 +33,11 @@ export const Container = styled.div`
     }
 
     @media screen and (min-width: 640px){ 
+        
+
         .area-icon-button{
             display: none;
+            
         }
 
         .area-logoMarca{
@@ -44,7 +46,6 @@ export const Container = styled.div`
         .area-menu{
             display: flex;
         }
-
     }
     
 `;

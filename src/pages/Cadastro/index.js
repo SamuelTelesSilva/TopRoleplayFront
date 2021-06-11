@@ -3,7 +3,7 @@ import {Grid, Main, Footer} from './styles';
 import NavBar from '../../components/NavBar/Toolbar/index';
 import Button from '../../components/Button/index';
 
-const Login = () =>{
+const Cadastro = () =>{
     
     return(
         <Grid>
@@ -13,6 +13,14 @@ const Login = () =>{
                     <div className="area-form"> 
                         <form>
                             <div>
+                                <label>Nome</label> 
+                            </div> 
+                            <input type="email" placeholder="E-mail"/>
+                            <div>
+                                <label>Idade</label> 
+                            </div>
+                            <input type="password" placeholder="Senha"/>
+                            <div>
                                 <label>E-mail</label> 
                             </div> 
                             <input type="email" placeholder="E-mail"/>
@@ -20,20 +28,20 @@ const Login = () =>{
                                 <label>Senha</label> 
                             </div>
                             <input type="password" placeholder="Senha"/>
+                            <div>
+                                <label>Senha</label> 
+                            </div>
+                            <input type="password" placeholder="Confirme a sua senha"/>
                         </form> 
                     </div>
 
                     <div className="area-button">
-                        <div className="button-entrar">
-                            <Button title="Entrar"/>
-                        </div>
                         <div className="button-cadastrar">
                             <Button title="Criar conta"/>
                         </div>
-                    </div>
-
-                    <div className="area-info">
-                        Esqueceu a sua senha?
+                        <div className="button-entrar">
+                            <Button title="Entrar"/>
+                        </div>
                     </div>
                 </div>     
             </Main>
@@ -41,4 +49,4 @@ const Login = () =>{
         </Grid>
     );
 }
-export default Login;
+export default Cadastro;

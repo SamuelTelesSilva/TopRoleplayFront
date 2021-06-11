@@ -20,7 +20,7 @@ export const Container = styled.div`
     .area-conteudo{
         display: block;
         width: 80%;
-        background-color: #111;
+        background: linear-gradient(to right, var(--corFundoPrincipal), var(--corSecundaria));
 
         .area-icon{
             width: 60px;
