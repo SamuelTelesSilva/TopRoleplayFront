@@ -83,13 +83,41 @@ export const Main = styled.div`
 
     .button-cadastrar{
         margin-left: 5px;
+
+        a{
+            width: 100%;
+        }
     }
 
     .area-info{
-        display: flex;
+        display: block;
         color: white;
         font-size: 14px;
         margin-top: 10px;
+
+        .msgError{
+            display: block;
+            margin: 10px 0px 10px 0px;
+            word-break: break-all;
+            color: var(--corTerciaria);
+            font-size: 14px;
+        }
+    }
+
+    .input-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--corTerciaria);
+        border-radius: 5px;
+        color: white;
+        width: 100%;
+        max-width: 250px;
+        height: 50px;
+        font-size: 16px;
+        :hover{
+            cursor: pointer;
+        }
     }
     
 
@@ -115,6 +143,9 @@ export const Main = styled.div`
             input{
                 margin-bottom: 15px;
             }
+        }
+        .input-button{
+            max-width: 100%;
         }
     }
 `;

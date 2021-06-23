@@ -1,10 +1,22 @@
 import React from 'react';
 import {Grid, Main, Footer} from './styles';
+import { useAuth } from '../../providers/auth';
+import { Link } from 'react-router-dom';
 import NavBar from '../../components/NavBar/Toolbar/index';
 import Button from '../../components/Button/index';
 
 const Login = () =>{
+    const { handleLogin, loginInput, setLoginInput, msgError} = useAuth();
+
+
+    //Pegando os valores do input e enviando para o loginInput do auth
+    const changeValue = event => {
+        const {name, value} = event.target;
+        setLoginInput({...loginInput, [name]: value});
+    }
+
     
+
     return(
         <Grid>
             <NavBar/>
@@ -15,24 +27,50 @@ const Login = () =>{
                             <div>
                                 <label>E-mail</label> 
                             </div> 
-                            <input type="email" placeholder="E-mail"/>
+                            <input 
+                                id="input-email"
+                                type="email" 
+                                placeholder="E-mail"
+                                name="username"
+                                value={loginInput.username}
+                                onChange={changeValue}    
+                                />
                             <div>
                                 <label>Senha</label> 
                             </div>
-                            <input type="password" placeholder="Senha"/>
+                            <input 
+                                id="input-password"
+                                type="password" 
+                                placeholder="Senha"
+                                name="password"
+                                value={loginInput.password}
+                                onChange={changeValue} 
+                                />
                         </form> 
                     </div>
-
+                    
                     <div className="area-button">
                         <div className="button-entrar">
-                            <Button title="Entrar"/>
+                            <input 
+                                className="input-button"
+                                type="submit" 
+                                value="Entrar"
+                                onClick={handleLogin}    
+                            />
                         </div>
                         <div className="button-cadastrar">
-                            <Button title="Criar conta"/>
+                            <Link
+                                to={`/register`}
+                                style={{textDecoration: 'none'}}>
+                                    <Button title="Criar conta"/>
+                            </Link>
                         </div>
                     </div>
 
                     <div className="area-info">
+                        <div id="msgError" className="msgError">
+                            {msgError}
+                        </div>
                         Esqueceu a sua senha?
                     </div>
                 </div>     
