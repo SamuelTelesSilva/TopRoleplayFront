@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, Main} from './styles';
+import {Grid, Main, ImageGrid} from './styles';
 import NavBar from '../../components/NavBar/Toolbar/index';
 import Footer from '../../components/Footer/index';
 import { avatarLinks } from '../../service/avatarLinks';
@@ -7,7 +7,8 @@ import Slider from "react-slick";
 import useWindowDimensions  from '../../components/useWindowDimensions/index';
 
 
-const Login = () => {
+const DashboardUsuario = () => {
+
     //Utilizado para pegar o tamanho da tela
     const {width} = useWindowDimensions();
 
@@ -45,13 +46,36 @@ const Login = () => {
         ]
       };
 
-    
 
+      const [selectValue, setSelectValue] = React.useState();
+        //console.log(selectValue)
+      
+
+      //Função que esta recebendo todos os itens que foi enviado
+      const pegarDados = (item) =>{
+        console.log('id: '+ item.id);
+        console.log('titulo: '+ item.titulo);
+      }
+    
+      
     return(
         <Grid>
             <NavBar/>
             <Main width={width}>
                 <div className="container">
+                    <div>
+                        asdasdasdadasdasdasdasdasdasd
+                        asdasdadad
+                        adsadadsadasdadasdasdasdadsasdads
+                        adasdad
+                    </div>
+                    <ImageGrid>
+                        {avatarLinks.map((item) =>(
+                            <div key={item.id} className="cont-img" onClick={() => pegarDados(item)}>
+                                <img  src={item.url} alt={item.titulo}/>
+                            </div>
+                        ))}
+                    </ImageGrid>
                     <div className="cont-slider">
                         <Slider {...settings} >
                             {avatarLinks.map((item) =>(
@@ -67,10 +91,4 @@ const Login = () => {
         </Grid>
     );
 }
-export default Login;
-
-/*
-
-
-
-*/
+export default DashboardUsuario;

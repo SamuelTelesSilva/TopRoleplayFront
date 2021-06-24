@@ -9,15 +9,45 @@ export const avatarLinks = [
         id: 2,
         titulo: 'img qualquer 2',
         url: 'https://www.rockstargames.com/br/img/global/downloads/buddyiconsconavatars/v_casino_heist2_256x256.jpg'
-     },
-     {
+    },
+    {
         id: 3,
         titulo: 'img qualquer 3',
         url: 'https://www.rockstargames.com/br/img/global/downloads/buddyiconsconavatars/v_gunrunning_guy_256x256.jpg'
-     },
-     {
+    },
+    {
         id: 4,
         titulo: 'img qualquer 4',
         url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWbpkS9Eh_hqXwNhzl0YeMEd9AT-YyxfNtGoGY8ocFWs9mV973-3vuaX2zzn6n-Ifjv-Q&usqp=CAU'
-     }
+    },
+    {
+        id: 5,
+        titulo: 'img qualquer 4',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWbpkS9Eh_hqXwNhzl0YeMEd9AT-YyxfNtGoGY8ocFWs9mV973-3vuaX2zzn6n-Ifjv-Q&usqp=CAU'
+    },
+    {
+        id: 6,
+        titulo: 'img qualquer 4',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWbpkS9Eh_hqXwNhzl0YeMEd9AT-YyxfNtGoGY8ocFWs9mV973-3vuaX2zzn6n-Ifjv-Q&usqp=CAU'
+    },
+    {
+        id: 7,
+        titulo: 'img qualquer 4',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWbpkS9Eh_hqXwNhzl0YeMEd9AT-YyxfNtGoGY8ocFWs9mV973-3vuaX2zzn6n-Ifjv-Q&usqp=CAU'
+    },
+    {
+        id: 8,
+        titulo: 'img qualquer 4',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWbpkS9Eh_hqXwNhzl0YeMEd9AT-YyxfNtGoGY8ocFWs9mV973-3vuaX2zzn6n-Ifjv-Q&usqp=CAU'
+    },
+    {
+        id: 9,
+        titulo: 'img qualquer 4',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWbpkS9Eh_hqXwNhzl0YeMEd9AT-YyxfNtGoGY8ocFWs9mV973-3vuaX2zzn6n-Ifjv-Q&usqp=CAU'
+    },
+    {
+        id: 10,
+        titulo: 'img qualquer 4',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWbpkS9Eh_hqXwNhzl0YeMEd9AT-YyxfNtGoGY8ocFWs9mV973-3vuaX2zzn6n-Ifjv-Q&usqp=CAU'
+    },
 ]

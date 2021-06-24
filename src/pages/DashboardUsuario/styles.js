@@ -27,21 +27,16 @@ export const Main = styled.div`
     width: 100%;
 
     .container{
+        display: block;
         width: 650px;
         height: 100%;
         border: 1px solid red;
     }
 
     .cont-slider{
-        img{
-            width: 100%;
-            height: auto;
-            padding: 10px;
-        }
+        display: none;  
     }
 
-
-    
     @media screen and (max-width: 700px){
         .container{
             width: 100%;
@@ -63,6 +58,31 @@ export const Main = styled.div`
                 height: auto;
                 padding: 10px;
             }
+        }
+    }
+`;
+
+export const ImageGrid = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid white;
+    
+
+    .cont-img{
+        margin-left: 7.5px;
+        margin-top: 5px;
+        border: 1px solid red;
+        border-radius: 50%;
+    }
+
+    img{
+        width: 150px;
+        height: 150px;
+        padding: 10px;
+        border-radius: 50%;
+
+        :hover{
+            cursor: pointer;
         }
     }
 `;
