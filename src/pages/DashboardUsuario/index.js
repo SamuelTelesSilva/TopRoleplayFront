@@ -46,9 +46,9 @@ const DashboardUsuario = () => {
         ]
       };
 
-
-      const [selectValue, setSelectValue] = React.useState();
-        //console.log(selectValue)
+      //Tambem posso colocar todos os dados no state, e mandar pelo auth para qualquer componente
+      const [selectValue, setSelectValue] = React.useState({});
+      console.log(selectValue);
       
 
       //Função que esta recebendo todos os itens que foi enviado
@@ -71,7 +71,7 @@ const DashboardUsuario = () => {
                     </div>
                     <ImageGrid>
                         {avatarLinks.map((item) =>(
-                            <div key={item.id} className="cont-img" onClick={() => pegarDados(item)}>
+                            <div key={item.id} className="cont-img" onClick={() => setSelectValue(item)}>
                                 <img  src={item.url} alt={item.titulo}/>
                             </div>
                         ))}
