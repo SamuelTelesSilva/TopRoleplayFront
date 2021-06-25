@@ -30,7 +30,7 @@ const Routes = () => (
     <Switch>
         <CustomRoute exact path="/login" component={Login} />
         <CustomRoute path="/register" component={Cadastro} />
-        <CustomRoute path="/dashboard/usuario" component={ DashboardUsuario } />
+        <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } />
     </Switch>
  
 );
