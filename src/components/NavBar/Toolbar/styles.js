@@ -21,9 +21,7 @@ export const Container = styled.div`
         display: none;
         justify-content: center;
         align-items: center;
-        border: 1px solid white;
         margin-left: 5%;
-        border-radius: 5px;
     }
 
     .area-menu{
