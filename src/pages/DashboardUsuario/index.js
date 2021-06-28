@@ -11,12 +11,23 @@ import history from '../../history';
 import {Link} from 'react-router-dom';
 import api from '../../service/api';
 
+import { useAuth } from '../../providers/auth';
+
 const DashboardUsuario = () => {
 
     //Utilizado para pegar o tamanho da tela
     const {width} = useWindowDimensions();
-    const [urlImgPerfilSelected, setUrlImgPerfilSelected] = useState('https://www.rockstargames.com/br/img/global/downloads/buddyiconsconavatars/v_afterhours_taleofus2_256x256.jpg');
+    //Pegando os dados do usuario logado
+    const {dadosUserLogado} = useAuth();
 
+    const [urlImgPerfilSelected, setUrlImgPerfilSelected] = useState(dadosUserLogado.urlAvatar);
+
+
+    
+
+    console.log(dadosUserLogado.urlAvatar);
+    
+    
     //setttings do Slick
     var settings = {
         dots: false,
@@ -61,13 +72,13 @@ const DashboardUsuario = () => {
     const [perfilUserInput, setPerfilUserInput] = useState({
         nome: '',
         idade: '',
-        urlAvatar: urlImgPerfilSelected,
+        urlAvatar: '',
         senhaAtual:'',
         senha: '',
         confirmaSenha:''
         
     });
-    const [aviso, setAviso] = useState('');
+
 
     //gerando uma hash para a senha do usuario
     var bcrypt = require('bcryptjs');
@@ -98,40 +109,44 @@ const DashboardUsuario = () => {
     
 
 
-    /*const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     useEffect(() =>{
         if(token){
             api.defaults.headers.Autorization = `Bearer ${JSON.parse(token)}`;
         }
-    }, [token]);*/
+    }, [token]);
 
 
     //Função que envia os dados para api
     async function handleSubmit(){
 
         //Passando o token para a api
-        //updateUser.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
+        api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
 
         const data = {
 
             'nome': perfilUserInput.nome,
             'idade': perfilUserInput.idade,
-            'urlAvatar': perfilUserInput.urlAvatar,
+            'urlAvatar': urlImgPerfilSelected,
             'senhaAnterior': perfilUserInput.senhaAtual,
             'senha': hash
         }
 
         //Verificando se existe campos vazios
         if(perfilUserInput.nome !== '' && perfilUserInput.idade !== '' && hash !== ''){
-            await updateUser(1,data)
+            await api.put(`/api/usuarios/${1}`, data)
             .then(response => {
                 if(response.status === 200){
                     alert("Usuario atualizado com sucesso!");
                     history.push('/login');      
                 }
             })
-            .catch(e => {
-                console.log(e);
+            .catch(error => {
+                if( error.request.status === 403){
+                    alert('Ocorreu um erro com o token')
+                }else if(error.request.status === 404){
+                    alert('A senha atual não esta correta')
+                }
             });
         }else{
             //validarDadosInput();
@@ -157,7 +172,7 @@ const DashboardUsuario = () => {
                         <div className="imgGallery">
                             {avatarLinks.map((item) =>(
                                 <div key={item.id} className="cont-img" onClick={() => imgPerfilSelected(item)}>
-                                    <img  src={item.url} alt={item.titulo}/>                               
+                                    <img src={item.url} alt={item.titulo}/>                               
                                 </div>
                             ))}
                         </div>

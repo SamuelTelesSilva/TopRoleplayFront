@@ -12,6 +12,7 @@ export const AuthProvider = (props) => {
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const [msgError, setMsgError] = useState('');
+    const [dadosUserLogado, setDadosUserLogado] = useState('');
     
     const [loginInput, setLoginInput] = useState({
         username: '',
@@ -48,7 +49,8 @@ export const AuthProvider = (props) => {
                 localStorage.setItem('token', JSON.stringify(response.data.token));
                 api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
                 setAuthenticated(true);
-                history.push('/privado');
+                setDadosUserLogado(response.data);
+                history.push('/dashboard/usuario');
             }).catch(error => {
                 if(error.request.status === 401){
                     setMsgError('Login e senha invalidos');
@@ -58,6 +60,7 @@ export const AuthProvider = (props) => {
             });
         }
     }
+
     //Login fim
     //------------------------------------------------------------
 
@@ -71,7 +74,9 @@ export const AuthProvider = (props) => {
             loginInput,
             setLoginInput,
             handleLogin,
-            msgError
+            msgError,
+            dadosUserLogado
+
             }}>
             {props.children}
         </AuthContext.Provider>
