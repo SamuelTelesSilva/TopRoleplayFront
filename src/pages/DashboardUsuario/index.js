@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Grid, Main, ImageGallery, ImagePerfil, FormEditarPerfil} from './styles';
 import NavBar from '../../components/NavBar/Toolbar/index';
 import Footer from '../../components/Footer/index';
@@ -6,6 +6,10 @@ import { avatarLinks } from '../../service/avatarLinks';
 import Slider from "react-slick";
 import useWindowDimensions  from '../../components/useWindowDimensions/index';
 
+import { criarUsuario, updateUser} from '../../service/toproleplayService';
+import history from '../../history';
+import {Link} from 'react-router-dom';
+import api from '../../service/api';
 
 const DashboardUsuario = () => {
 
@@ -48,13 +52,93 @@ const DashboardUsuario = () => {
       };
 
 
-      //Função que recupera os dados aonde foi clicado, estou pegando a url do  avatar selecionado
-      const imgPerfilSelected = (item)=>{
+    //Função que recupera os dados aonde foi clicado, estou pegando a url do  avatar selecionado
+    const imgPerfilSelected = (item)=>{
         setUrlImgPerfilSelected(item.url);
-      }
+    }
+
+
+    const [perfilUserInput, setPerfilUserInput] = useState({
+        nome: '',
+        idade: '',
+        urlAvatar: urlImgPerfilSelected,
+        senhaAtual:'',
+        senha: '',
+        confirmaSenha:''
+        
+    });
+    const [aviso, setAviso] = useState('');
+
+    //gerando uma hash para a senha do usuario
+    var bcrypt = require('bcryptjs');
+    var salt = bcrypt.genSaltSync(10);
+    var hash= '';
+
+    //Pegando os valores digitados no input
+    const changeValue = (event) => {
+        const { name, value } = event.target;
+        setPerfilUserInput({...perfilUserInput, [name]: value});
+    }
+    
+    console.log(perfilUserInput)
+    
+
+   
+
+    //Verificando e gerando uma hash para a senha do usuario
+    if(perfilUserInput.confirmaSenha !== ''){
+        if(perfilUserInput.confirmaSenha !== perfilUserInput.senha){
+            document.getElementById('msgError').innerHTML = 'É obrigatório repetir a SENHA';
+        }else{
+            hash = bcrypt.hashSync(perfilUserInput.confirmaSenha, salt);
+            document.getElementById('msgError').innerHTML = '';
+        }
+    }
 
     
-      
+
+
+    /*const token = localStorage.getItem('token');
+    useEffect(() =>{
+        if(token){
+            api.defaults.headers.Autorization = `Bearer ${JSON.parse(token)}`;
+        }
+    }, [token]);*/
+
+
+    //Função que envia os dados para api
+    async function handleSubmit(){
+
+        //Passando o token para a api
+        //updateUser.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
+
+        const data = {
+
+            'nome': perfilUserInput.nome,
+            'idade': perfilUserInput.idade,
+            'urlAvatar': perfilUserInput.urlAvatar,
+            'senhaAnterior': perfilUserInput.senhaAtual,
+            'senha': hash
+        }
+
+        //Verificando se existe campos vazios
+        if(perfilUserInput.nome !== '' && perfilUserInput.idade !== '' && hash !== ''){
+            await updateUser(1,data)
+            .then(response => {
+                if(response.status === 200){
+                    alert("Usuario atualizado com sucesso!");
+                    history.push('/login');      
+                }
+            })
+            .catch(e => {
+                console.log(e);
+            });
+        }else{
+            //validarDadosInput();
+        }
+    }
+
+    
     return(
         <Grid>
             <NavBar/>
@@ -101,7 +185,8 @@ const DashboardUsuario = () => {
                                         type="text"
                                         placeholder="Nome"
                                         name="nome"
-                                        
+                                        value={perfilUserInput.nome}
+                                        onChange={changeValue} 
                                         />
                                     <div>
                                         <label>Idade</label> 
@@ -111,7 +196,8 @@ const DashboardUsuario = () => {
                                         type="number" 
                                         placeholder="Idade"
                                         name="idade"
-                                        
+                                        value={perfilUserInput.idade}
+                                        onChange={changeValue} 
                                         />
                                     <div>
                                         <label>Digite a senha atual</label> 
@@ -121,7 +207,8 @@ const DashboardUsuario = () => {
                                         type="password" 
                                         placeholder="Senha atual"
                                         name="senhaAtual"
-                                        
+                                        value={perfilUserInput.senhaAtual}
+                                        onChange={changeValue} 
                                         />
                                     <div>
                                         <label>Nova Senha</label> 
@@ -131,7 +218,8 @@ const DashboardUsuario = () => {
                                         type="password" 
                                         placeholder="Senha"
                                         name="senha"
-                                            
+                                        value={perfilUserInput.senha}
+                                        onChange={changeValue}       
                                         />
                                     <div>
                                         <label>Digite a Senha novamente</label> 
@@ -141,7 +229,8 @@ const DashboardUsuario = () => {
                                         type="password" 
                                         placeholder="Confirme a sua senha"
                                         name="confirmaSenha"
-                                            
+                                        value={perfilUserInput.confirmaSenha}
+                                        onChange={changeValue}  
                                         />
                                 </form> 
                             </div>
@@ -154,6 +243,7 @@ const DashboardUsuario = () => {
                                         className="input-button"
                                         type="submit" 
                                         value="Atualizar Dados"
+                                        onClick={handleSubmit}
                                         />
                                 </div>
                             </div>

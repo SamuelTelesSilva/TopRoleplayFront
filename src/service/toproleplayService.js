@@ -12,4 +12,12 @@ export const efetuarLogin = data => {
 export const criarUsuario = data => {
     return http.post("/api/usuarios", data);
 };
+
+export const updateUser = (id, data) => {
+    return http.put(`/api/usuarios/${id}`, data);
+};
+
+export const remove = id => {
+    return http.delete(`/contatos/${id}`);
+};
   

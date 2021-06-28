@@ -57,8 +57,6 @@ export const Main = styled.div`
                 padding: 10px;
                 border-radius: 25px;
             }
-
-            
         }
     }
 `;
