@@ -181,7 +181,7 @@ const Cadastro = () =>{
                             <Link 
                                 to={`/login`}
                                 style={{textDecoration: 'none'}}>
-                                    <Button  title="Entrar"/>
+                                    <Button title="Entrar"/>
                             </Link>
                             
                         </div>

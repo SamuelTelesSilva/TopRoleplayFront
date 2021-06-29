@@ -5,6 +5,9 @@ import { useAuth } from '../../../providers/auth';
 import SideDrawer from '../SideDrawer/index';
 import NavMenu from '../NavMenu';
 import LogoMarca from '../LogoMarca';
+import PerfilLogado from '../PerfilLogado';
+
+
 
 const Toolbar = () => {
 
@@ -20,11 +23,13 @@ const Toolbar = () => {
             <div className="area-logoMarca">
                 <LogoMarca/>
             </div>
-            <div className="area-menu">
-                <NavMenu/>
+            <div className="area-menu-perfil">
+                
+                <PerfilLogado />
             </div>
             {openMenu ? <SideDrawer/> : null} 
         </Container>
     );
 }
 export default Toolbar;
+//<NavMenu/>

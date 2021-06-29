@@ -15,6 +15,15 @@ export const Container = styled.div`
         cursor: pointer;
     }
 
+    button{
+        color: white;
+        background: var(--corTerciaria);
+        font-size: 16px;
+
+        :hover{
+            cursor: pointer;
+        }
+    }
 
     @media screen and (max-width: 640px){ 
         max-width: 100%;

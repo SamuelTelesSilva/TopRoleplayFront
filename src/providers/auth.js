@@ -4,16 +4,16 @@ import { efetuarLogin } from '../service/toproleplayService';
 import history from '../history';
 
 
-export const AuthContext = createContext({});
 
+export const AuthContext = createContext({});
 export const AuthProvider = (props) => {
     
     const [openMenu, setOpenMenu] = useState(false);
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const [msgError, setMsgError] = useState('');
-    const [dadosUserLogado, setDadosUserLogado] = useState('');
-    
+
+
     const [loginInput, setLoginInput] = useState({
         username: '',
         password: ''
@@ -46,10 +46,15 @@ export const AuthProvider = (props) => {
         }else{
             await efetuarLogin(data)
             .then(response =>{
+
+                //Setando os valores no localStorage
                 localStorage.setItem('token', JSON.stringify(response.data.token));
+                localStorage.setItem('nome', response.data.nome);
+                localStorage.setItem('urlAvatar', response.data.urlAvatar);
+
                 api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
                 setAuthenticated(true);
-                setDadosUserLogado(response.data);
+
                 history.push('/dashboard/usuario');
             }).catch(error => {
                 if(error.request.status === 401){
@@ -74,9 +79,7 @@ export const AuthProvider = (props) => {
             loginInput,
             setLoginInput,
             handleLogin,
-            msgError,
-            dadosUserLogado
-
+            msgError
             }}>
             {props.children}
         </AuthContext.Provider>

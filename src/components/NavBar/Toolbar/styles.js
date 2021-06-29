@@ -24,9 +24,8 @@ export const Container = styled.div`
         margin-left: 5%;
     }
 
-    .area-menu{
+    .area-menu-perfil{
         display: none;
-        border: 1px solid red;
         align-items: center;
     }
 
@@ -41,7 +40,7 @@ export const Container = styled.div`
         .area-logoMarca{
             display: flex;
         }
-        .area-menu{
+        .area-menu-perfil{
             display: flex;
         }
     }

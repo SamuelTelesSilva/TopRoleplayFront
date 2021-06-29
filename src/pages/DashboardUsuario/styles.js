@@ -115,8 +115,7 @@ export const ImagePerfil = styled.div`
         max-width: 250px;
         max-height: 250px;
         border-radius: 50%;
-        border: 1px solid white;
-
+        
         img{
             width: 100%;
             max-width: 250px;

@@ -5,29 +5,20 @@ import Footer from '../../components/Footer/index';
 import { avatarLinks } from '../../service/avatarLinks';
 import Slider from "react-slick";
 import useWindowDimensions  from '../../components/useWindowDimensions/index';
-
-import { criarUsuario, updateUser} from '../../service/toproleplayService';
 import history from '../../history';
-import {Link} from 'react-router-dom';
 import api from '../../service/api';
-
 import { useAuth } from '../../providers/auth';
 
 const DashboardUsuario = () => {
 
     //Utilizado para pegar o tamanho da tela
-    const {width} = useWindowDimensions();
-    //Pegando os dados do usuario logado
-    const {dadosUserLogado} = useAuth();
-
-    const [urlImgPerfilSelected, setUrlImgPerfilSelected] = useState(dadosUserLogado.urlAvatar);
+    const { width } = useWindowDimensions();
 
 
-    
+    const urlAvatar = localStorage.getItem('urlAvatar');
 
-    console.log(dadosUserLogado.urlAvatar);
-    
-    
+    const [urlImgPerfilSelected, setUrlImgPerfilSelected] = useState(urlAvatar);
+
     //setttings do Slick
     var settings = {
         dots: false,
@@ -76,7 +67,6 @@ const DashboardUsuario = () => {
         senhaAtual:'',
         senha: '',
         confirmaSenha:''
-        
     });
 
 
@@ -91,10 +81,6 @@ const DashboardUsuario = () => {
         setPerfilUserInput({...perfilUserInput, [name]: value});
     }
     
-    console.log(perfilUserInput)
-    
-
-   
 
     //Verificando e gerando uma hash para a senha do usuario
     if(perfilUserInput.confirmaSenha !== ''){
@@ -105,9 +91,6 @@ const DashboardUsuario = () => {
             document.getElementById('msgError').innerHTML = '';
         }
     }
-
-    
-
 
     const token = localStorage.getItem('token');
     useEffect(() =>{
@@ -124,7 +107,6 @@ const DashboardUsuario = () => {
         api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
 
         const data = {
-
             'nome': perfilUserInput.nome,
             'idade': perfilUserInput.idade,
             'urlAvatar': urlImgPerfilSelected,
@@ -132,13 +114,16 @@ const DashboardUsuario = () => {
             'senha': hash
         }
 
-        //Verificando se existe campos vazios
+        //Verificando se existe campos vazios e enviando os dados
         if(perfilUserInput.nome !== '' && perfilUserInput.idade !== '' && hash !== ''){
             await api.put(`/api/usuarios/${1}`, data)
             .then(response => {
                 if(response.status === 200){
+                    localStorage.setItem('nome', response.data.nome);
+                    localStorage.setItem('urlAvatar', response.data.urlAvatar);
                     alert("Usuario atualizado com sucesso!");
-                    history.push('/login');      
+                    window.location.reload(); //fazendo um reload
+                    //history.push('/login');      
                 }
             })
             .catch(error => {

@@ -4,7 +4,9 @@ import {Container} from './styles';
 const Button = (props) => {
     return(
         <Container>
-            {props.title}
+            <button onClick={props.onclick}>
+                {props.title}
+            </button>
         </Container>
     );
 }
