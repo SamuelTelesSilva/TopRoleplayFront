@@ -97,6 +97,7 @@ export const ImageGallery = styled.div`
         }
     }
 
+    
     @media screen and (max-width: 700px){
         display: none;
     }
@@ -128,7 +129,6 @@ export const ImagePerfil = styled.div`
 
 export const FormEditarPerfil = styled.div`
 
-
     margin: 50px 0px 10px 0px; 
     
     .aux-cont{
@@ -138,6 +138,7 @@ export const FormEditarPerfil = styled.div`
     }
 
     .area-form{
+        margin-top: 25px;
         display: flex;
         width: 100%;
         
@@ -203,6 +204,18 @@ export const FormEditarPerfil = styled.div`
             cursor: pointer;
         }
     }
+
+    .cont-button-perfil{
+        display: flex;
+        justify-content: center;
+        margin-top: 35px;
+    }
+
+    .button-perfil{
+        width: 100%;
+        max-width: 150px;
+    }
+
 
     .msgError{
         color: var(--corTerciaria);

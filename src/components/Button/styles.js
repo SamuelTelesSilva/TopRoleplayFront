@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Buttonn = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,24 +10,14 @@ export const Container = styled.div`
     width: 100%;
     max-width: 250px;
     height: 50px;
+    font-size: 16px;
 
     :hover{
         cursor: pointer;
     }
 
-    button{
-        color: white;
-        background: var(--corTerciaria);
-        font-size: 16px;
-
-        :hover{
-            cursor: pointer;
-        }
-    }
-
     @media screen and (max-width: 640px){ 
-        max-width: 100%;
-        
+        max-width: 100%;   
     }
 `;
 //background: linear-gradient(to right, var(--corFundoPrincipal),  var(--corTerciaria), var(--corTerciaria));

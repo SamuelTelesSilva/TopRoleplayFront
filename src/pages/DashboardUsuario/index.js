@@ -8,6 +8,9 @@ import useWindowDimensions  from '../../components/useWindowDimensions/index';
 import history from '../../history';
 import api from '../../service/api';
 import { useAuth } from '../../providers/auth';
+import Button from '../../components/Button/index';
+
+
 
 const DashboardUsuario = () => {
 
@@ -100,6 +103,36 @@ const DashboardUsuario = () => {
     }, [token]);
 
 
+    //Função para atualizar a imagem de perfil
+    async function alterarAvatar(){
+
+        api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
+
+        const data = {
+            'urlAvatar': urlImgPerfilSelected
+        }
+        
+        await api.put(`/api/usuarios/avatar/${1}`, data)
+        .then(response => {
+            if(response.status === 200){
+                localStorage.setItem('nome', response.data.nome);
+                localStorage.setItem('urlAvatar', response.data.urlAvatar);
+                alert("Avatar atualizado com sucesso!");
+                window.location.reload(); //fazendo um reload
+                //history.push('/login');      
+            }
+        })
+        .catch(error => {
+            if( error.request.status === 403){
+                alert('Ocorreu um erro com o token')
+            }else if(error.request.status === 404){
+                alert('A senha atual não esta correta')
+            }
+        });
+    }
+
+
+
     //Função que envia os dados para api
     async function handleSubmit(){
 
@@ -109,7 +142,6 @@ const DashboardUsuario = () => {
         const data = {
             'nome': perfilUserInput.nome,
             'idade': perfilUserInput.idade,
-            'urlAvatar': urlImgPerfilSelected,
             'senhaAnterior': perfilUserInput.senhaAtual,
             'senha': hash
         }
@@ -138,6 +170,7 @@ const DashboardUsuario = () => {
         }
     }
 
+
     
     return(
         <Grid>
@@ -148,8 +181,7 @@ const DashboardUsuario = () => {
                         <div className="img-perfil">
                             <img src={urlImgPerfilSelected} alt={urlImgPerfilSelected}/>
                         </div>
-                    </ImagePerfil>
-                    
+                    </ImagePerfil>                    
                     <ImageGallery>
                         <div className="title-gallery">
                             <h2>Avatar</h2>
@@ -172,10 +204,18 @@ const DashboardUsuario = () => {
                             ))}
                         </Slider>
                     </div>
-
+                    
                     <FormEditarPerfil>
                         <div className="aux-cont">
+
+                            <div className="cont-button-perfil">
+                                <div className="button-perfil">
+                                    <Button title="Atualizar avatar" onclick={alterarAvatar}/>
+                                </div> 
+                            </div>
+
                             <div className="area-form"> 
+                            
                                 <form>
                                     <div>
                                         <label>Nome</label> 

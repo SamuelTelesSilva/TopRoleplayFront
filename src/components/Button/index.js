@@ -1,13 +1,11 @@
 import React from 'react';
-import {Container} from './styles';
+import {Buttonn} from './styles';
 
 const Button = (props) => {
     return(
-        <Container>
-            <button onClick={props.onclick}>
-                {props.title}
-            </button>
-        </Container>
+        <Buttonn onClick={props.onclick}>
+            {props.title}  
+        </Buttonn>
     );
 }
 export default Button;
