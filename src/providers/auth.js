@@ -12,6 +12,8 @@ export const AuthProvider = (props) => {
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const [msgError, setMsgError] = useState('');
+    const [idUserLogado, setIdUserLogado] = useState();
+    
 
 
     const [loginInput, setLoginInput] = useState({
@@ -49,6 +51,7 @@ export const AuthProvider = (props) => {
 
                 //Setando os valores no localStorage
                 localStorage.setItem('token', JSON.stringify(response.data.token));
+                localStorage.setItem('id', response.data.id);
                 localStorage.setItem('nome', response.data.nome);
                 localStorage.setItem('urlAvatar', response.data.urlAvatar);
 
@@ -79,7 +82,8 @@ export const AuthProvider = (props) => {
             loginInput,
             setLoginInput,
             handleLogin,
-            msgError
+            msgError,
+            idUserLogado
             }}>
             {props.children}
         </AuthContext.Provider>

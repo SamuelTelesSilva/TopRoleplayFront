@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Grid, Main, Footer} from './styles';
+import {Grid, Main, Header, Footer} from './styles';
 import {Link} from 'react-router-dom';
 
 import NavBar from '../../components/NavBar/Toolbar/index';
@@ -103,7 +103,7 @@ const Cadastro = () =>{
 
     return(
         <Grid>
-            <NavBar/>
+            <Header/>
             <Main>
                 <div className="aux-cont">
                     <div className="area-form"> 

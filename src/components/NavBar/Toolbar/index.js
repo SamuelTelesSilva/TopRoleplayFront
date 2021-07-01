@@ -24,7 +24,6 @@ const Toolbar = () => {
                 <LogoMarca/>
             </div>
             <div className="area-menu-perfil">
-                
                 <PerfilLogado />
             </div>
             {openMenu ? <SideDrawer/> : null} 

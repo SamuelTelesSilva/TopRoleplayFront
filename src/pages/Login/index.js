@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, Main, Footer} from './styles';
+import {Grid, Main, Footer, Header} from './styles';
 import { useAuth } from '../../providers/auth';
 import { Link } from 'react-router-dom';
 import NavBar from '../../components/NavBar/Toolbar/index';
@@ -19,7 +19,7 @@ const Login = () =>{
 
     return(
         <Grid>
-            <NavBar/>
+            <Header/>
             <Main>
                 <div className="aux-cont">
                     <div className="area-form"> 

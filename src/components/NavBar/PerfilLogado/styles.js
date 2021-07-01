@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
     display: ${props => props.autenticado ? 'flex' : 'none'};
     align-items: center;
+    
 
     .img-perfil{
         margin-right: 15px;
@@ -25,6 +26,5 @@ export const Container = styled.div`
 
     .botao-sair{
         width: 80px;
-        margin-right: 15px;
     }
 `;

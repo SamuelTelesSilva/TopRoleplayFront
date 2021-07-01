@@ -19,6 +19,7 @@ const DashboardUsuario = () => {
 
 
     const urlAvatar = localStorage.getItem('urlAvatar');
+    const idUserLogado = localStorage.getItem('id');
 
     const [urlImgPerfilSelected, setUrlImgPerfilSelected] = useState(urlAvatar);
 
@@ -112,7 +113,7 @@ const DashboardUsuario = () => {
             'urlAvatar': urlImgPerfilSelected
         }
         
-        await api.put(`/api/usuarios/avatar/${1}`, data)
+        await api.put(`/api/usuarios/avatar/${idUserLogado}`, data)
         .then(response => {
             if(response.status === 200){
                 localStorage.setItem('nome', response.data.nome);
@@ -148,7 +149,7 @@ const DashboardUsuario = () => {
 
         //Verificando se existe campos vazios e enviando os dados
         if(perfilUserInput.nome !== '' && perfilUserInput.idade !== '' && hash !== ''){
-            await api.put(`/api/usuarios/${1}`, data)
+            await api.put(`/api/usuarios/${idUserLogado}`, data)
             .then(response => {
                 if(response.status === 200){
                     localStorage.setItem('nome', response.data.nome);
@@ -210,7 +211,7 @@ const DashboardUsuario = () => {
 
                             <div className="cont-button-perfil">
                                 <div className="button-perfil">
-                                    <Button title="Atualizar avatar" onclick={alterarAvatar}/>
+                                    <Button title="Atualizar Avatar" onclick={alterarAvatar}/>
                                 </div> 
                             </div>
 
@@ -240,7 +241,7 @@ const DashboardUsuario = () => {
                                         onChange={changeValue} 
                                         />
                                     <div>
-                                        <label>Digite a senha atual</label> 
+                                        <label>Digite a Senha Atual</label> 
                                     </div> 
                                     <input 
                                         id="input-senha-atual" 
@@ -262,7 +263,7 @@ const DashboardUsuario = () => {
                                         onChange={changeValue}       
                                         />
                                     <div>
-                                        <label>Digite a Senha novamente</label> 
+                                        <label>Digite a Senha Novamente</label> 
                                     </div>
                                     <input 
                                         id="input-senha2"

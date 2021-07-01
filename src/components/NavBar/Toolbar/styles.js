@@ -21,17 +21,17 @@ export const Container = styled.div`
         display: none;
         justify-content: center;
         align-items: center;
-        margin-left: 5%;
+        margin-left: 64px;
     }
 
     .area-menu-perfil{
         display: none;
         align-items: center;
+        margin-right: 64px;
     }
 
     @media screen and (min-width: 640px){ 
         
-
         .area-icon-button{
             display: none;
             

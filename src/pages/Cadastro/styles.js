@@ -33,12 +33,12 @@ export const Main = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin: 25px 0px 25px 0px;
+    height: 100%;
+    margin: 32px 0px 32px 0px;
 
     .aux-cont{
         width: 650px;
         height: 100%;
-
     }
 
     .area-form{
@@ -129,7 +129,7 @@ export const Main = styled.div`
         }
 
         .button-cadastrar{
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             margin-left: 0px;
         }
 
@@ -145,7 +145,12 @@ export const Main = styled.div`
     }
 `;
 
+export const Header = styled.div`
+    grid-area: H;
+    background: linear-gradient(to right, var(--corFundoPrincipal), var(--corSecundaria));
+`;
+
 export const Footer = styled.div`
     grid-area: F;
-    background: var(--corSecundaria);
+    background: linear-gradient(to right, var(--corFundoPrincipal), var(--corSecundaria));
 `;

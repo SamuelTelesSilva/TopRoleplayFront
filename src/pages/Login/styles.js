@@ -72,7 +72,7 @@ export const Main = styled.div`
         display: flex; 
         width: 100%;
         justify-content: center;
-        margin-top: 20px;
+        margin-top: 24px;
     }
 
     .button-entrar, .button-cadastrar{
@@ -93,7 +93,7 @@ export const Main = styled.div`
         display: block;
         color: white;
         font-size: 14px;
-        margin-top: 10px;
+        margin-top: 16px;
 
         .msgError{
             display: block;
@@ -126,7 +126,7 @@ export const Main = styled.div`
         .aux-cont{
             display: block;
             width: 100%;
-            margin: 0px 1% 0px 1%;
+            margin: 32px 1% 32px 1%;
         }
 
         .area-button{
@@ -153,5 +153,9 @@ export const Main = styled.div`
 export const Footer = styled.div`
     grid-area: F;
     background: linear-gradient(to right, var(--corFundoPrincipal), var(--corSecundaria));
+`;
 
+export const Header = styled.div`
+    grid-area: H;
+    background: linear-gradient(to right, var(--corFundoPrincipal), var(--corSecundaria));
 `;

@@ -127,10 +127,7 @@ export const ImagePerfil = styled.div`
 `;
 
 
-export const FormEditarPerfil = styled.div`
-
-    margin: 50px 0px 10px 0px; 
-    
+export const FormEditarPerfil = styled.div`    
     .aux-cont{
         width: 650px;
         height: 100%;
@@ -138,12 +135,14 @@ export const FormEditarPerfil = styled.div`
     }
 
     .area-form{
-        margin-top: 25px;
+        margin-top: 32px;
         display: flex;
         width: 100%;
         
+        
         form{
             width: 100%;
+            margin: 0px 1% 0px -3px;
         }
 
         div label{
@@ -170,7 +169,7 @@ export const FormEditarPerfil = styled.div`
         display: flex; 
         width: 100%;
         justify-content: center;
-        margin-top: 20px;
+        margin: 20px 1% 0px -3px;
     }
 
     .button-entrar, .button-cadastrar{
@@ -254,6 +253,9 @@ export const FormEditarPerfil = styled.div`
     }
 
 `;
+
+
+
 
 
 
