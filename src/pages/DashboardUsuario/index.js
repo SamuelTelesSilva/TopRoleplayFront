@@ -12,15 +12,32 @@ import Button from '../../components/Button/index';
 
 const DashboardUsuario = () => {
 
-    //Utilizado para pegar o tamanho da tela
-    const { width } = useWindowDimensions();
-    const [senhaProvisoria, setSenhaProvisoria] = useState(localStorage.getItem('senhaUser'));
-
+    const { width } = useWindowDimensions();//Utilizado para pegar o tamanho da tela
+    const [senhaProvisoria] = useState(localStorage.getItem('senhaUser'));
     const urlAvatar = localStorage.getItem('urlAvatar');
     const idUserLogado = localStorage.getItem('id');
-    
-
     const [urlImgPerfilSelected, setUrlImgPerfilSelected] = useState(urlAvatar);
+    const token = localStorage.getItem('token');
+
+    const [perfilUserInput, setPerfilUserInput] = useState({
+        nome: '',
+        idade: '',
+        urlAvatar: '',
+        senhaAtual:'',
+        senha: '',
+        confirmaSenha:''
+    });
+
+    //gerando uma hash para a senha do usuario
+    var bcrypt = require('bcryptjs');
+    var salt = bcrypt.genSaltSync(10);
+    var hash= '';
+
+    useEffect(() =>{
+        if(token){
+            api.defaults.headers.Autorization = `Bearer ${JSON.parse(token)}`;
+        }
+    }, [token]);
 
     //setttings do Slick
     var settings = {
@@ -57,37 +74,22 @@ const DashboardUsuario = () => {
       };
 
 
-    //Função que recupera os dados aonde foi clicado, estou pegando a url do  avatar selecionado
+    //Pegando a url do  avatar selecionado
     const imgPerfilSelected = (item)=>{
         setUrlImgPerfilSelected(item.url);
     }
 
-
-    //Função para verificar o link que vai ser enviado para a api
+    /**
+     * Função para verificar o link que vai ser enviado para a api,
+     * Esta comparando o link do localStorage, com os links do avatarLinks.js
+     * @returns 
+     */
     const filtrarAvatar = () => {
         const res = avatarLinks.filter(avatar => avatar.url === urlAvatar);
         return res.length === 0 ? true : false;
     }
 
-
-
-
     
-    const [perfilUserInput, setPerfilUserInput] = useState({
-        nome: '',
-        idade: '',
-        urlAvatar: '',
-        senhaAtual:'',
-        senha: '',
-        confirmaSenha:''
-    });
-
-
-    //gerando uma hash para a senha do usuario
-    var bcrypt = require('bcryptjs');
-    var salt = bcrypt.genSaltSync(10);
-    var hash= '';
-
     //Pegando os valores digitados no input
     const changeValue = (event) => {
         const { name, value } = event.target;
@@ -105,17 +107,9 @@ const DashboardUsuario = () => {
         }
     }
 
-    const token = localStorage.getItem('token');
-    useEffect(() =>{
-        if(token){
-            api.defaults.headers.Autorization = `Bearer ${JSON.parse(token)}`;
-        }
-    }, [token]);
-
-
+    
     //Função para atualizar a imagem de perfil
     async function alterarAvatar(){
-        console.log(senhaProvisoria);
         api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
 
         const data = {
@@ -124,7 +118,7 @@ const DashboardUsuario = () => {
         }
         
         if(filtrarAvatar()){
-            console.log('Avatar errado');
+            alert('Avatar errado, por favor informe o erro para um ADM');
             localStorage.removeItem('token');
             window.location.reload();
         }else{
@@ -135,7 +129,6 @@ const DashboardUsuario = () => {
                     localStorage.setItem('urlAvatar', response.data.urlAvatar);
                     alert("Avatar atualizado com sucesso!");
                     window.location.reload(); //fazendo um reload
-                    //history.push('/login');      
                 }
             })
             .catch(error => {
@@ -153,7 +146,6 @@ const DashboardUsuario = () => {
     }
 
 
-
     //Função que envia os dados para api
     async function handleSubmit(){
 
@@ -169,11 +161,13 @@ const DashboardUsuario = () => {
 
         //Verificando se existe campos vazios e enviando os dados
         if(perfilUserInput.nome !== '' && perfilUserInput.idade !== '' && hash !== ''){
+
             await api.put(`/api/usuarios/${idUserLogado}`, data)
             .then(response => {
                 if(response.status === 200){
                     localStorage.setItem('nome', response.data.nome);
                     localStorage.setItem('urlAvatar', response.data.urlAvatar);
+                    localStorage.setItem('senhaUser', response.data.senha);
                     alert("Usuario atualizado com sucesso!");
                     window.location.reload(); //fazendo um reload
                     //history.push('/login');      
