@@ -5,10 +5,10 @@ import { AuthProvider } from './providers/auth';
 import { CookiesProvider } from 'react-cookie';
 
 ReactDOM.render(
-  <AuthProvider>
-    <CookiesProvider>
+  <CookiesProvider>
+    <AuthProvider>
       <App />
-    </CookiesProvider>
-  </AuthProvider>,
+    </AuthProvider>
+  </CookiesProvider>,
   document.getElementById('root')
 );

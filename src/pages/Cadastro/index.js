@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import {Grid, Main, Header, Footer} from './styles';
 import {Link} from 'react-router-dom';
-
-import NavBar from '../../components/NavBar/Toolbar/index';
 import Button from '../../components/Button/index';
 import { criarUsuario } from '../../service/toproleplayService';
 import history from '../../history';

@@ -3,7 +3,6 @@ import IconeBotao from '../IconeBotao/index';
 import { Container } from './styles';
 import { useAuth } from '../../../providers/auth';
 import SideDrawer from '../SideDrawer/index';
-import NavMenu from '../NavMenu';
 import LogoMarca from '../LogoMarca';
 import PerfilLogado from '../PerfilLogado';
 

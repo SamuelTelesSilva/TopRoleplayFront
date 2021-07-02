@@ -5,9 +5,7 @@ import Footer from '../../components/Footer/index';
 import { avatarLinks } from '../../service/avatarLinks';
 import Slider from "react-slick";
 import useWindowDimensions  from '../../components/useWindowDimensions/index';
-import history from '../../history';
 import api from '../../service/api';
-import { useAuth } from '../../providers/auth';
 import Button from '../../components/Button/index';
 
 
@@ -16,10 +14,11 @@ const DashboardUsuario = () => {
 
     //Utilizado para pegar o tamanho da tela
     const { width } = useWindowDimensions();
-
+    const [senhaProvisoria, setSenhaProvisoria] = useState(localStorage.getItem('senhaUser'));
 
     const urlAvatar = localStorage.getItem('urlAvatar');
     const idUserLogado = localStorage.getItem('id');
+    
 
     const [urlImgPerfilSelected, setUrlImgPerfilSelected] = useState(urlAvatar);
 
@@ -64,6 +63,16 @@ const DashboardUsuario = () => {
     }
 
 
+    //Função para verificar o link que vai ser enviado para a api
+    const filtrarAvatar = () => {
+        const res = avatarLinks.filter(avatar => avatar.url === urlAvatar);
+        return res.length === 0 ? true : false;
+    }
+
+
+
+
+    
     const [perfilUserInput, setPerfilUserInput] = useState({
         nome: '',
         idade: '',
@@ -106,30 +115,41 @@ const DashboardUsuario = () => {
 
     //Função para atualizar a imagem de perfil
     async function alterarAvatar(){
-
+        console.log(senhaProvisoria);
         api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
 
         const data = {
-            'urlAvatar': urlImgPerfilSelected
+            'urlAvatar': urlImgPerfilSelected,
+            'senhaProvisoria': senhaProvisoria
         }
         
-        await api.put(`/api/usuarios/avatar/${idUserLogado}`, data)
-        .then(response => {
-            if(response.status === 200){
-                localStorage.setItem('nome', response.data.nome);
-                localStorage.setItem('urlAvatar', response.data.urlAvatar);
-                alert("Avatar atualizado com sucesso!");
-                window.location.reload(); //fazendo um reload
-                //history.push('/login');      
-            }
-        })
-        .catch(error => {
-            if( error.request.status === 403){
-                alert('Ocorreu um erro com o token')
-            }else if(error.request.status === 404){
-                alert('A senha atual não esta correta')
-            }
-        });
+        if(filtrarAvatar()){
+            console.log('Avatar errado');
+            localStorage.removeItem('token');
+            window.location.reload();
+        }else{
+            await api.put(`/api/usuarios/avatar/${idUserLogado}`, data)
+            .then(response => {
+                if(response.status === 200){
+                    localStorage.setItem('nome', response.data.nome);
+                    localStorage.setItem('urlAvatar', response.data.urlAvatar);
+                    alert("Avatar atualizado com sucesso!");
+                    window.location.reload(); //fazendo um reload
+                    //history.push('/login');      
+                }
+            })
+            .catch(error => {
+                if( error.request.status === 403){
+                    alert('Ocorreu um erro com o token');
+                    localStorage.removeItem('token');
+                    window.location.reload();
+                }else if(error.request.status === 404){
+                    alert('A senha atual não esta igual a senha do registro informado');
+                    localStorage.removeItem('token');
+                    window.location.reload();
+                }
+            });
+        }  
     }
 
 

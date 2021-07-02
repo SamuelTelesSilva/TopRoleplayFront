@@ -2,7 +2,6 @@ import React from 'react';
 import {Grid, Main, Footer, Header} from './styles';
 import { useAuth } from '../../providers/auth';
 import { Link } from 'react-router-dom';
-import NavBar from '../../components/NavBar/Toolbar/index';
 import Button from '../../components/Button/index';
 
 const Login = () =>{

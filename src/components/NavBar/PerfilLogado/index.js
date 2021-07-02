@@ -4,19 +4,21 @@ import {useAuth} from '../../../providers/auth';
 import Button from '../../Button/index';
 import history from '../../../history';
 
-
 const PerfilLogado = () => {
     
     const { authenticated } = useAuth();
+
 
     //Pegando os dados do localStorage
     const nomePerfil = localStorage.getItem('nome');
     const urlAvatar = localStorage.getItem('urlAvatar');
 
     const sairDoPerfil = () =>{
+        localStorage.removeItem('id');
         localStorage.removeItem('token');
         localStorage.removeItem('nome');
         localStorage.removeItem('urlAvatar');
+        localStorage.removeItem('senhaUser');
         window.location.reload(); //fazendo um reload
         history.push('/login');
     }
@@ -38,7 +40,3 @@ const PerfilLogado = () => {
     );
 }
 export default PerfilLogado;
-
-/*
-
-*/
