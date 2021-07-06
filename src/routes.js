@@ -6,6 +6,8 @@ import Cadastro from './pages/Cadastro';
 import Login from './pages/Login/index';
 import DashboardUsuario from './pages/DashboardUsuario/index';
 import Dashboard from './pages/Dashboard';
+import DashboardCidade from './pages/DashboardCidade/index';
+import DashboardStreamer from './pages/DashboardStreamer/index';
 
 
 
@@ -37,3 +39,9 @@ const Routes = () => (
  
 );
 export default Routes;
+
+/**
+ * 
+ * <CustomRoute path="/dashboard/cidades" component={ DashboardCidade } />
+        <CustomRoute path="/dashboard/streamers" component={ DashboardStreamer } />
+ */

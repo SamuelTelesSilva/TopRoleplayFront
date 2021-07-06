@@ -1,46 +1,42 @@
 import React, { useState } from 'react';
 import { Container, PerfilUsuario, MenuLateral, MenuConf, Button, ButtonToggle} from './styles';
 import {Link} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function BarDashboard(){
+
     const [active, setActive] = useState(1);
     
     const btnList = [
         {
             id: 1,
             titulo: 'Cidades',
-            endpoint: 'cidades',
-            isDefault: false,
+            endpoint: 'cidades'
         },
         {
             id: 2,
             titulo: 'Streamers',
-            endpoint: 'streamers',
-            isDefault: false,
+            endpoint: 'streamers'
         },
         {
             id: 3,
             titulo: 'Clipes',
-            endpoint: 'clipes',
-            isDefault: false,
+            endpoint: 'clipes'
         },
         {
             id: 4,
             titulo: 'Grupos',
-            endpoint: 'grupos',
-            isDefault: false,
+            endpoint: 'grupos'
         },
         {
             id: 5,
             titulo: 'Eventos',
-            endpoint: 'eventos',
-            isDefault: false,
+            endpoint: 'eventos'
         },
         {
             id: 6,
             titulo: 'Noticias',
-            endpoint: 'noticias',
-            isDefault: false,
+            endpoint: 'noticias'
         }
     ]
     
@@ -60,7 +56,7 @@ export default function BarDashboard(){
             <MenuLateral>
                 <div className="cont-button">
                     {btnList.map(btn => (
-                        <Link 
+                        <NavLink 
                             to={`/dashboard/${btn.endpoint}`}
                             style={{textDecoration: 'none'}}
                             key={btn.id}
@@ -72,7 +68,7 @@ export default function BarDashboard(){
                             >
                                 {btn.titulo}
                             </ButtonToggle>
-                        </Link>
+                        </NavLink>
                     ))}
                 </div>
             </MenuLateral>

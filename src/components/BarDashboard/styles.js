@@ -95,9 +95,6 @@ export const Button = styled.button`
         color: white;
     }
 
-    
-
-
     @media screen and (max-width: 640px){ 
         max-width: 100%;   
     }
