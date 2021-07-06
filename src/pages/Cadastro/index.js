@@ -8,6 +8,7 @@ import history from '../../history';
 
 const Cadastro = () =>{
 
+    const [aviso, setAviso] = useState('');
     const [cadastroInput, setCadastroInput] = useState({
         nome: '',
         idade: '',
@@ -15,8 +16,7 @@ const Cadastro = () =>{
         senha: '',
         confirmaSenha:''
     });
-    const [aviso, setAviso] = useState('');
-
+    
     //gerando uma hash para a senha do usuario
     var bcrypt = require('bcryptjs');
     var salt = bcrypt.genSaltSync(10);
@@ -28,7 +28,6 @@ const Cadastro = () =>{
         setCadastroInput({...cadastroInput, [name]: value});
     }
 
-    //
     const validarDadosInput = () => {
 
         if(cadastroInput.nome === '' || cadastroInput.nome.length < 2){
@@ -97,7 +96,6 @@ const Cadastro = () =>{
             validarDadosInput();
         }
     }
-
 
     return(
         <Grid>

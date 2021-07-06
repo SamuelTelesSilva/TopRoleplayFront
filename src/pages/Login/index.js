@@ -7,14 +7,11 @@ import Button from '../../components/Button/index';
 const Login = () =>{
     const { handleLogin, loginInput, setLoginInput, msgError} = useAuth();
 
-
     //Pegando os valores do input e enviando para o loginInput do auth
     const changeValue = event => {
         const {name, value} = event.target;
         setLoginInput({...loginInput, [name]: value});
     }
-
-    
 
     return(
         <Grid>
