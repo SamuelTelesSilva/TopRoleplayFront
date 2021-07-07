@@ -1,6 +1,7 @@
 import React, {createContext, useState, useEffect} from 'react';
-import api from '../service/api';
+import { Route, Redirect} from 'react-router-dom';
 import { efetuarLogin } from '../service/toproleplayService';
+import api from '../service/api';
 import history from '../history';
 
 
@@ -12,11 +13,30 @@ export const AuthProvider = (props) => {
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const [msgError, setMsgError] = useState('');
-
     const [loginInput, setLoginInput] = useState({
         username: '',
         password: ''
     });
+
+
+    /**
+     * Função para autenticar as paginas
+     * @param {*} param0 
+     * @returns 
+     */
+    function CustomRoute({ isPrivate, ...rest}){
+        
+        if(loading){
+            return <h1>Loading...</h1>;
+        }
+    
+        if(isPrivate && !authenticated){
+            return <Redirect to="/login" />
+        }
+    
+        return <Route {...rest} />
+    }
+
 
     //--------------------------------------------------------
 
@@ -80,7 +100,8 @@ export const AuthProvider = (props) => {
             loginInput,
             setLoginInput,
             handleLogin,
-            msgError
+            msgError,
+            CustomRoute
             }}>
             {props.children}
         </AuthContext.Provider>

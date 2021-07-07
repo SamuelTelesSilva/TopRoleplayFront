@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Container, PerfilUsuario, MenuLateral, MenuConf, Button, ButtonToggle} from './styles';
-import {Link} from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 export default function BarDashboard(){
 
-    const [active, setActive] = useState(1);
+    //Pegando o id da pagina atual, para poder deixar o menu sempre na ultima pagina selecionada
+    const [active, setActive] = useState( parseInt(localStorage.getItem('idPagina')) );
     
     const btnList = [
         {
@@ -83,8 +83,6 @@ export default function BarDashboard(){
                     </Button>
                 </div>
             </MenuConf>
-            
-            
         </Container>
     );
 }
