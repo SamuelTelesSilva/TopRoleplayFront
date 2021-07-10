@@ -6,6 +6,7 @@ import Cadastro from './pages/Cadastro';
 import Login from './pages/Login/index';
 import DashboardUsuario from './pages/DashboardUsuario/index';
 import Dashboard from './pages/Dashboard';
+import CardItemDashboard from './components/CardItemDashboard';
 
 const Routes = () => {
     const { CustomRoute } = useAuth();
@@ -17,6 +18,7 @@ const Routes = () => {
                 <CustomRoute path="/register" component={Cadastro} />
                 <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } />
                 <CustomRoute path="/dashboard" component={ Dashboard } />
+                <CustomRoute path="/card" component={ CardItemDashboard } />
             </Switch>
         </>
     );
