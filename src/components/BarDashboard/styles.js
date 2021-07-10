@@ -4,8 +4,9 @@ export const Container = styled.div`
     grid-area: ML;
     display: block;
     background-color: var(--corSecundaria);
-    width: 100%;
+    width: 180px;
     height: 100%;
+    position: fixed;
 `;
 
 export const PerfilUsuario = styled.div`
@@ -90,6 +91,7 @@ export const Button = styled.button`
     color: var(--corSecundaria);
 
     :hover{
+        
         cursor: pointer;
         background: var(--corTerciaria);
         color: white;
@@ -104,7 +106,7 @@ export const ButtonToggle = styled(Button)`
 
   ${props => props.active ? `
         cursor: pointer;
-        background: var(--corTerciaria);
+        background-color: var(--corTerciaria);
         color: white;
     ` : 
   'none'}

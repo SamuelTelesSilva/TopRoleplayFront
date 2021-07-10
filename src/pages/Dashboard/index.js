@@ -22,7 +22,7 @@ export default function Dashboard(){
             <Header />
             <Main>
                 <Switch>
-                    <CustomRoute exact path='/dashboard/cidades' component={DashboardCidade}/>
+                    <CustomRoute path='/dashboard/cidades' component={DashboardCidade}/>
                     <CustomRoute path='/dashboard/streamers' component={DashboardStreamer}/>
                     <CustomRoute path='/dashboard/clipes' component={DashboardClipe}/>
                     <CustomRoute path='/dashboard/grupos' component={DashboardGrupo}/>

@@ -19,5 +19,7 @@ export const Header = styled.div`
 
 export const Main = styled.div`
     grid-area: M;
-    background-color: blue;
+    background-color: var(--corFundoPrincipal);
+    color: white;
+    font-size: 16px;
 `;
