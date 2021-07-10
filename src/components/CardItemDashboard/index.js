@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, AreaImgCard, AreaContentCard } from './styles';
+import { Container, AreaImgCard, AreaContentCard, AreaButton, IconEdit, IconDelete} from './styles';
 
 function CardItemDashboard(){
     return(
@@ -22,6 +22,10 @@ function CardItemDashboard(){
                     </div>
                 </div>
             </AreaContentCard>
+            <AreaButton>
+                <IconEdit/>
+                <IconDelete/>
+            </AreaButton>
         </Container>
     );
 }

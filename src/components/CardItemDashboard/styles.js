@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import { Edit } from '@styled-icons/boxicons-regular/Edit';
+import { PageDelete } from '@styled-icons/foundation/PageDelete';
 
 export const Container = styled.div`
     display: flex;
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
     height: 150px;
     background: var(--corSecundaria);
     border-radius: 8px;
@@ -41,5 +43,30 @@ export const AreaContentCard = styled.div`
         span{
             color: var(--corTerciaria);
         }
+    }
+`;
+
+export const AreaButton = styled.div`
+    display: block;
+    margin: 40px 5px 0px 0px;
+    height: 70px;
+`;
+
+export const IconEdit = styled(Edit)`
+    color: white;
+    width: 25px;
+
+    :hover{
+        cursor: pointer;
+    }
+`;
+
+export const IconDelete = styled(PageDelete)`
+    color: white;
+    margin-top: 12px;
+    width: 25px;
+
+    :hover{
+        cursor: pointer;
     }
 `;
