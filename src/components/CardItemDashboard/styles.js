@@ -5,7 +5,7 @@ import { PageDelete } from '@styled-icons/foundation/PageDelete';
 export const Container = styled.div`
     display: flex;
     width: 100%;
-    max-width: 450px;
+    max-width: 600px;
     height: 150px;
     background: var(--corSecundaria);
     border-radius: 8px;

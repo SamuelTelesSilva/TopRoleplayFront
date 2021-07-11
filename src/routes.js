@@ -7,6 +7,7 @@ import Login from './pages/Login/index';
 import DashboardUsuario from './pages/DashboardUsuario/index';
 import Dashboard from './pages/Dashboard';
 import CardItemDashboard from './components/CardItemDashboard';
+import Stars from './components/Stars';
 
 const Routes = () => {
     const { CustomRoute } = useAuth();
@@ -19,6 +20,7 @@ const Routes = () => {
                 <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } />
                 <CustomRoute path="/dashboard" component={ Dashboard } />
                 <CustomRoute path="/card" component={ CardItemDashboard } />
+                <CustomRoute path="/stars" component={ Stars } />
             </Switch>
         </>
     );

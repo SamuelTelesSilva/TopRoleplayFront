@@ -74,7 +74,7 @@ export const AreaButton = styled.div`
 `;
 
 export const AreaContent = styled.div`
-    display: flex;
+    display: block;
     margin-top: 120px;
 
     
@@ -111,6 +111,23 @@ export const AreaContent = styled.div`
         :hover{
             cursor: pointer;
         }
+    }
+
+    .area-content-cards{
+        display: flex;
+        width: 100%;
+        margin-top: 16px;
+        justify-content: center;
+    }
+
+    .content-cards{
+        display: block;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .cards{
+        margin-bottom: 16px;
     }
     
 `;

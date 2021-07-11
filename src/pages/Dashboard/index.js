@@ -16,6 +16,7 @@ import DashboardNoticia from '../DashboardNoticia';
 export default function Dashboard(){
 
     const { CustomRoute } = useAuth();
+    localStorage.setItem('idPagina','0');
 
     return(
         <Grid>

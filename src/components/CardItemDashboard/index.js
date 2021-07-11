@@ -1,24 +1,26 @@
 import React from 'react';
+import Stars from '../Stars';
 import { Container, AreaImgCard, AreaContentCard, AreaButton, IconEdit, IconDelete} from './styles';
 
-function CardItemDashboard(){
+function CardItemDashboard(props){
     return(
         <Container>
             <AreaImgCard>
                 <div className="area-img">
-                    <img src="https://www.rockstargames.com/br/img/global/downloads/buddyiconsconavatars/v_afterhours_taleofus2_256x256.jpg" alt="imagem do card"/>
+                    <img src={props.urlImg} alt={props.altUrl}/>
                 </div>
             </AreaImgCard>
             <AreaContentCard>
                 <div className="content-card">
                     <div>
-                        <span>Id: </span> 1
+                        <span>Id: </span> {props.id}
                     </div>
                     <div>
-                        <span>Nome: </span> Samuel Teles
+                        <span>Nome: </span> {props.name}
                     </div>
                     <div>
-                        <span>Estrelas: </span> 5
+                        <span>Estrelas: </span>
+                        <Stars starsValue={props.stars}/>
                     </div>
                 </div>
             </AreaContentCard>

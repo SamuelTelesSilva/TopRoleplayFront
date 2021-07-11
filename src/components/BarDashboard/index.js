@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, PerfilUsuario, MenuLateral, MenuConf, Button, ButtonToggle} from './styles';
+import { Container, PerfilUsuario, MenuLateral, MenuConf, Button, ButtonToggle } from './styles';
 import { NavLink } from 'react-router-dom';
 
 export default function BarDashboard(){
