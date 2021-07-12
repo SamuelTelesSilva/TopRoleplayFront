@@ -9,7 +9,6 @@ export const Container = styled.div`
     .aux-cont{
         display: block;
         width: 50%;
-        border: 1px solid red;
         height: 100%;
     }
 
@@ -33,7 +32,6 @@ export const Form = styled.div`
     display: block;
     width: 100%;
     height: 100%;
-    border: 1px solid red;
 
     .title-input, .redeSociais{
         display: flex;
@@ -60,7 +58,6 @@ export const AreaButton = styled.div`
     display: flex;
     width: 100%;
     justify-content: center;
-    border: 1px solid blue;
     margin: 24px 0px 16px 0px;
 
     .button-register{
@@ -116,6 +113,7 @@ export const AreaContent = styled.div`
     .area-content-cards{
         display: flex;
         width: 100%;
+        height: 830px; 
         margin-top: 16px;
         justify-content: center;
     }
@@ -127,6 +125,10 @@ export const AreaContent = styled.div`
     }
 
     .cards{
+        margin-bottom: 16px;
+    }
+
+    .area-pagination{
         margin-bottom: 16px;
     }
     

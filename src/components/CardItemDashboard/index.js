@@ -1,5 +1,5 @@
 import React from 'react';
-import Stars from '../Stars';
+import Heart from '../Heart';
 import { Container, AreaImgCard, AreaContentCard, AreaButton, IconEdit, IconDelete} from './styles';
 
 function CardItemDashboard(props){
@@ -19,8 +19,8 @@ function CardItemDashboard(props){
                         <span>Nome: </span> {props.name}
                     </div>
                     <div>
-                        <span>Estrelas: </span>
-                        <Stars starsValue={props.stars}/>
+                        <span>Corações: </span>
+                        <Heart heartsValue={props.hearts}/>
                     </div>
                 </div>
             </AreaContentCard>
