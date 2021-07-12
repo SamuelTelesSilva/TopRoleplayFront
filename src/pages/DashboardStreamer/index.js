@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Container, AreaForm, Form, AreaButton, AreaContent } from './styles';
 import ButtonInput from '../../components/ButtonInput';
 import CardItemDashboard from '../../components/CardItemDashboard';
@@ -6,6 +6,13 @@ import CardItemDashboard from '../../components/CardItemDashboard';
 const DashboardStreamer = () => {
     //Setando o id da pagina, esta sendo utilizado para controlar o menu
     localStorage.setItem('idPagina','2');
+
+    const [searchInput, setSearchInput] = useState("");
+    const [filteredContact, setFilteredContact] = useState([]); 
+
+    
+
+
 
 
     const content = [
@@ -34,6 +41,20 @@ const DashboardStreamer = () => {
             stars: 100
         },
     ]
+
+
+    useEffect(() => {
+        setFilteredContact(
+            content.filter((streamers) =>
+                streamers.name.toLowerCase().includes(searchInput.toLowerCase())
+            )   
+        );
+    }, [searchInput]);
+
+    const handleChange = event => {
+        setSearchInput(event.target.value)
+        console.log(event.target.value)
+    }
 
     return(
         <Container>
@@ -65,14 +86,22 @@ const DashboardStreamer = () => {
                 </AreaForm>
                 <AreaContent>
                     <div className="search-content">
-                        <input className="input-search" type="text" placeholder="Digite o nome do Streamer"/>
+                        <input 
+                            className="input-search" 
+                            placeholder="Digite o nome do Streamer"
+
+                            onChange={handleChange}      
+                        />
                         <div className="button-search">
-                            <input className="button-input-search" type="submit" value="Pesquisar"/>
+                            <input 
+                                className="button-input-search" 
+                                type="submit" 
+                                value="Pesquisar"/>
                         </div>
                     </div>
                     <div className="area-content-cards">
                         <div className="content-cards">
-                            {content.map((item)=>(
+                            {filteredContact.map((item)=>(
                                 <div className="cards" key={item.id}>
                                     <CardItemDashboard 
                                         id={item.id} 
