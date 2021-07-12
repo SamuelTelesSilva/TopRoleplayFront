@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Container, AreaForm, Form, AreaButton, AreaContent } from './styles';
 import ButtonInput from '../../components/ButtonInput';
 import CardItemDashboard from '../../components/CardItemDashboard';
+import Paginacao from '../../components/Paginacao';
 
 const DashboardStreamer = () => {
     //Setando o id da pagina, esta sendo utilizado para controlar o menu
@@ -9,10 +10,7 @@ const DashboardStreamer = () => {
 
     const [searchInput, setSearchInput] = useState("");
     const [filteredContact, setFilteredContact] = useState([]); 
-
-    
-
-
+    const [paginaAtual, setPaginaAtual] = useState(0);
 
 
     const content = [
@@ -55,6 +53,12 @@ const DashboardStreamer = () => {
         setSearchInput(event.target.value)
         console.log(event.target.value)
     }
+
+
+    //Paginação
+    const handleChangePagination = (event, value) => {
+        setPaginaAtual(value-1);
+    };
 
     return(
         <Container>
@@ -114,8 +118,9 @@ const DashboardStreamer = () => {
                             ))}
                         </div>
                     </div>
-
-                    
+                    <div className="area-pagination">
+                        <Paginacao count={10} onchange={handleChangePagination}/>        
+                    </div>
                 </AreaContent>
            </div>
         </Container>
