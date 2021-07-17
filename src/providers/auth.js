@@ -1,6 +1,6 @@
 import React, {createContext, useState, useEffect} from 'react';
 import { Route, Redirect} from 'react-router-dom';
-import { efetuarLogin } from '../service/toproleplayService';
+import { efetuarLogin } from '../service/usuarioService';
 import api from '../service/api';
 import history from '../history';
 

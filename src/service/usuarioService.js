@@ -4,7 +4,6 @@ export const getAll = (limit, paginaAtual) => {
     return http.get(`/api/post?sort=id,desc&size=${limit}&page=${paginaAtual}`);
 };
 
-
 export const efetuarLogin = data => {
     return http.post("/api/login", data);
 };
