@@ -3,7 +3,7 @@ import { Container, AreaForm, Form, AreaButton, AreaContent } from './styles';
 import ButtonInput from '../../components/ButtonInput';
 import CardItemDashboard from '../../components/CardItemDashboard';
 import Paginacao from '../../components/Paginacao';
-import {registerStreamer, getAll} from '../../service/streamerService'
+import {registerStreamer, getAll, searchByName} from '../../service/streamerService'
 import api from '../../service/api';
 
 
@@ -16,11 +16,10 @@ const DashboardStreamer = () => {
 
     const [searchInput, setSearchInput] = useState("");
     const [filteredContact, setFilteredContact] = useState([]); 
-    const [searchResults, setSearchResults] = useState([]);
     const [limit] = useState(5);
     const [paginaAtual, setPaginaAtual] = useState(0);
     const [pages, setPages] = useState();
-    const [total, setTotal] = useState(0);
+    const [total] = useState(0);
     const token = localStorage.getItem('token');
     const [perfilUserInput, setPerfilUserInput] = useState({
         nome: '',
@@ -33,30 +32,37 @@ const DashboardStreamer = () => {
     });
 
     
-    useEffect(()=>{
 
+    useEffect(()=>{
         if(token){
             api.defaults.headers.Autorization = `Bearer ${JSON.parse(token)}`;
         }
+        searchAndGetAll();
+    }, [token, paginaAtual, limit, searchInput, pages, total]);
 
-        //Pegando os dados
-        getAll(limit, paginaAtual)
-        .then((response) => {
-            setTotal(response.data['totalElements'])
-            setSearchResults(response.data.content); 
-            setPages(response.data['totalPages']);
 
-        }).catch(e => {
-            console.log("Erro ao utilizar o getAll " + e);
-        });
-
-        //filtrando os dados
-        setFilteredContact(
-            searchResults.filter((streamer) =>
-                streamer.nome.toLowerCase().includes(searchInput.toLowerCase())
-            )   
-        );
-    }, [token, paginaAtual, limit, total, searchInput, searchResults]);
+    /**
+     * Metodo para fazer um getAll ou ele faz uma busca pelo nome
+     */
+     const searchAndGetAll = () => {
+        if(searchInput === ""){
+            getAll(limit, paginaAtual).then((response) => {
+                setPages(response.data['totalPages']);
+                setFilteredContact(response.data.content)
+            }).catch(e => {
+                console.log("Erro ao utilizar o getAll " + e);
+            });
+        }else{
+            searchByName(limit, paginaAtual, searchInput)
+            .then((response) => {
+                setFilteredContact(response.data.content)
+                setPages(response.data['totalPages']);
+            }).catch(e => {
+                console.log("Erro ao utilizar o searchByName " + e);
+            });
+        }
+    }
+    
         
 
     //Pegando os valores digitados no input
@@ -192,7 +198,9 @@ const DashboardStreamer = () => {
                             <input 
                                 className="button-input-search" 
                                 type="submit" 
-                                value="Pesquisar"/>
+                                value="Pesquisar"
+                                onClick={searchAndGetAll}
+                            />
                         </div>
                     </div>
                     <div className="area-content-cards">

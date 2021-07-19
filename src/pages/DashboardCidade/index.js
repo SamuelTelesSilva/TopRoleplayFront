@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAuth } from '../../providers/auth';
 import './styles';
 
 const DashboardCidade = () => {

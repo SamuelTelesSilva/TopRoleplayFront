@@ -1,7 +1,11 @@
 import http from './api.js';
 
 export const getAll = (limit, paginaAtual) => {
-    return http.get(`/api/streamer?sort=id,desc&size=${limit}&page=${paginaAtual}`);
+    return http.get(`/api/streamer?size=${limit}&page=${paginaAtual}`);
+};
+
+export const searchByName = (limit, paginaAtual, name) => {
+    return http.get(`/api/streamer/search/streamer/${name}?size=${limit}&page=${paginaAtual}`);
 };
 
 export const registerStreamer = data => {

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Star, StarFill, StarHalf, Heart, HeartFill} from '@styled-icons/bootstrap';
-
+import {Heart, HeartFill} from '@styled-icons/bootstrap';
+//Star, StarFill, StarHalf
 
 export const HeartEmpty = styled(Heart)`
     width: 16px;
