@@ -81,9 +81,9 @@ export const AreaContent = styled.div`
     }
 
     .input-search{
-        width: 80%;
+        width: 100%;
         height: 35px;
-        border-radius: 15px 0px 0px 15px;
+        border-radius: 15px;
         padding: 0px 8px 0px 13px;
         background-color: var(--corFundoPrincipal);
         border: 2px solid var(--corTerciaria);

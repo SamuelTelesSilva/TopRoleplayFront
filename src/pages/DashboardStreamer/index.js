@@ -31,39 +31,34 @@ const DashboardStreamer = () => {
         urlPlataformaStream: ''
     });
 
-    
-
     useEffect(()=>{
         if(token){
             api.defaults.headers.Autorization = `Bearer ${JSON.parse(token)}`;
         }
+        /**
+        * Metodo para fazer um getAll ou ele faz uma busca pelo nome
+        */
+        const searchAndGetAll = () => {
+            if(searchInput === ""){
+                getAll(limit, paginaAtual).then((response) => {
+                    setPages(response.data['totalPages']);
+                    setFilteredContact(response.data.content)
+                }).catch(e => {
+                    console.log("Erro ao utilizar o getAll " + e);
+                });
+            }else{
+                searchByName(limit, paginaAtual, searchInput)
+                .then((response) => {
+                    setFilteredContact(response.data.content)
+                    setPages(response.data['totalPages']);
+                }).catch(e => {
+                    console.log("Erro ao utilizar o searchByName " + e);
+                });
+            }
+        }
         searchAndGetAll();
     }, [token, paginaAtual, limit, searchInput, pages, total]);
 
-
-    /**
-     * Metodo para fazer um getAll ou ele faz uma busca pelo nome
-     */
-     const searchAndGetAll = () => {
-        if(searchInput === ""){
-            getAll(limit, paginaAtual).then((response) => {
-                setPages(response.data['totalPages']);
-                setFilteredContact(response.data.content)
-            }).catch(e => {
-                console.log("Erro ao utilizar o getAll " + e);
-            });
-        }else{
-            searchByName(limit, paginaAtual, searchInput)
-            .then((response) => {
-                setFilteredContact(response.data.content)
-                setPages(response.data['totalPages']);
-            }).catch(e => {
-                console.log("Erro ao utilizar o searchByName " + e);
-            });
-        }
-    }
-    
-        
 
     //Pegando os valores digitados no input
     const changeValue = (event) => {
@@ -194,14 +189,6 @@ const DashboardStreamer = () => {
                             value={searchInput}
                             onChange={handleSearch}      
                         />
-                        <div className="button-search">
-                            <input 
-                                className="button-input-search" 
-                                type="submit" 
-                                value="Pesquisar"
-                                onClick={searchAndGetAll}
-                            />
-                        </div>
                     </div>
                     <div className="area-content-cards">
                         <div className="content-cards">
