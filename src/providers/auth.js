@@ -8,6 +8,7 @@ import history from '../history';
 
 export const AuthContext = createContext({});
 export const AuthProvider = (props) => {
+
     
     const [openMenu, setOpenMenu] = useState(false);
     const [authenticated, setAuthenticated] = useState(false);
@@ -17,8 +18,7 @@ export const AuthProvider = (props) => {
         username: '',
         password: ''
     });
-
-
+   
     /**
      * Função para autenticar as paginas
      * @param {*} param0 
@@ -90,6 +90,10 @@ export const AuthProvider = (props) => {
     //Login fim
     //------------------------------------------------------------
 
+
+
+
+ 
     return(
         <AuthContext.Provider value={{
             openMenu, 
@@ -102,6 +106,7 @@ export const AuthProvider = (props) => {
             handleLogin,
             msgError,
             CustomRoute
+
             }}>
             {props.children}
         </AuthContext.Provider>

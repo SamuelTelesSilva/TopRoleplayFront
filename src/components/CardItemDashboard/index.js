@@ -1,8 +1,10 @@
 import React from 'react';
 import Heart from '../Heart';
 import { Container, AreaImgCard, AreaContentCard, AreaButton, IconEdit, IconDelete} from './styles';
+import {useAuth} from '../../providers/auth';
 
 function CardItemDashboard(props){
+
     return(
         <Container>
             <AreaImgCard>
@@ -25,8 +27,8 @@ function CardItemDashboard(props){
                 </div>
             </AreaContentCard>
             <AreaButton>
-                <IconEdit/>
-                <IconDelete/>
+                <IconEdit onClick={props.onclickEdit}/>
+                <IconDelete onClick={props.onclickDelete}/>
             </AreaButton>
         </Container>
     );

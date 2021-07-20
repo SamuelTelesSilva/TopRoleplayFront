@@ -1,19 +1,28 @@
 import React, {useState, useEffect} from 'react';
-import { Container, AreaForm, Form, AreaButton, AreaContent } from './styles';
+import { Container, AreaForm, AreaButton, AreaContent } from './styles';
 import ButtonInput from '../../components/ButtonInput';
 import CardItemDashboard from '../../components/CardItemDashboard';
 import Paginacao from '../../components/Paginacao';
 import {registerStreamer, getAll, searchByName} from '../../service/streamerService'
 import api from '../../service/api';
-
-
-
+import FormCreate from '../../components/Form/FormCreate';
+import FormEdit from '../../components/Form/FormEdit';
 
 const DashboardStreamer = () => {
 
     //Setando o id da pagina, esta sendo utilizado para controlar o menu
     localStorage.setItem('idPagina','2');
 
+    const initialStreamerState = {
+        id: null,
+        nome: '',
+        urlImgCapa: '',
+        urlImgCard: '',
+        urlInstagram: '',
+        urlTwitter: '',
+        urlPlataformaStream: ''
+    }
+    
     const [searchInput, setSearchInput] = useState("");
     const [filteredContact, setFilteredContact] = useState([]); 
     const [limit] = useState(5);
@@ -21,15 +30,9 @@ const DashboardStreamer = () => {
     const [pages, setPages] = useState();
     const [total] = useState(0);
     const token = localStorage.getItem('token');
-    const [perfilUserInput, setPerfilUserInput] = useState({
-        nome: '',
-        urlImgCapa: '',
-        urlImgCard: '',
-        urlInstagram: '',
-        urlDiscord: '',
-        urlTwitter: '',
-        urlPlataformaStream: ''
-    });
+    const [streamerInput, setStreamerInput] = useState(initialStreamerState);
+    const [editing , setEditing] = useState(false);
+    
 
     useEffect(()=>{
         if(token){
@@ -60,10 +63,13 @@ const DashboardStreamer = () => {
     }, [token, paginaAtual, limit, searchInput, pages, total]);
 
 
+    
+
     //Pegando os valores digitados no input
     const changeValue = (event) => {
         const { name, value } = event.target;
-        setPerfilUserInput({...perfilUserInput, [name]: value});
+        setStreamerInput({...streamerInput, [name]: value});
+        console.log(streamerInput)
     }
 
     //Pagination
@@ -77,18 +83,17 @@ const DashboardStreamer = () => {
     }
 
     async function handleSubmit(){
-
         //Passando o token para a api
         api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
 
         const data = {
-            'nome': perfilUserInput.nome,
+            'nome': streamerInput.nome,
             'coracao': 150,
-            'urlImageCapa': perfilUserInput.urlImgCapa,
-            'urlImageCard': perfilUserInput.urlImgCard,
-            'urlInstagram': perfilUserInput.urlInstagram ,
-            'urlTwitter':  perfilUserInput.urlTwitter,
-            'urlPlataformaStream': perfilUserInput.urlPlataformaStream
+            'urlImageCapa': streamerInput.urlImgCapa,
+            'urlImageCard': streamerInput.urlImgCard,
+            'urlInstagram': streamerInput.urlInstagram ,
+            'urlTwitter':  streamerInput.urlTwitter,
+            'urlPlataformaStream': streamerInput.urlPlataformaStream
         }
 
         await registerStreamer(data).then(response => {
@@ -98,89 +103,69 @@ const DashboardStreamer = () => {
         });
     }
 
+    const buttonReturn = () => {
+        setEditing(false)
+        setStreamerInput(initialStreamerState);
+    }
+
+    const dataEditing = (item) => {
+        setEditing(true)
+        setStreamerInput({
+            id: item.id,
+            nome: item.nome,
+            urlImgCapa: item.urlImageCapa,
+            urlImgCard: item.urlImageCard,
+            urlInstagram: item.urlInstagram,
+            urlTwitter: item.urlTwitter,
+            urlPlataformaStream: item.urlPlataformaStream
+        })
+    }
+
     return(
         <Container>
             <div className="aux-cont">
-                <AreaForm>
-                    <Form>
-                        <div className="title-input">Nome do  Streamer</div>
-                        <input 
-                            className="input-form" 
-                            type="text" 
-                            placeholder="Digite o nome do streamer"
-                            name="nome"
-                            value={perfilUserInput.nome}
-                            onChange={changeValue}
-                        />
-                        <div className="title-input">Url Imagem capa</div>
-                        <input 
-                            className="input-form" 
-                            type="text" 
-                            placeholder="Url da imagem de capa"
-                            name="urlImgCapa"    
-                            value={perfilUserInput.urlImgCapa}
-                            onChange={changeValue}
-                        />
-                        <div className="title-input">Url imagem 2</div>
-                        <input 
-                            className="input-form" 
-                            type="text" 
-                            placeholder="Url da imagem para o Card"
-                            name="urlImgCard"    
-                            value={perfilUserInput.urlImgCard}
-                            onChange={changeValue}
-                        />
-                        <div className="redeSociais">Redes Sociais</div>
-                        <div className="title-input">Instagram</div>
-                        <input 
-                            className="input-form" 
-                            type="text" 
-                            placeholder="Url do Instagram"
-                            name="urlInstagram"    
-                            value={perfilUserInput.urlInstagram}
-                            onChange={changeValue}
-                        />
-                        <div className="title-input">Discord</div>
-                        <input 
-                            className="input-form" 
-                            type="text" 
-                            placeholder="Url do Discord"
-                            name="urlDiscord"    
-                            value={perfilUserInput.urlDiscord}
-                            onChange={changeValue}
-                        />
-                        <div className="title-input">Twitter</div>
-                        <input 
-                            className="input-form" 
-                            type="text" 
-                            placeholder="Url do Twitter"
-                            name="urlTwitter"    
-                            value={perfilUserInput.urlTwitter}
-                            onChange={changeValue}
-                        />
-                        <div className="title-input">Plataforma de Stream</div>
-                        <input 
-                            className="input-form" 
-                            type="text" 
-                            placeholder="Url da plataforma de stream"
-                            name="urlPlataformaStream"    
-                            value={perfilUserInput.urlPlataformaStream}
-                            onChange={changeValue}
-                        />
-                    </Form>
-                    <AreaButton>
-                        <div className="button-register">
-                            <ButtonInput 
-                                type="submit" 
-                                value="Cadastrar"
-                                onclick={handleSubmit}    
-                                />
-                        </div>
-                        <div className="button-update">
-                            <ButtonInput type="submit" value="Atualizar"/>
-                        </div>
-                    </AreaButton>
-                </AreaForm>
+                {
+                    editing ?
+                    (
+                        <AreaForm>
+                            <FormEdit 
+                                streamerInput={streamerInput}
+                                onchange={changeValue}    
+                            />
+                            <AreaButton>
+                                <div className="button-update">
+                                    <ButtonInput type="submit" value="Atualizar"/>
+                                </div>
+                                <div className="button-return">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Voltar"
+                                        onclick={buttonReturn}    
+                                    />
+                                </div>
+                            </AreaButton>
+                        </AreaForm>
+                    )
+                    : 
+                    (
+                        <AreaForm>
+                            <FormCreate 
+                                streamerInput={streamerInput}
+                                onchange={changeValue}    
+                            />
+                            <AreaButton>
+                                <div className="button-register">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Cadastrar"
+                                        onclick={handleSubmit}    
+                                    />
+                                </div>
+                            </AreaButton>
+                        </AreaForm>
+                    )
+                }
+                    
                 <AreaContent>
                     <div className="search-content">
                         <input 
@@ -200,6 +185,7 @@ const DashboardStreamer = () => {
                                         hearts={item.coracao} 
                                         urlImg={item.urlImageCard} 
                                         altUrl={item.nome}
+                                        onclickEdit={() => dataEditing(item)}
                                     />
                                 </div>
                             ))}

@@ -5,7 +5,7 @@ export const getAll = (limit, paginaAtual) => {
 };
 
 export const searchByName = (limit, paginaAtual, name) => {
-    return http.get(`/api/streamer/search/streamer/${name}?size=${limit}&page=${paginaAtual}`);
+    return http.get(`/api/streamer/search/${name}?size=${limit}&page=${paginaAtual}`);
 };
 
 export const registerStreamer = data => {
