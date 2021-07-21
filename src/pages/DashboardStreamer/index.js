@@ -5,8 +5,7 @@ import CardItemDashboard from '../../components/CardItemDashboard';
 import Paginacao from '../../components/Paginacao';
 import { registerStreamer, getAll, searchByName, updateStreamer, remove} from '../../service/streamerService'
 import api from '../../service/api';
-import FormCreate from '../../components/Form/FormCreate';
-import FormEdit from '../../components/Form/FormEdit';
+import Form from '../../components/Form';
 
 const DashboardStreamer = () => {
 
@@ -39,7 +38,7 @@ const DashboardStreamer = () => {
             api.defaults.headers.Autorization = `Bearer ${JSON.parse(token)}`;
         }
         /**
-        * Metodo para fazer um getAll ou ele faz uma busca pelo nome
+        * Metodo para fazer um getAll com busca pelo nome
         */
         const searchAndGetAll = () => {
             if(searchInput === ""){
@@ -62,9 +61,6 @@ const DashboardStreamer = () => {
         searchAndGetAll();
     }, [token, paginaAtual, limit, searchInput, pages, total]);
 
-
-    
-
     //Pegando os valores digitados no input
     const changeValue = (event) => {
         const { name, value } = event.target;
@@ -82,6 +78,9 @@ const DashboardStreamer = () => {
         setSearchInput(event.target.value)
     }
 
+    /**
+     * Método para cadastrar um Streamer 
+    */
     async function handleSubmit(){
         //Passando o token para a api
         api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
@@ -103,11 +102,19 @@ const DashboardStreamer = () => {
         });
     }
 
+    /**
+     * Metodo para fazer a alteração de um botão para outro,
+     * e limpar o form.
+    */
     const buttonReturn = () => {
         setEditing(false)
         setStreamerInput(initialStreamerState);
     }
 
+    /**
+     * Método para Preencher o form com o streamer selecionado
+     * @param {*} item 
+    */
     const dataEditing = (item) => {
         setEditing(true)
         setStreamerInput({
@@ -121,7 +128,9 @@ const DashboardStreamer = () => {
         })
     }
 
-    //Update Streamer
+    /**
+     * Método para fazer o update no streamer selecionado
+    */
     const updateStreamers = () => {
         console.log(streamerInput)
         if(streamerInput.id !== null){
@@ -139,7 +148,10 @@ const DashboardStreamer = () => {
     };
 
 
-    //Remover
+    /**
+     * Método para remover o streamer selecionado
+     * @param {*} id 
+    */
     const removeStreamer = (id) => {
         remove(id).then(response => {
             console.log(response);
@@ -148,18 +160,16 @@ const DashboardStreamer = () => {
         });
     }
 
-
     return(
         <Container>
-            <div className="aux-cont">
-                {
-                    editing ?
-                    (
-                        <AreaForm>
-                            <FormEdit 
-                                streamerInput={streamerInput}
-                                onchange={changeValue}    
-                            />
+            <div className="aux-cont">    
+                <AreaForm>
+                    <Form 
+                        streamerInput={streamerInput}
+                        onchange={changeValue}    
+                    />
+                    {
+                        editing ? (
                             <AreaButton>
                                 <div className="button-update">
                                     <ButtonInput 
@@ -176,15 +186,8 @@ const DashboardStreamer = () => {
                                     />
                                 </div>
                             </AreaButton>
-                        </AreaForm>
-                    )
-                    : 
-                    (
-                        <AreaForm>
-                            <FormCreate 
-                                streamerInput={streamerInput}
-                                onchange={changeValue}    
-                            />
+                        ) :
+                        (
                             <AreaButton>
                                 <div className="button-register">
                                     <ButtonInput 
@@ -194,9 +197,9 @@ const DashboardStreamer = () => {
                                     />
                                 </div>
                             </AreaButton>
-                        </AreaForm>
-                    )
-                }
+                        )
+                    }
+                </AreaForm>
                     
                 <AreaContent>
                     <div className="search-content">

@@ -1,7 +1,7 @@
-import React,{useState, useEffect} from 'react';
-import {Form} from './styles';
+import React,{ useState, useEffect } from 'react';
+import { Container } from './styles';
 
-const FormCreate = (props) =>{
+const Form = (props) =>{
 
     useEffect(() => {
         setStreamer(props.streamerInput)
@@ -9,7 +9,7 @@ const FormCreate = (props) =>{
     const [streamer, setStreamer] = useState(props.streamerInput);
     
     return(
-        <Form>
+        <Container>
             <div className="title-input">Nome do  Streamer</div>
             <input 
                 className="input-form" 
@@ -72,8 +72,8 @@ const FormCreate = (props) =>{
                 value={streamer.urlPlataformaStream}
                 onChange={props.onchange}
             />
-        </Form>
+        </Container>
     );
 }
 
-export default FormCreate;
+export default Form;
