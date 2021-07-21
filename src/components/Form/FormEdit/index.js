@@ -2,11 +2,14 @@ import React,{useState, useEffect} from 'react';
 import {Form} from './styles';
 
 const FormEdit = (props) =>{
-    const [streamer, setStreamer] = useState(props.streamerInput);
 
     useEffect(() => {
         setStreamer(props.streamerInput)
     }, [props])
+
+    const [streamer, setStreamer] = useState(props.streamerInput);
+
+    
     
     return(
         <Form>
@@ -24,8 +27,8 @@ const FormEdit = (props) =>{
                 className="input-form" 
                 type="text" 
                 placeholder="Url da imagem de capa"
-                name="urlImgCapa"    
-                value={streamer.urlImgCapa}
+                name="urlImageCapa"    
+                value={streamer.urlImageCapa}
                 onChange={props.onchange}
             />
             <div className="title-input">Url imagem 2</div>
@@ -33,8 +36,8 @@ const FormEdit = (props) =>{
                 className="input-form" 
                 type="text" 
                 placeholder="Url da imagem para o Card"
-                name="urlImgCard"    
-                value={streamer.urlImgCard}
+                name="urlImageCard"    
+                value={streamer.urlImageCard}
                 onChange={props.onchange}
             />
             <div className="redeSociais">Redes Sociais</div>

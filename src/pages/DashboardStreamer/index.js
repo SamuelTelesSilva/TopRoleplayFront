@@ -16,8 +16,8 @@ const DashboardStreamer = () => {
     const initialStreamerState = {
         id: null,
         nome: '',
-        urlImgCapa: '',
-        urlImgCard: '',
+        urlImageCapa: '',
+        urlImageCard: '',
         urlInstagram: '',
         urlTwitter: '',
         urlPlataformaStream: ''
@@ -89,8 +89,8 @@ const DashboardStreamer = () => {
         const data = {
             'nome': streamerInput.nome,
             'coracao': 150,
-            'urlImageCapa': streamerInput.urlImgCapa,
-            'urlImageCard': streamerInput.urlImgCard,
+            'urlImageCapa': streamerInput.urlImageCapa,
+            'urlImageCard': streamerInput.urlImageCard,
             'urlInstagram': streamerInput.urlInstagram ,
             'urlTwitter':  streamerInput.urlTwitter,
             'urlPlataformaStream': streamerInput.urlPlataformaStream
@@ -113,8 +113,8 @@ const DashboardStreamer = () => {
         setStreamerInput({
             id: item.id,
             nome: item.nome,
-            urlImgCapa: item.urlImageCapa,
-            urlImgCard: item.urlImageCard,
+            urlImageCapa: item.urlImageCapa,
+            urlImageCard: item.urlImageCard,
             urlInstagram: item.urlInstagram,
             urlTwitter: item.urlTwitter,
             urlPlataformaStream: item.urlPlataformaStream
@@ -123,6 +123,7 @@ const DashboardStreamer = () => {
 
     //Update Streamer
     const updateStreamers = () => {
+        console.log(streamerInput)
         if(streamerInput.id !== null){
             updateStreamer(streamerInput.id, streamerInput)
             .then(response => {
