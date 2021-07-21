@@ -17,6 +17,6 @@ export const updateStreamer = (id, data) => {
 };
 
 export const remove = id => {
-    return http.delete(`/contatos/${id}`);
+    return http.delete(`/api/streamer/${id}`);
 };
   

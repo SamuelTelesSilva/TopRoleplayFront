@@ -3,7 +3,7 @@ import { Container, AreaForm, AreaButton, AreaContent } from './styles';
 import ButtonInput from '../../components/ButtonInput';
 import CardItemDashboard from '../../components/CardItemDashboard';
 import Paginacao from '../../components/Paginacao';
-import { registerStreamer, getAll, searchByName, updateStreamer} from '../../service/streamerService'
+import { registerStreamer, getAll, searchByName, updateStreamer, remove} from '../../service/streamerService'
 import api from '../../service/api';
 import FormCreate from '../../components/Form/FormCreate';
 import FormEdit from '../../components/Form/FormEdit';
@@ -137,6 +137,17 @@ const DashboardStreamer = () => {
         }
     };
 
+
+    //Remover
+    const removeStreamer = (id) => {
+        remove(id).then(response => {
+            console.log(response);
+        }).catch(e => {
+            console.log(e);
+        });
+    }
+
+
     return(
         <Container>
             <div className="aux-cont">
@@ -206,6 +217,7 @@ const DashboardStreamer = () => {
                                         urlImg={item.urlImageCard} 
                                         altUrl={item.nome}
                                         onclickEdit={() => dataEditing(item)}
+                                        onclickDelete={() => removeStreamer(item.id)}
                                     />
                                 </div>
                             ))}
