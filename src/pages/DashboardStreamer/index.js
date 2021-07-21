@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, AreaForm, AreaButton, AreaContent } from './styles';
 import ButtonInput from '../../components/ButtonInput';
 import CardItemDashboard from '../../components/CardItemDashboard';
 import Paginacao from '../../components/Paginacao';
-import {registerStreamer, getAll, searchByName} from '../../service/streamerService'
+import { registerStreamer, getAll, searchByName, updateStreamer} from '../../service/streamerService'
 import api from '../../service/api';
 import FormCreate from '../../components/Form/FormCreate';
 import FormEdit from '../../components/Form/FormEdit';
@@ -121,6 +121,22 @@ const DashboardStreamer = () => {
         })
     }
 
+    //Update Streamer
+    const updateStreamers = () => {
+        if(streamerInput.id !== null){
+            updateStreamer(streamerInput.id, streamerInput)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+            
+        }else{
+            alert("Selecione um contato");
+        }
+    };
+
     return(
         <Container>
             <div className="aux-cont">
@@ -134,7 +150,11 @@ const DashboardStreamer = () => {
                             />
                             <AreaButton>
                                 <div className="button-update">
-                                    <ButtonInput type="submit" value="Atualizar"/>
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Atualizar"
+                                        onclick={updateStreamers}
+                                    />
                                 </div>
                                 <div className="button-return">
                                     <ButtonInput 

@@ -10,7 +10,7 @@ const FormEdit = (props) =>{
     
     return(
         <Form>
-            <div className="title-input">Nome do  Streamer EDITAR</div>
+            <div className="title-input">Nome do  Streamer</div>
             <input 
                 className="input-form" 
                 type="text" 

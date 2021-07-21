@@ -12,8 +12,8 @@ export const registerStreamer = data => {
     return http.post("/api/streamer", data);
 };
 
-export const updateUser = (id, data) => {
-    return http.put(`/api/usuarios/${id}`, data);
+export const updateStreamer = (id, data) => {
+    return http.put(`/api/streamer/${id}`, data);
 };
 
 export const remove = id => {
