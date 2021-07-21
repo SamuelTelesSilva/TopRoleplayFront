@@ -6,6 +6,10 @@ import Paginacao from '../../components/Paginacao';
 import { registerStreamer, getAll, searchByName, updateStreamer, remove} from '../../service/streamerService'
 import api from '../../service/api';
 import Form from '../../components/Form';
+import ModalRemove from '../../components/Modal/ModalRemove'; 
+import history from '../../history';
+
+
 
 const DashboardStreamer = () => {
 
@@ -31,6 +35,8 @@ const DashboardStreamer = () => {
     const token = localStorage.getItem('token');
     const [streamerInput, setStreamerInput] = useState(initialStreamerState);
     const [editing , setEditing] = useState(false);
+    const [activeModal, setActiveModal] = useState(false);
+    const [idRemove, setIdRemove] = useState(false);
     
 
     useEffect(()=>{
@@ -147,22 +153,36 @@ const DashboardStreamer = () => {
         }
     };
 
-
     /**
-     * Método para remover o streamer selecionado
+     * Método para remover o streamer selecionado,
      * @param {*} id 
     */
     const removeStreamer = (id) => {
-        remove(id).then(response => {
-            console.log(response);
-        }).catch(e => {
-            console.log(e);
-        });
+        if(id !== null){
+            remove(id).then(response => {
+                window.location.reload();//procucar uma forma de atualizar só os conteudos não a pagina toda
+            }).catch(e => {
+                console.log(e);
+            });
+            setActiveModal(false);
+        }else{
+            console.log('erro no id');
+        }
+    }
+    //Método para ativar o modal e pegar o id
+    const activeModalDelete = (id) => {
+        setIdRemove(id);
+        setActiveModal(true);
     }
 
     return(
         <Container>
-            <div className="aux-cont">    
+            <div className="aux-cont">   
+                <ModalRemove 
+                    accepted={() => removeStreamer(idRemove)}
+                    denied={() => setActiveModal(false)}
+                    active={activeModal}
+                /> 
                 <AreaForm>
                     <Form 
                         streamerInput={streamerInput}
@@ -221,7 +241,7 @@ const DashboardStreamer = () => {
                                         urlImg={item.urlImageCard} 
                                         altUrl={item.nome}
                                         onclickEdit={() => dataEditing(item)}
-                                        onclickDelete={() => removeStreamer(item.id)}
+                                        onclickDelete={() => activeModalDelete(item.id)}
                                     />
                                 </div>
                             ))}
