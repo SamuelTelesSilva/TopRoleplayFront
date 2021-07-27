@@ -7,8 +7,8 @@ import { registerStreamer, getAll, searchByName, updateStreamer, remove} from '.
 import api from '../../service/api';
 import Form from '../../components/Form';
 import ModalRemove from '../../components/Modal/ModalRemove'; 
-import history from '../../history';
-
+import ModalMsg from '../../components/Modal/ModalMsg'; 
+import { useAuth } from '../../providers/auth';
 
 
 const DashboardStreamer = () => {
@@ -37,7 +37,7 @@ const DashboardStreamer = () => {
     const [editing , setEditing] = useState(false);
     const [activeModal, setActiveModal] = useState(false);
     const [idRemove, setIdRemove] = useState(false);
-    
+    const {activeModalMsg , setActiveModalMsg} = useAuth();
 
     useEffect(()=>{
         if(token){
@@ -103,6 +103,7 @@ const DashboardStreamer = () => {
 
         await registerStreamer(data).then(response => {
             console.log(response)
+            setActiveModalMsg(true);
         }).catch(e => {
             console.log(e)
         });
@@ -143,6 +144,7 @@ const DashboardStreamer = () => {
             updateStreamer(streamerInput.id, streamerInput)
             .then(response => {
                 console.log(response);
+                setActiveModalMsg(true);
             })
             .catch(e => {
                 console.log(e);
@@ -183,6 +185,9 @@ const DashboardStreamer = () => {
                     denied={() => setActiveModal(false)}
                     active={activeModal}
                 /> 
+                <ModalMsg 
+                    active={activeModalMsg}
+                />
                 <AreaForm>
                     <Form 
                         streamerInput={streamerInput}

@@ -9,7 +9,7 @@ import history from '../history';
 export const AuthContext = createContext({});
 export const AuthProvider = (props) => {
 
-    
+    const [activeModalMsg, setActiveModalMsg] = useState(false);
     const [openMenu, setOpenMenu] = useState(false);
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -105,7 +105,9 @@ export const AuthProvider = (props) => {
             setLoginInput,
             handleLogin,
             msgError,
-            CustomRoute
+            CustomRoute,
+            activeModalMsg,
+            setActiveModalMsg
 
             }}>
             {props.children}
