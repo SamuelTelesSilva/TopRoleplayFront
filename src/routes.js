@@ -8,7 +8,7 @@ import DashboardUsuario from './pages/DashboardUsuario/index';
 import Dashboard from './pages/Dashboard';
 import CardItemDashboard from './components/CardItemDashboard';
 import Heart from './components/Heart';
-import ModalMsg from './components/Modal/ModalMsg';
+
 
 const Routes = () => {
     const { CustomRoute } = useAuth();
@@ -22,7 +22,6 @@ const Routes = () => {
                 <CustomRoute path="/dashboard" component={ Dashboard } />
                 <CustomRoute path="/card" component={ CardItemDashboard } />
                 <CustomRoute path="/hearts" component={ Heart } />
-                <CustomRoute path="/modal" component={ ModalMsg } />
             </Switch>
         </>
     );

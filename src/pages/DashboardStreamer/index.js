@@ -7,8 +7,9 @@ import { registerStreamer, getAll, searchByName, updateStreamer, remove} from '.
 import api from '../../service/api';
 import Form from '../../components/Form';
 import ModalRemove from '../../components/Modal/ModalRemove'; 
-import ModalMsg from '../../components/Modal/ModalMsg'; 
+import ModalMsgEdit from '../../components/Modal/ModalMsgEdit'; 
 import { useAuth } from '../../providers/auth';
+import ModalMsgCreate from '../../components/Modal/ModalMsgCreate';
 
 
 const DashboardStreamer = () => {
@@ -37,8 +38,14 @@ const DashboardStreamer = () => {
     const [editing , setEditing] = useState(false);
     const [activeModal, setActiveModal] = useState(false);
     const [idRemove, setIdRemove] = useState(false);
-    const {activeModalMsg , setActiveModalMsg} = useAuth();
+    const {
+        activeModalMsgEdit,
+        setActiveModalMsgEdit,
+        activeModalMsgCreate,
+        setActiveModalMsgCreate
+    } = useAuth();
 
+    
     useEffect(()=>{
         if(token){
             api.defaults.headers.Autorization = `Bearer ${JSON.parse(token)}`;
@@ -71,7 +78,6 @@ const DashboardStreamer = () => {
     const changeValue = (event) => {
         const { name, value } = event.target;
         setStreamerInput({...streamerInput, [name]: value});
-        console.log(streamerInput)
     }
 
     //Pagination
@@ -102,8 +108,7 @@ const DashboardStreamer = () => {
         }
 
         await registerStreamer(data).then(response => {
-            console.log(response)
-            setActiveModalMsg(true);
+            setActiveModalMsgCreate(true)
         }).catch(e => {
             console.log(e)
         });
@@ -139,12 +144,11 @@ const DashboardStreamer = () => {
      * Método para fazer o update no streamer selecionado
     */
     const updateStreamers = () => {
-        console.log(streamerInput)
+        
         if(streamerInput.id !== null){
             updateStreamer(streamerInput.id, streamerInput)
             .then(response => {
-                console.log(response);
-                setActiveModalMsg(true);
+                setActiveModalMsgEdit(true);
             })
             .catch(e => {
                 console.log(e);
@@ -185,8 +189,13 @@ const DashboardStreamer = () => {
                     denied={() => setActiveModal(false)}
                     active={activeModal}
                 /> 
-                <ModalMsg 
-                    active={activeModalMsg}
+                <ModalMsgEdit 
+                    active={activeModalMsgEdit}
+                    msgModalT="Atualizado com sucesso!"
+                />
+                <ModalMsgCreate
+                    active={activeModalMsgCreate}
+                    msgModalCreate="Streamer adicionado com sucesso!"
                 />
                 <AreaForm>
                     <Form 

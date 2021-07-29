@@ -2,44 +2,44 @@ import React, {useState, useEffect} from 'react';
 import {Container} from './styles';
 import { useAuth } from '../../../providers/auth';
 
-const ModalMsg = (props) => {
+const ModalMsgCreate = (props) => {
 
     const [seconds, setSeconds] = useState(0);
     const [timerOn, setTimerOn] = useState(true);
-    const {activeModalMsg, setActiveModalMsg} = useAuth();
-    
+    const {activeModalMsgCreate, setActiveModalMsgCreate} = useAuth();
+
     
     useEffect(() => {
         let interval = null;
 
-        if(timerOn && activeModalMsg){    
+        if(timerOn && activeModalMsgCreate){    
             interval = setInterval(() => {
                 setSeconds(seconds => seconds + 1);
             }, 1000);
 
             if(seconds === 10){
                 setTimerOn(false)
-                setActiveModalMsg(false)
+                setActiveModalMsgCreate(false)
             }  
         }else{
             clearInterval(interval);
             setSeconds(0);
         }
         return () => clearInterval(interval);
-    }, [seconds, timerOn, setTimerOn, activeModalMsg, setActiveModalMsg]);
+    }, [seconds, timerOn, setTimerOn, activeModalMsgCreate, setActiveModalMsgCreate]);
 
     
 
     const closeModal = () => {
-        setActiveModalMsg(false)
+        setActiveModalMsgCreate(false)
     }
     
     return(
-        <Container onClick={closeModal} active={activeModalMsg}>
+        <Container onClick={closeModal} active={activeModalMsgCreate}>
            <div className="aux-container">
-                {props.msgDoModal}
+                {props.msgModalCreate}
            </div>
         </Container>
     );
 }
-export default ModalMsg;
+export default ModalMsgCreate;
