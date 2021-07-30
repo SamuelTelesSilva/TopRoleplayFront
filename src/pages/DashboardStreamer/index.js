@@ -108,6 +108,7 @@ const DashboardStreamer = () => {
         }
 
         await registerStreamer(data).then(response => {
+            console.log(response)
             setActiveModalMsgCreate(true)
         }).catch(e => {
             console.log(e)
