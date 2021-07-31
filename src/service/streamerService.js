@@ -4,6 +4,10 @@ export const getAll = (limit, paginaAtual) => {
     return http.get(`/api/streamer?size=${limit}&page=${paginaAtual}`);
 };
 
+export const getAllSelect = () => {
+    return http.get(`/api/streamer`);
+};
+
 export const searchByName = (limit, paginaAtual, name) => {
     return http.get(`/api/streamer/search/${name}?size=${limit}&page=${paginaAtual}`);
 };

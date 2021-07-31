@@ -49,11 +49,30 @@ export const AreaButton = styled.div`
     }
 `;
 
+export const AreaSearch = styled.div`
+    margin-top: 100px;
+
+    .search-content{
+        display: flex;
+        width: 100%;
+    }
+
+    .input-search{
+        width: 100%;
+        height: 35px;
+        border-radius: 15px;
+        padding: 0px 8px 0px 13px;
+        background-color: var(--corFundoPrincipal);
+        border: 2px solid var(--corTerciaria);
+        color: white;
+    }
+`;
+
 export const AreaAssociation = styled.div`
     display: block;
-    margin-top: 100px;
+    margin-top: 20px;
     width: 100%;
-    border: 1px dashed white;
+    border: 1px dashed var(--corTerciaria);
     padding: 10px 10px 0px 10px;
 
     .title-association{
@@ -79,30 +98,13 @@ export const AreaAssociation = styled.div`
         width: 250px;
         height: 30px;
         border-radius: 5px;
+        padding-left: 5px;
     }
-
-
 `;
+
 
 export const AreaContent = styled.div`
     display: block;
-    margin-top: 120px;
-
-    
-    .search-content{
-        display: flex;
-        width: 100%;
-    }
-
-    .input-search{
-        width: 100%;
-        height: 35px;
-        border-radius: 15px;
-        padding: 0px 8px 0px 13px;
-        background-color: var(--corFundoPrincipal);
-        border: 2px solid var(--corTerciaria);
-        color: white;
-    }
 
     .button-search{
         width: 20%;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, AreaForm, AreaButton, AreaContent,AreaAssociation} from './styles';
+import { Container, AreaForm, AreaButton, AreaContent,AreaAssociation, AreaSearch} from './styles';
 import ButtonInput from '../../components/ButtonInput';
 import CardItemDashboard from '../../components/CardItemDashboard';
 import Paginacao from '../../components/Paginacao';
@@ -272,9 +272,19 @@ const DashboardStreamer = () => {
                         )
                     }
                 </AreaForm>
+                <AreaSearch>
+                    <div className="search-content">
+                        <input 
+                            className="input-search" 
+                            placeholder="Digite o nome do Streamer para Pesquisar"
+                            value={searchInput}
+                            onChange={handleSearch}      
+                        />
+                    </div>
+                </AreaSearch>
                 <AreaAssociation>
                     <div className="title-association">
-                        Cadastrar associação
+                        Cadastrar Associação
                     </div>
                     <div className="content-association">
                         <div>
@@ -282,7 +292,7 @@ const DashboardStreamer = () => {
                             <div className="area-select-streamer">
                                 <select value={selectedStreamer} size="1" onChange={e => setSelectedStreamer(e.target.value)}>
                                     <option value="selecione">selecione</option>
-                                    {streamerSelect.map((item)=>(
+                                    {filteredStreamer.map((item)=>(
                                         <option key={item.id} value={item.id}>{item.nome}</option>
                                     ))}    
                                 </select>
@@ -315,14 +325,7 @@ const DashboardStreamer = () => {
                     </div>
                 </AreaAssociation>
                 <AreaContent>
-                    <div className="search-content">
-                        <input 
-                            className="input-search" 
-                            placeholder="Digite o nome do Streamer"
-                            value={searchInput}
-                            onChange={handleSearch}      
-                        />
-                    </div>
+                    
                     <div className="area-content-cards">
                         <div className="content-cards">
                             {filteredStreamer.map((item)=>(
