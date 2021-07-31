@@ -1,7 +1,10 @@
 import http from './api.js';
 
 export const getAll = (limit, paginaAtual) => {
-    return http.get(`/api/streamer?size=${limit}&page=${paginaAtual}`);
+    return http.get(`/api/cidade?size=${limit}&page=${paginaAtual}`);
+};
+export const getAllSelect = () => {
+    return http.get(`/api/cidade`);
 };
 
 export const searchByName = (limit, paginaAtual, name) => {
@@ -10,10 +13,6 @@ export const searchByName = (limit, paginaAtual, name) => {
 
 export const registerStreamer = data => {
     return http.post("/api/streamer", data);
-};
-
-export const registerAssociationStreamer = (idCidade, idStreamer) => {
-    return http.post(`/api/streamer/cidadeid/${idCidade}/streamerid/${idStreamer}`);
 };
 
 export const updateStreamer = (id, data) => {

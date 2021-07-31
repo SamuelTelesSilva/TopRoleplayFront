@@ -24,5 +24,6 @@ export const Container = styled.div`
 
     .redeSociais{
         color: var(--corTerciaria);
+        font-size: 18px;
     }
 `;

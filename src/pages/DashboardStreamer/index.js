@@ -3,7 +3,8 @@ import { Container, AreaForm, AreaButton, AreaContent,AreaAssociation} from './s
 import ButtonInput from '../../components/ButtonInput';
 import CardItemDashboard from '../../components/CardItemDashboard';
 import Paginacao from '../../components/Paginacao';
-import { registerStreamer, getAll, searchByName, updateStreamer, remove} from '../../service/streamerService'
+import { registerStreamer, getAll, searchByName, updateStreamer, remove, registerAssociationStreamer} from '../../service/streamerService';
+import { getAllSelect } from '../../service/cityService';
 import api from '../../service/api';
 import Form from '../../components/Form';
 import ModalRemove from '../../components/Modal/ModalRemove'; 
@@ -28,7 +29,11 @@ const DashboardStreamer = () => {
     }
     
     const [searchInput, setSearchInput] = useState("");
-    const [filteredContact, setFilteredContact] = useState([]); 
+    const [filteredStreamer, setFilteredStreamer] = useState([]);
+    const [streamerSelect, setStreamerSelect] = useState([]);
+    const [citySelect, setCitySelect] = useState([]);
+    const [selectedStreamer, setSelectedStreamer] = useState("selecione");
+    const [selectedCity, setSelectedCity] = useState("selecione");
     const [limit] = useState(5);
     const [paginaAtual, setPaginaAtual] = useState(0);
     const [pages, setPages] = useState();
@@ -57,19 +62,27 @@ const DashboardStreamer = () => {
             if(searchInput === ""){
                 getAll(limit, paginaAtual).then((response) => {
                     setPages(response.data['totalPages']);
-                    setFilteredContact(response.data.content)
+                    setFilteredStreamer(response.data.content);
+                    setStreamerSelect(response.data.content);
                 }).catch(e => {
                     console.log("Erro ao utilizar o getAll " + e);
                 });
             }else{
                 searchByName(limit, paginaAtual, searchInput)
                 .then((response) => {
-                    setFilteredContact(response.data.content)
+                    setFilteredStreamer(response.data.content)
                     setPages(response.data['totalPages']);
                 }).catch(e => {
                     console.log("Erro ao utilizar o searchByName " + e);
                 });
             }
+
+            //Pegando as cidades
+            getAllSelect().then((response)=>{
+                setCitySelect(response.data.content)
+            }).catch(e => {
+                console.log("Erro ao utilizar o getAllSelect " + e);
+            });
         }
         searchAndGetAll();
     }, [token, paginaAtual, limit, searchInput, pages, total]);
@@ -182,6 +195,30 @@ const DashboardStreamer = () => {
         setActiveModal(true);
     }
 
+    
+    /**
+     * Função para cadastrar uma associação
+     * entre o streamer e a cidade(servidor),
+     * onde ele joga.
+    */
+    async function handleSubmitAssociation(){
+        //Passando o token para a api
+        api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
+
+        if(selectedStreamer === "selecione" || selectedCity === "selecione"){
+            alert('selecione corretamente as opções');
+        }else{
+            await registerAssociationStreamer(selectedCity, selectedStreamer).then(response => {
+                if(response.status === 200){
+                    alert('Associação cadastrada com sucesso!');
+                }
+            }).catch(e => {
+                alert('Ocorreu um erro, possivelmente já existe essa associação cadastrada. ' + e);
+            });
+        }
+    }
+
+
     return(
         <Container>
             <div className="aux-cont">     
@@ -237,22 +274,45 @@ const DashboardStreamer = () => {
                 </AreaForm>
                 <AreaAssociation>
                     <div className="title-association">
-                        Cadastrar
+                        Cadastrar associação
                     </div>
                     <div className="content-association">
-                        <div className="area-select-streamer">
-                            <span>Selecione o Streamer</span>
-                            <select>
-                                {filteredContact.map((item)=>(
-                                    <option key={item.id}>{item.nome}</option>
-                                ))}    
-                            </select>
+                        <div>
+                            <div>Selecione o Streamer</div>
+                            <div className="area-select-streamer">
+                                <select value={selectedStreamer} size="1" onChange={e => setSelectedStreamer(e.target.value)}>
+                                    <option value="selecione">selecione</option>
+                                    {streamerSelect.map((item)=>(
+                                        <option key={item.id} value={item.id}>{item.nome}</option>
+                                    ))}    
+                                </select>
+                            </div>
                         </div>
-                        <div className="area-select-city">
-
+                        <div>
+                            <div>Selecione a Cidade</div>
+                            <div className="area-select-city">
+                                <select value={selectedCity} size="1" onChange={e => setSelectedCity(e.target.value)}>  
+                                    <option value="selecione">selecione</option>
+                                    {citySelect.map((item)=>(
+                                        <option key={item.id} value={item.id}>{item.nome}</option>
+                                    ))}    
+                                </select>
+                            </div>
+                            
                         </div>
+                        
                     </div>
-
+                    <div className="area-button-association">
+                        <AreaButton>
+                            <div className="button-register-association">
+                                <ButtonInput 
+                                    type="submit" 
+                                    value="Associar"
+                                    onclick={handleSubmitAssociation}    
+                                />
+                            </div>
+                        </AreaButton>
+                    </div>
                 </AreaAssociation>
                 <AreaContent>
                     <div className="search-content">
@@ -265,7 +325,7 @@ const DashboardStreamer = () => {
                     </div>
                     <div className="area-content-cards">
                         <div className="content-cards">
-                            {filteredContact.map((item)=>(
+                            {filteredStreamer.map((item)=>(
                                 <div className="cards" key={item.id}>
                                     <CardItemDashboard 
                                         id={item.id} 
