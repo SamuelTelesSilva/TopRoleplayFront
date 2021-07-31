@@ -49,6 +49,27 @@ export const AreaButton = styled.div`
     }
 `;
 
+export const AreaAssociation = styled.div`
+    display: block;
+    border: 1px solid red;
+    width: 100%;
+
+    .title-association{
+        display: flex;
+        justify-content: center;
+        border: 1px solid yellow;
+        width: 100%;
+    }
+
+    .content-association{
+        display: flex;
+    }
+
+    .area-select-streamer{
+        display: block;
+    }
+`;
+
 export const AreaContent = styled.div`
     display: block;
     margin-top: 120px;

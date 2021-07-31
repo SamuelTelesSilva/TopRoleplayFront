@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, AreaForm, AreaButton, AreaContent } from './styles';
+import { Container, AreaForm, AreaButton, AreaContent,AreaAssociation} from './styles';
 import ButtonInput from '../../components/ButtonInput';
 import CardItemDashboard from '../../components/CardItemDashboard';
 import Paginacao from '../../components/Paginacao';
@@ -184,7 +184,7 @@ const DashboardStreamer = () => {
 
     return(
         <Container>
-            <div className="aux-cont">   
+            <div className="aux-cont">     
                 <ModalRemove 
                     accepted={() => removeStreamer(idRemove)}
                     denied={() => setActiveModal(false)}
@@ -235,7 +235,25 @@ const DashboardStreamer = () => {
                         )
                     }
                 </AreaForm>
-                    
+                <AreaAssociation>
+                    <div className="title-association">
+                        Cadastrar
+                    </div>
+                    <div className="content-association">
+                        <div className="area-select-streamer">
+                            <span>Selecione o Streamer</span>
+                            <select>
+                                {filteredContact.map((item)=>(
+                                    <option key={item.id}>{item.nome}</option>
+                                ))}    
+                            </select>
+                        </div>
+                        <div className="area-select-city">
+
+                        </div>
+                    </div>
+
+                </AreaAssociation>
                 <AreaContent>
                     <div className="search-content">
                         <input 
