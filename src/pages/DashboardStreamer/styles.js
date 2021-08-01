@@ -95,11 +95,23 @@ export const AreaAssociation = styled.div`
     }
 
     .area-select-streamer select, .area-select-city select{
-        width: 250px;
+        width: 100%;
         height: 30px;
         border-radius: 5px;
         padding-left: 5px;
     }
+
+    .title-update{
+        margin-top: 10px;
+    }
+
+
+    @media screen and (max-width: 1200px){ 
+        .content-association{
+            display: block;
+        }
+    }
+    
 `;
 
 

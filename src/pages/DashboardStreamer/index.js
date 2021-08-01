@@ -3,7 +3,7 @@ import { Container, AreaForm, AreaButton, AreaContent,AreaAssociation, AreaSearc
 import ButtonInput from '../../components/ButtonInput';
 import CardItemDashboard from '../../components/CardItemDashboard';
 import Paginacao from '../../components/Paginacao';
-import { registerStreamer, getAll, searchByName, updateStreamer, remove, registerAssociationStreamer} from '../../service/streamerService';
+import { registerStreamer, getAll, searchByName, updateStreamer, remove, registerAssociationStreamer, updateStreamerAssociation} from '../../service/streamerService';
 import { getAllSelect } from '../../service/cityService';
 import api from '../../service/api';
 import Form from '../../components/Form';
@@ -25,15 +25,18 @@ const DashboardStreamer = () => {
         urlImageCard: '',
         urlInstagram: '',
         urlTwitter: '',
-        urlPlataformaStream: ''
+        urlPlataformaStream: '',
+        idCity: null
     }
     
     const [searchInput, setSearchInput] = useState("");
     const [filteredStreamer, setFilteredStreamer] = useState([]);
-    const [streamerSelect, setStreamerSelect] = useState([]);
+    const [cityData, setCityData] = useState([]);
     const [citySelect, setCitySelect] = useState([]);
     const [selectedStreamer, setSelectedStreamer] = useState("selecione");
     const [selectedCity, setSelectedCity] = useState("selecione");
+    const [selectedStreamerUpdate, setSelectedStreamerUpdate] = useState("selecione");
+    const [selectedCityUpdate, setSelectedCityUpdate] = useState("selecione");
     const [limit] = useState(5);
     const [paginaAtual, setPaginaAtual] = useState(0);
     const [pages, setPages] = useState();
@@ -50,7 +53,6 @@ const DashboardStreamer = () => {
         setActiveModalMsgCreate
     } = useAuth();
 
-    
     useEffect(()=>{
         if(token){
             api.defaults.headers.Autorization = `Bearer ${JSON.parse(token)}`;
@@ -63,7 +65,6 @@ const DashboardStreamer = () => {
                 getAll(limit, paginaAtual).then((response) => {
                     setPages(response.data['totalPages']);
                     setFilteredStreamer(response.data.content);
-                    setStreamerSelect(response.data.content);
                 }).catch(e => {
                     console.log("Erro ao utilizar o getAll " + e);
                 });
@@ -143,6 +144,8 @@ const DashboardStreamer = () => {
     */
     const dataEditing = (item) => {
         setEditing(true)
+        setCityData(item.cidade)
+        
         setStreamerInput({
             id: item.id,
             nome: item.nome,
@@ -153,7 +156,7 @@ const DashboardStreamer = () => {
             urlPlataformaStream: item.urlPlataformaStream
         })
     }
-
+  
     /**
      * Método para fazer o update no streamer selecionado
     */
@@ -218,6 +221,18 @@ const DashboardStreamer = () => {
         }
     }
 
+    const updateAssociationStreamer = () => {
+        
+        
+        updateStreamerAssociation(selectedCity, selectedStreamerUpdate, selectedCityUpdate)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(e => {
+            console.log(e);
+        });
+        
+    };
 
     return(
         <Container>
@@ -282,24 +297,36 @@ const DashboardStreamer = () => {
                         />
                     </div>
                 </AreaSearch>
-                <AreaAssociation>
-                    <div className="title-association">
-                        Cadastrar Associação
-                    </div>
-                    <div className="content-association">
-                        <div>
-                            <div>Selecione o Streamer</div>
-                            <div className="area-select-streamer">
-                                <select value={selectedStreamer} size="1" onChange={e => setSelectedStreamer(e.target.value)}>
-                                    <option value="selecione">selecione</option>
-                                    {filteredStreamer.map((item)=>(
-                                        <option key={item.id} value={item.id}>{item.nome}</option>
-                                    ))}    
-                                </select>
+
+                {editing ? (
+                    <AreaAssociation>
+                        <div className="title-association">
+                            Atualizar Associação
+                        </div>
+                        <div className="content-association">
+                            <div>
+                                <div>Streamer Atual</div>
+                                <div className="area-select-streamer">
+                                    <select value={selectedStreamerUpdate} size="1" onChange={e => setSelectedStreamerUpdate(e.target.value)}>
+                                        <option value="selecione">Selecione</option>
+                                        <option value={streamerInput.id}>{streamerInput.nome}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div>Cidade Atual</div>
+                                <div className="area-select-city">
+                                    <select value={selectedCityUpdate} size="1" onChange={e => setSelectedCityUpdate(e.target.value)}>  
+                                        <option value="selecione">selecione</option>
+                                        {cityData.map((city)=>(
+                                            <option key={city.id} value={city.id}>{city.nome}</option>
+                                        ))}    
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div>
-                            <div>Selecione a Cidade</div>
+                            <div className="title-update">Selecione a Cidade para Substituir a Atual</div>
                             <div className="area-select-city">
                                 <select value={selectedCity} size="1" onChange={e => setSelectedCity(e.target.value)}>  
                                     <option value="selecione">selecione</option>
@@ -308,24 +335,72 @@ const DashboardStreamer = () => {
                                     ))}    
                                 </select>
                             </div>
+                        </div>
+                        <div className="area-button-association">
+                            <AreaButton>
+                                <div className="button-register-association">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Atualizar"
+                                        onclick={updateAssociationStreamer}    
+                                    />
+                                </div>
+                                <div className="button-return">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Voltar"
+                                        onclick={buttonReturn}    
+                                    />
+                                </div>
+                            </AreaButton>
                             
                         </div>
-                        
-                    </div>
-                    <div className="area-button-association">
-                        <AreaButton>
-                            <div className="button-register-association">
-                                <ButtonInput 
-                                    type="submit" 
-                                    value="Associar"
-                                    onclick={handleSubmitAssociation}    
-                                />
+                    </AreaAssociation>
+                ): (
+                    <AreaAssociation>
+                        <div className="title-association">
+                            Cadastrar Associação
+                        </div>
+                        <div className="content-association">
+                            <div>
+                                <div>Selecione o Streamer</div>
+                                <div className="area-select-streamer">
+                                    <select value={selectedStreamer} size="1" onChange={e => setSelectedStreamer(e.target.value)}>
+                                        <option value="selecione">selecione</option>
+                                        {filteredStreamer.map((item)=>(
+                                            <option key={item.id} value={item.id}>{item.nome}</option>
+                                        ))}    
+                                    </select>
+                                </div>
                             </div>
-                        </AreaButton>
-                    </div>
-                </AreaAssociation>
+                            <div>
+                                <div>Selecione a Cidade</div>
+                                <div className="area-select-city">
+                                    <select value={selectedCity} size="1" onChange={e => setSelectedCity(e.target.value)}>  
+                                        <option value="selecione">selecione</option>
+                                        {citySelect.map((item)=>(
+                                            <option key={item.id} value={item.id}>{item.nome}</option>
+                                        ))}    
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        <div className="area-button-association">
+                            <AreaButton>
+                                <div className="button-register-association">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Associar"
+                                        onclick={handleSubmitAssociation}    
+                                    />
+                                </div>
+                            </AreaButton>
+                        </div>
+                    </AreaAssociation>
+                )}
                 <AreaContent>
-                    
                     <div className="area-content-cards">
                         <div className="content-cards">
                             {filteredStreamer.map((item)=>(

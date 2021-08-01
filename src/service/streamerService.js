@@ -24,6 +24,10 @@ export const updateStreamer = (id, data) => {
     return http.put(`/api/streamer/${id}`, data);
 };
 
+export const updateStreamerAssociation = (idNewCity, idCurrentStreamer, idCurrentCity) => {
+    return http.put(`/api/streamer/newcity/${idNewCity}/newstreamer/${idCurrentStreamer}/cidade/${idCurrentCity}/streamer/${idCurrentStreamer}`);
+};
+
 export const remove = id => {
     return http.delete(`/api/streamer/${id}`);
 };
