@@ -18,7 +18,6 @@ export const AuthProvider = (props) => {
     const [msgModal, setMsgModal] = useState("");
     
 
-    
     const [loginInput, setLoginInput] = useState({
         username: '',
         password: ''

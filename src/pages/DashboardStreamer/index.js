@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, AreaForm, AreaButton, AreaContent,AreaAssociation, AreaSearch} from './styles';
+import { Container, AreaForm, AreaButton, AreaContent, AreaAssociation, AreaSearch} from './styles';
 import ButtonInput from '../../components/ButtonInput';
 import CardItemDashboard from '../../components/CardItemDashboard';
 import Paginacao from '../../components/Paginacao';
@@ -11,7 +11,6 @@ import ModalRemove from '../../components/Modal/ModalRemove';
 import ModalMsgEdit from '../../components/Modal/ModalMsgEdit'; 
 import { useAuth } from '../../providers/auth';
 import ModalMsgCreate from '../../components/Modal/ModalMsgCreate';
-import FormAssociation from '../../components/FormAssociation';
 
 const DashboardStreamer = () => {
 
@@ -42,8 +41,8 @@ const DashboardStreamer = () => {
     const [pages, setPages] = useState();
     const [total] = useState(0);
     const token = localStorage.getItem('token');
-    const [streamerInput, setStreamerInput] = useState(initialStreamerState);
     const [editing , setEditing] = useState(false);
+    const [streamerInput, setStreamerInput] = useState(initialStreamerState);
     const [activeModal, setActiveModal] = useState(false);
     const [idRemove, setIdRemove] = useState(false);
     const {
@@ -238,49 +237,6 @@ const DashboardStreamer = () => {
         }
     };
 
-    const elementCurrentStreamer = (
-        <select value={selectedStreamerUpdate} size="1" onChange={e => setSelectedStreamerUpdate(e.target.value)}>
-            <option value="selecione">Selecione</option>
-            <option value={streamerInput.id}>{streamerInput.nome}</option>
-        </select>
-    );
-
-    const elementCurrentCity = (
-        <select value={selectedCityUpdate} size="1" onChange={e => setSelectedCityUpdate(e.target.value)}>  
-            <option value="selecione">selecione</option>
-            {cityData.map((city)=>(
-                <option key={city.id} value={city.id}>{city.nome}</option>
-            ))}    
-        </select>
-    );
-
-    const elementCity = (
-        <select value={selectedCity} size="1" onChange={e => setSelectedCity(e.target.value)}>  
-            <option value="selecione">selecione</option>
-            {citySelect.map((item)=>(
-                <option key={item.id} value={item.id}>{item.nome}</option>
-            ))}    
-        </select>
-    );
-
-    const element = (
-        <select value={selectedStreamer} size="1" onChange={e => setSelectedStreamer(e.target.value)}>
-            <option value="selecione">selecione</option>
-            {filteredStreamer.map((item)=>(
-                <option key={item.id} value={item.id}>{item.nome}</option>
-            ))}    
-        </select>
-    ); 
-
-    const element2 = (
-        <select value={selectedCity} size="1" onChange={e => setSelectedCity(e.target.value)}>  
-            <option value="selecione">selecione</option>
-            {citySelect.map((item)=>(
-                <option key={item.id} value={item.id}>{item.nome}</option>
-            ))}    
-        </select>
-    );
-
     return(
         <Container>
             <div className="aux-cont">     
@@ -346,12 +302,43 @@ const DashboardStreamer = () => {
                 </AreaSearch>
 
                 {editing ? (
-                    <FormAssociation
-                        titleAssociation="Atualizar Associação"
-                        areaCurrentStreamer={elementCurrentStreamer}
-                        areaCurrentCity={elementCurrentCity}
-                        areaCity={elementCity}
-                    >
+                    <AreaAssociation>
+                        <div className="title-association">
+                            Atualizar Associação
+                        </div>
+                        <div className="content-association">
+                            <div>
+                                <div>Streamer Atual</div>
+                                <div className="area-select-streamer">
+                                    <select value={selectedStreamerUpdate} size="1" onChange={e => setSelectedStreamerUpdate(e.target.value)}>
+                                        <option value="selecione">Selecione</option>
+                                        <option value={streamerInput.id}>{streamerInput.nome}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div>Cidade Atual</div>
+                                <div className="area-select-city">
+                                    <select value={selectedCityUpdate} size="1" onChange={e => setSelectedCityUpdate(e.target.value)}>  
+                                        <option value="selecione">selecione</option>
+                                        {cityData.map((city)=>(
+                                            <option key={city.id} value={city.id}>{city.nome}</option>
+                                        ))}    
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="title-update">Selecione a Cidade para Substituir a Atual</div>
+                            <div className="area-select-city">
+                                <select value={selectedCity} size="1" onChange={e => setSelectedCity(e.target.value)}>  
+                                    <option value="selecione">selecione</option>
+                                    {citySelect.map((item)=>(
+                                        <option key={item.id} value={item.id}>{item.nome}</option>
+                                    ))}    
+                                </select>
+                            </div>
+                        </div>
                         <div className="area-button-association">
                             <AreaButton>
                                 <div className="button-register-association">
@@ -369,14 +356,40 @@ const DashboardStreamer = () => {
                                     />
                                 </div>
                             </AreaButton>
+                            
                         </div>
-                    </FormAssociation>
+                    </AreaAssociation>
                 ): (
-                    <FormAssociation
-                        titleAssociation="Cadastrar Associação"
-                        areaCurrentStreamer={element}
-                        areaCurrentCity={element2}
-                    >
+                    <AreaAssociation>
+                        <div className="title-association">
+                            Cadastrar Associação
+                        </div>
+                        <div className="content-association">
+                            <div>
+                                <div>Selecione o Streamer</div>
+                                <div className="area-select-streamer">
+                                    <select value={selectedStreamer} size="1" onChange={e => setSelectedStreamer(e.target.value)}>
+                                        <option value="selecione">selecione</option>
+                                        {filteredStreamer.map((item)=>(
+                                            <option key={item.id} value={item.id}>{item.nome}</option>
+                                        ))}    
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div>Selecione a Cidade</div>
+                                <div className="area-select-city">
+                                    <select value={selectedCity} size="1" onChange={e => setSelectedCity(e.target.value)}>  
+                                        <option value="selecione">selecione</option>
+                                        {citySelect.map((item)=>(
+                                            <option key={item.id} value={item.id}>{item.nome}</option>
+                                        ))}    
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
                         <div className="area-button-association">
                             <AreaButton>
                                 <div className="button-register-association">
@@ -388,7 +401,7 @@ const DashboardStreamer = () => {
                                 </div>
                             </AreaButton>
                         </div>
-                    </FormAssociation>
+                    </AreaAssociation>
                 )}
                 <AreaContent>
                     <div className="area-content-cards">
