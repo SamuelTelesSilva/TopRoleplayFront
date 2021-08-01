@@ -87,6 +87,9 @@ const DashboardStreamer = () => {
         searchAndGetAll();
     }, [token, paginaAtual, limit, searchInput, pages, total]);
 
+
+    
+
     //Pegando os valores digitados no input
     const changeValue = (event) => {
         const { name, value } = event.target;
