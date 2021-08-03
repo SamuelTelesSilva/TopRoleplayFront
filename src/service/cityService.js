@@ -11,8 +11,8 @@ export const searchByName = (limit, paginaAtual, name) => {
     return http.get(`/api/streamer/search/${name}?size=${limit}&page=${paginaAtual}`);
 };
 
-export const registerStreamer = data => {
-    return http.post("/api/streamer", data);
+export const registerCity = data => {
+    return http.post("/api/cidade", data);
 };
 
 export const updateStreamer = (id, data) => {

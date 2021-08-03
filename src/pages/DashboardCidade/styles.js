@@ -57,3 +57,24 @@ export const Form = styled.div`
         font-size: 18px;
     }
 `;
+
+export const AreaButton = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 24px 0px 16px 0px;
+
+    .button-register, .button-register-association{
+        width: 150px;
+        margin-right: 10px;
+    }
+    
+    .button-update{
+        width: 150px;
+    }
+    
+    .button-return{
+        width: 150px;
+        margin-left: 10px;
+    }
+`;

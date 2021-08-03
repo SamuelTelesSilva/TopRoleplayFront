@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import {Container, AreaForm, Form} from './styles';
+import {Container, AreaForm,AreaButton, Form} from './styles';
+import { registerCity } from '../../service/cityService';
+import ButtonInput from '../../components/ButtonInput';
+import api from '../../service/api';
+
 
 const DashboardCidade = () => {
     
     //Setando o id da pagina, esta sendo utilizado para controlar o menu
     localStorage.setItem('idPagina', '1');
+    const token = localStorage.getItem('token');
+
+
 
     const [cidadeInput, setCidadeInput] = useState({
         id: null,
@@ -21,6 +28,26 @@ const DashboardCidade = () => {
         const {name, value} = event.target;
         setCidadeInput({...cidadeInput, [name]: value})
         
+    }
+
+    async function handleSubmit(){
+        api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
+
+        const data = {
+            'nome': cidadeInput.nome,
+            'coracao': 300,
+            'urlImageCapa': cidadeInput.urlImageCapa,
+            'urlImageCard': cidadeInput.urlImageCard,
+            'urlInstagram': cidadeInput.urlInstagram,
+            'urlTwitter': cidadeInput.urlTwitter,
+            'urlDiscord': cidadeInput.urlDiscord
+        }
+
+        await registerCity(data).then(response => {
+            console.log(response);
+        }).catch(e => {
+            console.log(e);
+        })
     }
 
     return(
@@ -84,6 +111,15 @@ const DashboardCidade = () => {
                             onChange={changeValue}
                         />
                     </Form>
+                    <AreaButton>
+                        <div className="button-register">
+                            <ButtonInput 
+                                type="submit" 
+                                value="Cadastrar"
+                                onclick={handleSubmit}    
+                            />
+                        </div>
+                    </AreaButton>
                 </AreaForm>
             </div>
         </Container>
