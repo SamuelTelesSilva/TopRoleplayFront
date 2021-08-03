@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import {Container, AreaForm,AreaButton, Form} from './styles';
-import { registerCity } from '../../service/cityService';
+import {Container, AreaForm, AreaButton, AreaContent, AreaSearch, Form} from './styles';
+import { getAll, registerCity, searchByName } from '../../service/cityService';
 import ButtonInput from '../../components/ButtonInput';
 import api from '../../service/api';
+import CardItemDashboard from '../../components/CardItemDashboard';
+import Paginacao from '../../components/Paginacao';
+
 
 
 const DashboardCidade = () => {
-    
+
     //Setando o id da pagina, esta sendo utilizado para controlar o menu
     localStorage.setItem('idPagina', '1');
-    const token = localStorage.getItem('token');
-
-
-
-    const [cidadeInput, setCidadeInput] = useState({
+    const initialCityState = {
         id: null,
         nome: '',
         urlImageCapa: '',
@@ -21,7 +20,55 @@ const DashboardCidade = () => {
         urlInstagram: '',
         urlTwitter: '',
         urlDiscord: ''
-    });
+    }
+    const token = localStorage.getItem('token');
+    const [cidadeInput, setCidadeInput] = useState(initialCityState);
+    const [limit] = useState(5);
+    const [paginaAtual, setPaginaAtual] = useState(0);
+    const [pages, setPages] = useState();
+    const [total] = useState(0);
+    const [searchInput, setSearchInput] = useState("");
+    const [filteredCity, setFilteredCity] = useState([]);
+
+    
+
+    useEffect(()=>{
+
+        if(token){
+            api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
+        }
+        
+        const searchAndGetAll = () => {
+            if(searchInput === ""){
+                getAll(limit, paginaAtual).then((response) =>{
+                    setPages(response.data['totalPages']);
+                    setFilteredCity(response.data.content);
+                }).catch(
+                    (e)=>{console.log(e)
+                });
+            }else{
+                searchByName(limit, paginaAtual, searchInput)
+                .then((response) => {
+                    setFilteredCity(response.data.content)
+                    setPages(response.data['totalPages']);
+                }).catch(e => {
+                    console.log("Erro ao utilizar o searchByName " + e);
+                });
+            }
+        }
+        searchAndGetAll();
+        
+    }, [paginaAtual, limit, searchInput, pages, total, token]);
+
+    //Search
+    const handleSearch = event => {
+        setSearchInput(event.target.value)
+    }
+
+    //Pagination
+    const handleChangePagination = (event, value) => {
+        setPaginaAtual(value-1);
+    };
 
     //Pegando os valores digitados no input
     const changeValue = (event) => {
@@ -49,6 +96,8 @@ const DashboardCidade = () => {
             console.log(e);
         })
     }
+
+    
 
     return(
         <Container>
@@ -121,6 +170,37 @@ const DashboardCidade = () => {
                         </div>
                     </AreaButton>
                 </AreaForm>
+                <AreaSearch>
+                    <div className="search-content">
+                        <input 
+                            className="input-search" 
+                            placeholder="Digite o nome da cidade para Pesquisar"
+                            value={searchInput}
+                            onChange={handleSearch}      
+                        />
+                    </div>
+                </AreaSearch>
+                <AreaContent>
+                    <div className="area-content-cards">
+                        <div className="content-cards">
+                            {filteredCity.map((item)=>(
+                                <div className="cards" key={item.id}>
+                                    <CardItemDashboard 
+                                        id={item.id} 
+                                        name={item.nome} 
+                                        hearts={item.coracao} 
+                                        urlImg={item.urlImageCard} 
+                                        altUrl={item.nome}
+                                       
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="area-pagination">
+                        <Paginacao count={pages} onchange={handleChangePagination}/>        
+                    </div>
+                </AreaContent>
             </div>
         </Container>
     );

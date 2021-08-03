@@ -1,14 +1,15 @@
 import http from './api.js';
 
 export const getAll = (limit, paginaAtual) => {
-    return http.get(`/api/cidade?size=${limit}&page=${paginaAtual}`);
+    return http.get(`/api/cidade?sort=id,desc&size=${limit}&page=${paginaAtual}`);
 };
+
 export const getAllSelect = () => {
     return http.get(`/api/cidade`);
 };
 
 export const searchByName = (limit, paginaAtual, name) => {
-    return http.get(`/api/streamer/search/${name}?size=${limit}&page=${paginaAtual}`);
+    return http.get(`/api/cidade/search/${name}?size=${limit}&page=${paginaAtual}`);
 };
 
 export const registerCity = data => {

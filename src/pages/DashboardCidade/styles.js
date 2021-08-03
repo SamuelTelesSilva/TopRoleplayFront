@@ -78,3 +78,70 @@ export const AreaButton = styled.div`
         margin-left: 10px;
     }
 `;
+
+export const AreaContent = styled.div`
+    display: block;
+
+    .button-search{
+        width: 20%;
+    }
+
+    .button-input-search{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--corTerciaria);
+        border-radius: 0px 5px 5px 0px;
+        color: white;
+        width: 100%;
+        height: 35px;
+        font-size: 16px;
+
+        :hover{
+            cursor: pointer;
+        }
+    }
+
+    .area-content-cards{
+        display: flex;
+        width: 100%;
+        height: 830px; 
+        justify-content: center;
+    }
+
+    .content-cards{
+        display: block;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .cards{
+        margin-bottom: 16px;
+    }
+
+    .area-pagination{
+        margin-bottom: 16px;
+    }
+    
+`;
+
+
+
+export const AreaSearch = styled.div`
+    margin-bottom: 16px;
+
+    .search-content{
+        display: flex;
+        width: 100%;
+    }
+
+    .input-search{
+        width: 100%;
+        height: 35px;
+        border-radius: 15px;
+        padding: 0px 8px 0px 13px;
+        background-color: var(--corFundoPrincipal);
+        border: 2px solid var(--corTerciaria);
+        color: white;
+    }
+`;
