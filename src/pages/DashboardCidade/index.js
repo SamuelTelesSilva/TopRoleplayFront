@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {Container, AreaForm, AreaButton, AreaContent, AreaSearch, Form} from './styles';
-import { getAll, registerCity, searchByName } from '../../service/cityService';
+import { getAll, registerCity, searchByName, updateCity, remove} from '../../service/cityService';
 import ButtonInput from '../../components/ButtonInput';
 import api from '../../service/api';
 import CardItemDashboard from '../../components/CardItemDashboard';
 import Paginacao from '../../components/Paginacao';
-
+import ModalMsgEdit from '../../components/Modal/ModalMsgEdit';
+import { useAuth } from '../../providers/auth';
+import ModalMsgCreate from '../../components/Modal/ModalMsgCreate';
+import ModalRemove from '../../components/Modal/ModalRemove';
 
 
 const DashboardCidade = () => {
@@ -29,8 +32,15 @@ const DashboardCidade = () => {
     const [total] = useState(0);
     const [searchInput, setSearchInput] = useState("");
     const [filteredCity, setFilteredCity] = useState([]);
-
-    
+    const [editing , setEditing] = useState(false);
+    const {
+        activeModalMsgEdit,
+        setActiveModalMsgEdit,
+        activeModalMsgCreate,
+        setActiveModalMsgCreate
+    } = useAuth();
+    const [activeModal, setActiveModal] = useState(false);
+    const [idRemove, setIdRemove] = useState(false);
 
     useEffect(()=>{
 
@@ -57,7 +67,7 @@ const DashboardCidade = () => {
             }
         }
         searchAndGetAll();
-        
+
     }, [paginaAtual, limit, searchInput, pages, total, token]);
 
     //Search
@@ -92,16 +102,100 @@ const DashboardCidade = () => {
 
         await registerCity(data).then(response => {
             console.log(response);
+            setActiveModalMsgCreate(true);
         }).catch(e => {
             console.log(e);
         })
     }
 
-    
+    /**
+     * Metodo para fazer a alteração de um botão para outro,
+     * e limpar o form.
+    */
+      const buttonReturn = () => {
+        setEditing(false)
+        setCidadeInput(initialCityState);
+    }
 
+
+    /**
+     * Método para Preencher o form com a cidade selecionada
+     * @param {*} item 
+    */
+     const dataEditing = (item) => {
+        setEditing(true);
+        console.log(item)
+        
+        setCidadeInput({
+            id: item.id,
+            nome: item.nome,
+            urlImageCapa: item.urlImageCapa,
+            urlImageCard: item.urlImageCard,
+            urlInstagram: item.urlInstagram,
+            urlTwitter: item.urlTwitter,
+            urlDiscord: item.urlDiscord
+        })
+    }
+  
+    /**
+     * Método para fazer o update na cidade selecionado
+    */
+    const updateCidade = () => {
+        
+        if(cidadeInput.id !== null){
+            updateCity(cidadeInput.id, cidadeInput)
+            .then(response => {
+                setActiveModalMsgEdit(true);
+                console.log(response)
+            })
+            .catch(e => {
+                console.log(e);
+            });
+            
+        }else{
+            alert("Selecione um contato");
+        }
+    };
+
+    /**
+     * Método para remover a cidade selecionada,
+     * @param {*} id 
+    */
+     const removeCity = (id) => {
+        if(id !== null){
+            remove(id).then(response => {
+                window.location.reload();//procucar uma forma de atualizar só os conteudos não a pagina toda
+            }).catch(e => {
+                console.log(e);
+            });
+            setActiveModal(false);
+        }else{
+            console.log('erro no id');
+        }
+    }
+
+    //Método para ativar o modal e pegar o id
+    const activeModalDelete = (id) => {
+        setIdRemove(id);
+        setActiveModal(true);
+    }
+    
     return(
         <Container>
             <div className="aux-cont">
+                <ModalMsgCreate
+                    active={activeModalMsgCreate}
+                    msgModalCreate="Cidade adicionada com sucesso!"
+                />
+                <ModalMsgEdit
+                    active={activeModalMsgEdit}
+                    msgModalT="Atualizado com sucesso!"
+                />
+                <ModalRemove 
+                    accepted={() => removeCity(idRemove)}
+                    denied={() => setActiveModal(false)}
+                    active={activeModal}
+                /> 
                 <AreaForm>
                     <Form>
                         <div className="title-input">Nome da Cidade</div>
@@ -160,15 +254,37 @@ const DashboardCidade = () => {
                             onChange={changeValue}
                         />
                     </Form>
-                    <AreaButton>
-                        <div className="button-register">
-                            <ButtonInput 
-                                type="submit" 
-                                value="Cadastrar"
-                                onclick={handleSubmit}    
-                            />
-                        </div>
-                    </AreaButton>
+                    {
+                        editing ? (
+                            <AreaButton>
+                                <div className="button-update">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Atualizar"
+                                        onclick={updateCidade}
+                                    />
+                                </div>
+                                <div className="button-return">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Voltar"
+                                        onclick={buttonReturn}    
+                                    />
+                                </div>
+                            </AreaButton>
+                        ) :
+                        (
+                            <AreaButton>
+                                <div className="button-register">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Cadastrar"
+                                        onclick={handleSubmit}    
+                                    />
+                                </div>
+                            </AreaButton>
+                        )
+                    }
                 </AreaForm>
                 <AreaSearch>
                     <div className="search-content">
@@ -191,7 +307,8 @@ const DashboardCidade = () => {
                                         hearts={item.coracao} 
                                         urlImg={item.urlImageCard} 
                                         altUrl={item.nome}
-                                       
+                                        onclickEdit={() => dataEditing(item)}
+                                        onclickDelete={() => activeModalDelete(item.id)}
                                     />
                                 </div>
                             ))}

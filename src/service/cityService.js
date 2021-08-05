@@ -16,11 +16,11 @@ export const registerCity = data => {
     return http.post("/api/cidade", data);
 };
 
-export const updateStreamer = (id, data) => {
-    return http.put(`/api/streamer/${id}`, data);
+export const updateCity = (id, data) => {
+    return http.put(`/api/cidade/${id}`, data);
 };
 
 export const remove = id => {
-    return http.delete(`/api/streamer/${id}`);
+    return http.delete(`/api/cidade/${id}`);
 };
   

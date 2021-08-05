@@ -5,13 +5,11 @@ export const Container = styled.div`
     width: 100%;
     justify-content: center;
     height: 100%;
-    border: 1px solid red;
 
     .aux-cont{
         display: block;
         width: 50%;
         height: 100%;
-        border: 1px solid red;
     }
 
     @media screen and (max-width: 640px){ 
@@ -128,7 +126,7 @@ export const AreaContent = styled.div`
 
 
 export const AreaSearch = styled.div`
-    margin-bottom: 16px;
+    margin: 100px 0px 16px 0px;
 
     .search-content{
         display: flex;
