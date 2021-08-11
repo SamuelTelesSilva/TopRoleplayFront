@@ -5,7 +5,7 @@ export const getAll = (limit, paginaAtual) => {
 };
 
 export const getAllSelect = () => {
-    return http.get(`/api/grupo`);
+    return http.get(`/api/grupo?sort=id,desc`);
 };
 
 export const searchByName = (limit, paginaAtual, name) => {
@@ -22,5 +22,30 @@ export const updateGroup = (id, data) => {
 
 export const remove = id => {
     return http.delete(`/api/grupo/${id}`);
+};
+
+export const registerLeader = (idGrupo, idLider) => {
+    return http.post(`/api/grupo/${idGrupo}/lider/${idLider}`);
+};
+
+export const registerMember = (idGrupo, idMembro) => {
+    return http.post(`/api/grupo/${idGrupo}/membro/${idMembro}`);
+};
+
+export const registerCity = (idGrupo, idCidade) => {
+    return http.post(`/api/grupo/${idGrupo}/cidade/${idCidade}`);
+};
+
+
+export const removeLeader = (idGrupo, idLider) => {
+    return http.delete(`/api/grupo/${idGrupo}/lider/${idLider}`);
+};
+
+export const removeMember = (idGrupo, idMembro) => {
+    return http.delete(`/api/grupo/${idGrupo}/membro/${idMembro}`);
+};
+
+export const removeCity = (idGrupo, idCidade) => {
+    return http.delete(`/api/grupo/${idGrupo}/cidade/${idCidade}`);
 };
   

@@ -1,7 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles';
-import { Container, AreaForm, AreaButton, AreaContent, AreaSearch, Form } from './styles';
-import { getAll, registerGroup, searchByName, updateGroup, remove} from '../../service/groupService';
+import { 
+    Container, 
+    AreaForm, 
+    AreaButton, 
+    AreaContent, 
+    AreaSearch, 
+    Form, 
+    AreaAssociation
+} from './styles';
+import {
+    getAll, 
+    registerGroup, 
+    searchByName, 
+    updateGroup, 
+    remove, 
+    registerLeader, 
+    registerMember, 
+    registerCity,
+    removeLeader,
+    removeMember,
+    removeCity
+} from '../../service/groupService';
+import { getAllSelect } from '../../service/streamerService';
+import { getAllSelectCity } from '../../service/cityService';
 import { useAuth } from '../../providers/auth';
 import ButtonInput from '../../components/ButtonInput';
 import Paginacao from '../../components/Paginacao';
@@ -24,7 +46,6 @@ const DashboardGrupo = () => {
         urlImageCapa: '',
         urlImageCard: ''
     }
-    const [selectedGender, setSelectedGender] = useState("selecione");
     const token = localStorage.getItem('token');
     const [editing , setEditing] = useState(false);
     const [grupoInput, setGrupoInput] = useState(initialCityState);
@@ -36,6 +57,16 @@ const DashboardGrupo = () => {
     const [filteredGroup, setFilteredGroup] = useState([]);
     const [activeModal, setActiveModal] = useState(false);
     const [idRemove, setIdRemove] = useState(false);
+    const [selectedGroup, setSelectedGroup] = useState("selecione");
+    const [selectedStreamer, setSelectedStreamer] = useState("selecione");
+    const [selectedStreamerMember, setSelectedStreamerMember] = useState("selecione");
+    const [selectedGroupMember, setSelectedGroupMember] = useState("selecione");
+    const [selectedCity, setSelectedCity] = useState("selecione");
+    const [selectedGender, setSelectedGender] = useState("selecione");
+    const [selectedGroupCity, setSelectedGroupCity] = useState("selecione");
+    
+    const [citySelect, setCitySelect] = useState([]);
+    const [streamerSelect, setStreamerSelect] = useState([]);
     const {
         activeModalMsgEdit,
         setActiveModalMsgEdit,
@@ -68,6 +99,16 @@ const DashboardGrupo = () => {
                     console.log("Erro ao utilizar o searchByName " + e);
                 });
             }
+
+            //Pegando todos os streamers
+            getAllSelect().then(response => {
+                setStreamerSelect(response.data.content);
+            });
+
+            //Pegando todas as cidades
+            getAllSelectCity().then(response => {
+                setCitySelect(response.data.content);
+            })
         }
         searchAndGetAll();
 
@@ -92,8 +133,6 @@ const DashboardGrupo = () => {
             genero: 'Outros'
         }
     ]
-
-    
 
     //Search
     const handleSearch = event => {
@@ -168,7 +207,7 @@ const DashboardGrupo = () => {
             'urlImageCapa': grupoInput.urlImageCapa,
             'urlImageCard': grupoInput.urlImageCard
         }
-        
+
         if(grupoInput.id !== null){
             updateGroup(grupoInput.id, data)
             .then(response => {
@@ -205,6 +244,81 @@ const DashboardGrupo = () => {
     const activeModalDelete = (id) => {
         setIdRemove(id);
         setActiveModal(true);
+    }
+
+    /**
+     * Função para cadastrar uma associação
+     * entre o grupo e o streamer
+    */
+    async function handleSubmitAssociationLeader(){
+        //Passando o token para a api
+        api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
+        
+        if(selectedGroup !== "selecione" && selectedStreamer !== "selecione"){
+            await registerLeader(selectedGroup, selectedStreamer).then(response =>{
+                console.log(response);
+            }).catch(e => {
+                console.log(e);
+            });        
+        }
+    }
+
+    /**
+     * Função para cadastrar uma associação
+     * entre o grupo e o streamer
+    */
+     async function handleSubmitAssociationMember(){
+        //Passando o token para a api
+        api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
+
+        if(selectedGroupMember !== "selecione" && selectedStreamerMember !== "selecione"){
+            await registerMember(selectedGroupMember, selectedStreamerMember).then(response =>{
+                console.log(response);
+            }).catch(e => {
+                console.log(e);
+            });        
+        }
+    }
+
+    /**
+     * Função para cadastrar uma associação
+     * entre o grupo e a cidade
+    */
+     async function handleSubmitAssociationCity(){
+        //Passando o token para a api
+        api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
+
+        if(selectedGroupCity !== "selecione" && selectedCity !== "selecione"){
+            await registerCity(selectedGroupCity, selectedCity).then(response =>{
+                console.log(response);
+            }).catch(e => {
+                console.log(e);
+            });        
+        }
+    }
+
+    const removeAssociationLeader = () => {
+        removeLeader(selectedGroup, selectedStreamer).then(() => {
+            window.location.reload();
+        }).catch(e => {
+            console.log(e);
+        });
+    }
+
+    const removeAssociationMember = () => {
+        removeMember(selectedGroupMember, selectedStreamerMember).then(() => {
+            window.location.reload();
+        }).catch(e => {
+            console.log(e);
+        });
+    }
+
+    const removeAssociationCity = () => {
+        removeCity(selectedGroupCity, selectedCity).then(() => {
+            window.location.reload();
+        }).catch(e => {
+            console.log(e);
+        });
     }
 
     return(
@@ -264,6 +378,7 @@ const DashboardGrupo = () => {
                             onChange={changeValue}
                         />
                     </Form>
+                    
                     {
                         editing ? (
                             <AreaButton>
@@ -295,6 +410,171 @@ const DashboardGrupo = () => {
                             </AreaButton>
                         )
                     }
+
+                    <AreaSearch>
+                        <div className="search-content">
+                            <input 
+                                className="input-search" 
+                                placeholder="Digite o nome do grupo para Pesquisar"
+                                value={searchInput}
+                                onChange={handleSearch}      
+                            />
+                        </div>
+                    </AreaSearch>
+
+                    <AreaAssociation>
+                        <div className="title-association">
+                            Quem é o líder do Grupo?
+                        </div>
+                        <div className="content-association">
+                            <div>
+                                <div>Selecione o Grupo</div>
+                                <div className="area-select-group">
+                                    <select value={selectedGroup} size="1" onChange={e => setSelectedGroup(e.target.value)}>
+                                        <option value="selecione">selecione</option>
+                                        {filteredGroup.map((item)=>(
+                                            <option key={item.id} value={item.id}>
+                                                {item.id} - {item.nome}
+                                            </option>
+                                        ))}    
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div>Selecione o Streamer</div>
+                                <div className="area-select-streamer">
+                                    <select value={selectedStreamer} size="1" onChange={e => setSelectedStreamer(e.target.value)}>  
+                                        <option value="selecione">selecione</option>
+                                        {streamerSelect.map((item)=>(
+                                            <option key={item.id} value={item.id}>
+                                                {item.id} - {item.nome}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="area-button-association">
+                            <AreaButton>
+                                <div className="button-register-association">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Associar"
+                                        onclick={handleSubmitAssociationLeader}    
+                                    />
+                                </div>
+                                <div className="button-delete-association">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Deletar"
+                                        onclick={removeAssociationLeader}    
+                                    />
+                                </div>
+                            </AreaButton>
+                        </div>
+                    </AreaAssociation>
+                    <AreaAssociation>
+                        <div className="title-association">
+                            Quem faz parte do Grupo?
+                        </div>
+                        <div className="content-association">
+                            <div>
+                                <div>Selecione o Grupo</div>
+                                <div className="area-select-group">
+                                    <select value={selectedGroupMember} size="1" onChange={e => setSelectedGroupMember(e.target.value)}>
+                                        <option value="selecione">selecione</option>
+                                        {filteredGroup.map((item)=>(
+                                            <option key={item.id} value={item.id}>
+                                                {item.id} - {item.nome}
+                                            </option>
+                                        ))}    
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div>Selecione o Streamer</div>
+                                <div className="area-select-streamer">
+                                    <select value={selectedStreamerMember} size="1" onChange={e => setSelectedStreamerMember(e.target.value)}>  
+                                        <option value="selecione">selecione</option>
+                                        {streamerSelect.map((item)=>(
+                                            <option key={item.id} value={item.id}>
+                                                {item.id} - {item.nome}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="area-button-association">
+                            <AreaButton>
+                                <div className="button-register-association">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Associar"
+                                        onclick={handleSubmitAssociationMember}    
+                                    />
+                                </div>
+                                <div className="button-delete-association">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Deletar"
+                                        onclick={removeAssociationMember}    
+                                    />
+                                </div>
+                            </AreaButton>
+                        </div>
+                    </AreaAssociation>
+                    <AreaAssociation>
+                        <div className="title-association">
+                            O Grupo Joga em qual Cidade?
+                        </div>
+                        <div className="content-association">
+                            <div>
+                                <div>Selecione o Grupo</div>
+                                <div className="area-select-group">
+                                    <select value={selectedGroupCity} size="1" onChange={e => setSelectedGroupCity(e.target.value)}>
+                                        <option value="selecione">selecione</option>
+                                        {filteredGroup.map((item)=>(
+                                            <option key={item.id} value={item.id}>
+                                                {item.id} - {item.nome}
+                                            </option>
+                                        ))}    
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div>Selecione a Cidade</div>
+                                <div className="area-select-streamer">
+                                    <select value={selectedCity} size="1" onChange={e => setSelectedCity(e.target.value)}>  
+                                        <option value="selecione">selecione</option>
+                                        {citySelect.map((item)=>(
+                                            <option key={item.id} value={item.id}>
+                                                {item.id} - {item.nome}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="area-button-association">
+                            <AreaButton>
+                                <div className="button-register-association">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Associar"
+                                        onclick={handleSubmitAssociationCity}    
+                                    />
+                                </div>
+                                <div className="button-delete-association">
+                                    <ButtonInput 
+                                        type="submit" 
+                                        value="Deletar"
+                                        onclick={removeAssociationCity}    
+                                    />
+                                </div>
+                            </AreaButton>
+                        </div>
+                    </AreaAssociation>
                 </AreaForm>
                 <AreaSearch>
                     <div className="search-content">

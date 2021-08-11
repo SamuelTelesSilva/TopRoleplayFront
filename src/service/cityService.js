@@ -5,7 +5,11 @@ export const getAll = (limit, paginaAtual) => {
 };
 
 export const getAllSelect = () => {
-    return http.get(`/api/cidade`);
+    return http.get(`/api/cidade?sort=id,desc`);
+};
+
+export const getAllSelectCity = () => {
+    return http.get(`/api/cidade?sort=id,desc`);
 };
 
 export const searchByName = (limit, paginaAtual, name) => {
