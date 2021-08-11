@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Container, AreaForm, AreaButton, AreaContent, AreaSearch, Form} from './styles';
+import { Container, AreaForm, AreaButton, AreaContent, AreaSearch, Form } from './styles';
 import { getAll, registerCity, searchByName, updateCity, remove} from '../../service/cityService';
 import ButtonInput from '../../components/ButtonInput';
 import api from '../../service/api';
