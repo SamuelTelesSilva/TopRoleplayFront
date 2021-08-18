@@ -8,8 +8,8 @@ export const getAllSelect = () => {
     return http.get(`/api/clipe?sort=id,desc`);
 };
 
-export const searchByName = (limit, paginaAtual, name) => {
-    return http.get(`/api/clipe/search/${name}?size=${limit}&page=${paginaAtual}`);
+export const searchByTitle = (limit, paginaAtual, titulo) => {
+    return http.get(`/api/clipe/search/${titulo}?size=${limit}&page=${paginaAtual}`);
 };
 
 export const registerClipe = data => {

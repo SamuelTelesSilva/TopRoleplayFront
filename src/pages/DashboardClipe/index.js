@@ -3,12 +3,25 @@ import {
     Container, 
     AreaForm, 
     Form, 
-    AreaButton
+    AreaButton,
+    AreaContent,
+    AreaSearch,
+    Table
 } from './styles';
-import { registerClipe } from '../../service/clipeService';
+import { 
+    registerClipe,
+    getAll,
+    searchByTitle,
+    updateClipe,
+    removeClipe
+} from '../../service/clipeService';
 import ButtonInput from '../../components/ButtonInput';
 import { getAllSelect } from '../../service/streamerService';
 import api from '../../service/api';
+import Paginacao from '../../components/Paginacao';
+import CardItemDashboard from '../../components/CardItemDashboard';
+
+
 
 const DashboardClipe = () => {
     //Setando o id da pagina, esta sendo utilizado para controlar o menu
@@ -28,6 +41,13 @@ const DashboardClipe = () => {
     const [clipeInput, setClipeInput] = useState(initialCityState);
     const [selectedStreamer, setSelectedStreamer] = useState("selecione");
     const token = localStorage.getItem('token');
+    const [limit] = useState(15);
+    const [paginaAtual, setPaginaAtual] = useState(0);
+    const [pages, setPages] = useState();
+    const [total] = useState(0);
+    const [searchInput, setSearchInput] = useState("");
+    const [filteredClipe, setFilteredClipe] = useState([]);
+
 
 
     useEffect(()=>{
@@ -37,14 +57,37 @@ const DashboardClipe = () => {
         }
 
         const searchAndGetAll = () => {
+
+            if(searchInput === ""){
+                getAll(limit, paginaAtual).then((response) =>{
+                    setPages(response.data['totalPages']);
+                    setFilteredClipe(response.data.content);
+                }).catch(
+                    (e)=>{console.log(e)
+                });
+            }else{
+                searchByTitle(limit, paginaAtual, searchInput)
+                .then((response) => {
+                    setFilteredClipe(response.data.content)
+                    setPages(response.data['totalPages']);
+                }).catch(e => {
+                    console.log("Erro ao utilizar o searchByName " + e);
+                });
+            }
+
+            //Pegando todos os Streamers
             getAllSelect().then((response) => {
                 setGetStreamer(response.data.content)
             }
             ).catch((e) => {console.log(e)});
+
         }
         searchAndGetAll();
-    },[]);
 
+    },[paginaAtual, limit, searchInput, pages, token]);
+
+
+    console.log(filteredClipe)
 
     const changeValue = (event) => {
         const {name, value} = event.target;
@@ -78,7 +121,16 @@ const DashboardClipe = () => {
         }
     }
 
-    
+    const handleChangePagination = (event, value) => {
+        setPaginaAtual(value-1);
+    };
+
+
+    const handleSearch = event => {
+        setSearchInput(event.target.value);
+        console.log(searchInput)
+    }
+
 
     return(
         <Container>
@@ -168,6 +220,47 @@ const DashboardClipe = () => {
                         )
                     }
                 </AreaForm>
+                <AreaSearch>
+                    <div className="search-content">
+                        <input 
+                            className="input-search" 
+                            placeholder="Digite o nome do grupo para Pesquisar"
+                            value={searchInput}
+                            onChange={handleSearch}      
+                        />
+                    </div>
+                </AreaSearch>
+                <AreaContent>
+                    <Table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Título</th>
+                                    <th>Streamer</th>
+                                    <th>Editar</th>
+                                    <th>Remover</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    filteredClipe.map((item) => (
+                                        <tr key={item.id}>
+                                            <td>{item.id}</td>
+                                            <td>{item.titulo}</td>
+                                            <td>{item.streamer.nome}</td>
+                                            <td onClick={()=> console.log('clicado'+ item.id)}>Editar</td>
+                                            <td onClick={()=> console.log('clicado'+ item.id)}>Remover</td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+                    </Table>
+                    <div className="area-pagination">
+                        <Paginacao count={pages} onchange={handleChangePagination}/>        
+                    </div>
+                </AreaContent>
             </div>
         </Container>
     );

@@ -105,7 +105,7 @@ const DashboardStreamer = () => {
     const handleSearch = event => {
         setSearchInput(event.target.value)
     }
-
+    
     /**
      * Método para cadastrar um Streamer 
     */

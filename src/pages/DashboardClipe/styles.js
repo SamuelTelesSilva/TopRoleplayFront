@@ -50,11 +50,6 @@ export const Form = styled.div`
         color: white;
     }
 
-    .redeSociais{
-        color: var(--corTerciaria);
-        font-size: 18px;
-    }
-
     .area-select-streamer{
         display: flex;
         width: 100%;
@@ -91,5 +86,55 @@ export const AreaButton = styled.div`
     .button-return{
         width: 150px;
         margin-left: 10px;
+    }
+`;
+
+export const AreaContent = styled.div`
+    display: block;
+
+    .area-pagination{
+        margin: 16px 0px 16px 0px;
+    }
+    
+`;
+
+
+
+export const AreaSearch = styled.div`
+    margin: 100px 0px 16px 0px;
+
+    .search-content{
+        display: flex;
+        width: 100%;
+    }
+
+    .input-search{
+        width: 100%;
+        height: 35px;
+        border-radius: 15px;
+        padding: 0px 8px 0px 13px;
+        background-color: var(--corFundoPrincipal);
+        border: 2px solid var(--corTerciaria);
+        color: white;
+    }
+`;
+
+
+export const Table = styled.div`
+    width: 100%;
+
+    table{
+        width: 100%;
+        
+    }
+
+    th{
+        border: 1px solid var(--corTerciaria);
+        height: 50px;
+        border-radius: 5px;
+    }
+
+    td{
+        font-size: 16px;
     }
 `;
