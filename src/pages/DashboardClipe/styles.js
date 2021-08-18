@@ -1,1 +1,95 @@
 import styled from 'styled-components';
+
+export const Container = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 100%;
+
+    .aux-cont{
+        display: block;
+        width: 50%;
+        height: 100%;
+    }
+
+    @media screen and (max-width: 640px){ 
+        justify-content: start;
+
+        .aux-cont{
+            width: 100%;
+        }
+    }
+
+`;
+
+export const AreaForm = styled.div`
+    display: block;
+    width: 100%;
+    height: auto;
+`;
+
+export const Form = styled.div`
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    .title-input, .redeSociais{
+        display: flex;
+        justify-content: center;
+        margin: 16px 0px 16px 0px;
+    }
+
+    .input-form{
+        width: 100%;
+        height: 35px;
+        border-radius: 15px;
+        padding-left: 13px;
+        padding-right: 8px;
+        background-color: var(--corFundoPrincipal);
+        border: 2px solid white;
+        color: white;
+    }
+
+    .redeSociais{
+        color: var(--corTerciaria);
+        font-size: 18px;
+    }
+
+    .area-select-streamer{
+        display: flex;
+        width: 100%;
+    }
+
+    .area-select-streamer select{
+        width: 100%;
+        height: 35px;
+        border-radius: 15px;
+        padding-left: 5px;
+        background-color: var(--corFundoPrincipal);
+        border: 2px solid white;
+        padding-left: 13px;
+        padding-right: 8px;
+        color: white;
+    }    
+`;
+
+export const AreaButton = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 24px 0px 16px 0px;
+
+    .button-register, .button-register-association, .button-delete-association{
+        width: 150px;
+        margin-right: 10px;
+    }
+    
+    .button-update{
+        width: 150px;
+    }
+    
+    .button-return{
+        width: 150px;
+        margin-left: 10px;
+    }
+`;
