@@ -125,7 +125,6 @@ export const Table = styled.div`
 
     table{
         width: 100%;
-        
     }
 
     th{

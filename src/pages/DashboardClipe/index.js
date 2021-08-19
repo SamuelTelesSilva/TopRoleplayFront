@@ -34,7 +34,9 @@ const DashboardClipe = () => {
         url: '',
         coracao: 200,
         urlImageCapa: '',
-        urlImageCard: ''
+        urlImageCard: '',
+        streamerName: '',
+        streamerId: null
     }
     const [editing , setEditing] = useState(false);
     const [getStreamer, setGetStreamer] = useState([]);
@@ -87,7 +89,7 @@ const DashboardClipe = () => {
     },[paginaAtual, limit, searchInput, pages, token]);
 
 
-    console.log(filteredClipe)
+    console.log(selectedStreamer)
 
     const changeValue = (event) => {
         const {name, value} = event.target;
@@ -131,6 +133,46 @@ const DashboardClipe = () => {
         console.log(searchInput)
     }
 
+    const dadosEditarClipe = (item) => {
+        setEditing(true);
+
+        setClipeInput({
+            id: item.id,
+            titulo: item.titulo,
+            url: item.url,
+            urlImageCapa: item.urlImageCapa,
+            urlImageCard: item.urlImageCard,
+            streamerName: item.streamer.nome,
+            streamerId: item.streamer.id
+        });
+    }
+
+    const editarClipe = () => {
+        
+        const data = {
+            'titulo': clipeInput.titulo,
+            'url': clipeInput.url,
+            'urlImageCapa': clipeInput.urlImageCapa,
+            'urlImageCard': clipeInput.urlImageCard,
+            'streamer': {
+                'id': selectedStreamer
+            }
+        }
+
+        updateClipe(clipeInput.id, data).then((response)=>{
+            console.log(response)
+        }).catch((e)=>{console.log(e)})
+    }
+
+    const removerClipe = (id) => {
+        removeClipe(id).then((response)=>{
+            console.log(response)
+        }).catch((e)=>{
+            console.log(e)
+        });
+        
+    }
+
 
     return(
         <Container>
@@ -170,13 +212,15 @@ const DashboardClipe = () => {
                             type="text" 
                             placeholder="Url da imagem para o Card"
                             name="urlImageCard"   
-                            value={clipeInput.urlImageCard} 
-                            onChange={changeValue}
+                            value={ clipeInput.urlImageCard } 
+                            onChange={ changeValue }
                         />
                         <div className="title-input">Streamer Responsável</div>
+                        
+                        { editing ? (<div>Streamer Atual: { clipeInput.streamerName }</div>) : '' }
                         <div className="area-select-streamer">
                             <select value={selectedStreamer} size="1" onChange={e => setSelectedStreamer(e.target.value)}>
-                                <option value="selecione">Selecione</option>
+                                <option value="selecione">selecione</option>
                                 {
                                     getStreamer.map((item) => (
                                         <option key={item.id} value={item.id}>
@@ -195,7 +239,7 @@ const DashboardClipe = () => {
                                     <ButtonInput 
                                         type="submit" 
                                         value="Atualizar"
-                                        
+                                        onclick={() => editarClipe()}
                                     />
                                 </div>
                                 <div className="button-return">
@@ -249,8 +293,8 @@ const DashboardClipe = () => {
                                             <td>{item.id}</td>
                                             <td>{item.titulo}</td>
                                             <td>{item.streamer.nome}</td>
-                                            <td onClick={()=> console.log('clicado'+ item.id)}>Editar</td>
-                                            <td onClick={()=> console.log('clicado'+ item.id)}>Remover</td>
+                                            <td onClick={()=> dadosEditarClipe(item)}>Editar</td>
+                                            <td onClick={() => removerClipe(item.id)}>Remover</td>
                                         </tr>
                                     ))
                                 }
