@@ -11,8 +11,7 @@ export default createGlobalStyle`
 
     html, body, #root {
         height: 100%; 
-        /*background: var(--corFundoPrincipal); */
-        background: white;
+        background: var(--corFundoPrincipal); 
     }
 
     *{

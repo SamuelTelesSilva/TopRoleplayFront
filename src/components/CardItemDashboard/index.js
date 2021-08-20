@@ -1,7 +1,13 @@
 import React from 'react';
 import Heart from '../Heart';
-import { Container, AreaImgCard, AreaContentCard, AreaButton, IconEdit, IconDelete} from './styles';
-import {useAuth} from '../../providers/auth';
+import { 
+    Container, 
+    AreaImgCard, 
+    AreaContentCard, 
+    AreaButton, 
+    IconEdit, 
+    IconDelete
+} from './styles';
 
 function CardItemDashboard(props){
 

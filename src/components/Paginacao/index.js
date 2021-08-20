@@ -15,7 +15,7 @@ const Paginacao = (props) => {
 
     const classes = useStyles();
     return(
-        <Container>
+        <Container active={props.active}>
             <Pagination 
                 classes={{ ul: classes.ul }}
                 count={props.count}

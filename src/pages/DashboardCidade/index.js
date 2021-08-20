@@ -101,8 +101,7 @@ const DashboardCidade = () => {
         }
 
         await registerCity(data).then(response => {
-            console.log(response);
-            setActiveModalMsgCreate(true);
+            response.status === 201 ? setActiveModalMsgCreate(true): alert('Ocorreu um erro')   
         }).catch(e => {
             console.log(e);
         })
@@ -145,8 +144,7 @@ const DashboardCidade = () => {
         if(cidadeInput.id !== null){
             updateCity(cidadeInput.id, cidadeInput)
             .then(response => {
-                setActiveModalMsgEdit(true);
-                console.log(response)
+                response.status === 201 ? setActiveModalMsgEdit(true) : alert('Ocorreu um erro')
             })
             .catch(e => {
                 console.log(e);
@@ -164,7 +162,7 @@ const DashboardCidade = () => {
      const removeCity = (id) => {
         if(id !== null){
             remove(id).then(response => {
-                window.location.reload();//procucar uma forma de atualizar só os conteudos não a pagina toda
+                response.status === 200 ? window.location.reload() : alert('Ocorreu um erro')
             }).catch(e => {
                 console.log(e);
             });

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import { 
     Container, 
     AreaForm, 
@@ -6,7 +7,9 @@ import {
     AreaButton,
     AreaContent,
     AreaSearch,
-    Table
+    Table,
+    IconEdit, 
+    IconDelete
 } from './styles';
 import { 
     registerClipe,
@@ -19,14 +22,16 @@ import ButtonInput from '../../components/ButtonInput';
 import { getAllSelect } from '../../service/streamerService';
 import api from '../../service/api';
 import Paginacao from '../../components/Paginacao';
-import CardItemDashboard from '../../components/CardItemDashboard';
+import ModalRemove from '../../components/Modal/ModalRemove'; 
+import ModalMsgEdit from '../../components/Modal/ModalMsgEdit'; 
+import ModalMsgCreate from '../../components/Modal/ModalMsgCreate';
+import { useAuth } from '../../providers/auth';
 
 
 
 const DashboardClipe = () => {
     //Setando o id da pagina, esta sendo utilizado para controlar o menu
     localStorage.setItem('idPagina', '3');
-
 
     const initialCityState = {
         id: null,
@@ -38,6 +43,7 @@ const DashboardClipe = () => {
         streamerName: '',
         streamerId: null
     }
+
     const [editing , setEditing] = useState(false);
     const [getStreamer, setGetStreamer] = useState([]);
     const [clipeInput, setClipeInput] = useState(initialCityState);
@@ -46,14 +52,20 @@ const DashboardClipe = () => {
     const [limit] = useState(15);
     const [paginaAtual, setPaginaAtual] = useState(0);
     const [pages, setPages] = useState();
-    const [total] = useState(0);
     const [searchInput, setSearchInput] = useState("");
     const [filteredClipe, setFilteredClipe] = useState([]);
-
+    const [activeModal, setActiveModal] = useState(false);
+    const [idRemove, setIdRemove] = useState(false);
+    const {
+        activeModalMsgEdit,
+        setActiveModalMsgEdit,
+        activeModalMsgCreate,
+        setActiveModalMsgCreate
+    } = useAuth();
 
 
     useEffect(()=>{
-
+    
         if(token){
             api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
         }
@@ -85,11 +97,7 @@ const DashboardClipe = () => {
 
         }
         searchAndGetAll();
-
     },[paginaAtual, limit, searchInput, pages, token]);
-
-
-    console.log(selectedStreamer)
 
     const changeValue = (event) => {
         const {name, value} = event.target;
@@ -114,11 +122,7 @@ const DashboardClipe = () => {
             alert('Você tem que atribuir um streamer para adicionar um clipe');
         }else{
             await registerClipe(data).then(response => {
-                alert(
-                    response.status === 201 ? 
-                        'Cadastrado com Sucesso!': 
-                        'Ocorreu um erro'
-                )
+                response.status === 201 ? setActiveModalMsgCreate(true) : alert('Ocorreu um erro')
             }).catch( (e)=>{console.log(e)} );
         }
     }
@@ -127,10 +131,8 @@ const DashboardClipe = () => {
         setPaginaAtual(value-1);
     };
 
-
     const handleSearch = event => {
         setSearchInput(event.target.value);
-        console.log(searchInput)
     }
 
     const dadosEditarClipe = (item) => {
@@ -149,34 +151,52 @@ const DashboardClipe = () => {
 
     const editarClipe = () => {
         
+
         const data = {
             'titulo': clipeInput.titulo,
             'url': clipeInput.url,
             'urlImageCapa': clipeInput.urlImageCapa,
             'urlImageCard': clipeInput.urlImageCard,
             'streamer': {
-                'id': selectedStreamer
+                'id': selectedStreamer === 'selecione' ? clipeInput.streamerId : selectedStreamer
             }
         }
 
         updateClipe(clipeInput.id, data).then((response)=>{
-            console.log(response)
+            response.status === 200 ? setActiveModalMsgEdit(true) : alert('Ocorreu um erro')
         }).catch((e)=>{console.log(e)})
+    }
+
+    const activeModalDelete = (id) => {
+        setIdRemove(id);
+        setActiveModal(true);
     }
 
     const removerClipe = (id) => {
         removeClipe(id).then((response)=>{
-            console.log(response)
+            response.status === 200 ? window.location.reload() : alert('Ocorreu um erro')
         }).catch((e)=>{
             console.log(e)
-        });
-        
+        }); 
+        setActiveModal(false);
     }
-
 
     return(
         <Container>
             <div className="aux-cont">
+                <ModalRemove 
+                    accepted={() => removerClipe(idRemove)}
+                    denied={() => setActiveModal(false)}
+                    active={activeModal}
+                /> 
+                <ModalMsgEdit 
+                    active={activeModalMsgEdit}
+                    msgModalT="Atualizado com sucesso!"
+                />
+                <ModalMsgCreate
+                    active={activeModalMsgCreate}
+                    msgModalCreate="Clipe adicionado com sucesso!"
+                />
                 <AreaForm>
                     <Form>
                         <div className="title-input">Título do Clipe</div>
@@ -217,7 +237,13 @@ const DashboardClipe = () => {
                         />
                         <div className="title-input">Streamer Responsável</div>
                         
-                        { editing ? (<div>Streamer Atual: { clipeInput.streamerName }</div>) : '' }
+                        { editing ? 
+                            (
+                                <div className="streamer-edit-select">
+                                    Streamer Atual: { clipeInput.streamerName }
+                                </div>
+                            ) : '' 
+                        }
                         <div className="area-select-streamer">
                             <select value={selectedStreamer} size="1" onChange={e => setSelectedStreamer(e.target.value)}>
                                 <option value="selecione">selecione</option>
@@ -293,8 +319,12 @@ const DashboardClipe = () => {
                                             <td>{item.id}</td>
                                             <td>{item.titulo}</td>
                                             <td>{item.streamer.nome}</td>
-                                            <td onClick={()=> dadosEditarClipe(item)}>Editar</td>
-                                            <td onClick={() => removerClipe(item.id)}>Remover</td>
+                                            <td onClick={()=> dadosEditarClipe(item)}>
+                                                <IconEdit/>
+                                            </td>
+                                            <td onClick={() => activeModalDelete(item.id)}>
+                                                <IconDelete />
+                                            </td>
                                         </tr>
                                     ))
                                 }
@@ -302,7 +332,8 @@ const DashboardClipe = () => {
                         </table>
                     </Table>
                     <div className="area-pagination">
-                        <Paginacao count={pages} onchange={handleChangePagination}/>        
+                        <Paginacao active={true} count={pages} onchange={handleChangePagination}/>    
+                        
                     </div>
                 </AreaContent>
             </div>

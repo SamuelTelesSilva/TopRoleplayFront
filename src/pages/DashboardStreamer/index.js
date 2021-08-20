@@ -1,9 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Container, AreaForm, AreaButton, AreaContent, AreaAssociation, AreaSearch} from './styles';
+import { 
+    Container, 
+    AreaForm, 
+    AreaButton, 
+    AreaContent, 
+    AreaAssociation, 
+    AreaSearch
+} from './styles';
 import ButtonInput from '../../components/ButtonInput';
 import CardItemDashboard from '../../components/CardItemDashboard';
 import Paginacao from '../../components/Paginacao';
-import { registerStreamer, getAll, searchByName, updateStreamer, remove, registerAssociationStreamer, updateStreamerAssociation} from '../../service/streamerService';
+import { 
+    registerStreamer, 
+    getAll, 
+    searchByName, 
+    updateStreamer, 
+    remove, 
+    registerAssociationStreamer, 
+    updateStreamerAssociation
+} from '../../service/streamerService';
 import { getAllSelect } from '../../service/cityService';
 import api from '../../service/api';
 import Form from '../../components/Form';
@@ -88,8 +103,6 @@ const DashboardStreamer = () => {
     }, [token, paginaAtual, limit, searchInput, pages, total]);
 
 
-    
-
     //Pegando os valores digitados no input
     const changeValue = (event) => {
         const { name, value } = event.target;
@@ -124,8 +137,7 @@ const DashboardStreamer = () => {
         }
 
         await registerStreamer(data).then(response => {
-            console.log(response)
-            setActiveModalMsgCreate(true)
+            response.status === 201 ? setActiveModalMsgCreate(true) : alert('Ocorreu um erro')
         }).catch(e => {
             console.log(e)
         });
@@ -167,7 +179,7 @@ const DashboardStreamer = () => {
         if(streamerInput.id !== null){
             updateStreamer(streamerInput.id, streamerInput)
             .then(response => {
-                setActiveModalMsgEdit(true);
+                response.status === 200 ? setActiveModalMsgEdit(true) : alert('Ocorreu um erro')
             })
             .catch(e => {
                 console.log(e);
@@ -183,9 +195,10 @@ const DashboardStreamer = () => {
      * @param {*} id 
     */
     const removeStreamer = (id) => {
+
         if(id !== null){
             remove(id).then(response => {
-                window.location.reload();//procucar uma forma de atualizar só os conteudos não a pagina toda
+                response.status === 200 ? window.location.reload() : alert('Ocorreu um erro')
             }).catch(e => {
                 console.log(e);
             });

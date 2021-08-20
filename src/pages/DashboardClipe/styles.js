@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { Edit } from '@styled-icons/boxicons-regular/Edit';
+import { PageDelete } from '@styled-icons/foundation/PageDelete';
+
 
 export const Container = styled.div`
     display: flex;
@@ -65,7 +68,13 @@ export const Form = styled.div`
         padding-left: 13px;
         padding-right: 8px;
         color: white;
-    }    
+    }   
+    
+    .streamer-edit-select{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
 `;
 
 export const AreaButton = styled.div`
@@ -135,5 +144,27 @@ export const Table = styled.div`
 
     td{
         font-size: 16px;
+        text-align: center; 
+        
+    }
+`;
+
+export const IconEdit = styled(Edit)`
+    color: white;
+    width: 25px;
+
+    :hover{
+        cursor: pointer;
+        color: var(--corTerciaria);
+    }
+`;
+
+export const IconDelete = styled(PageDelete)`
+    color: white;
+    width: 25px;
+
+    :hover{
+        cursor: pointer;
+        color: var(--corTerciaria);
     }
 `;
