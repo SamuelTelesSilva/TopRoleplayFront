@@ -142,10 +142,13 @@ export const Table = styled.div`
         border-radius: 5px;
     }
 
-    td{
+    td{    
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;    
         font-size: 16px;
         text-align: center; 
-        
     }
 `;
 

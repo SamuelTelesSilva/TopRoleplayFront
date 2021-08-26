@@ -181,6 +181,11 @@ const DashboardClipe = () => {
         setActiveModal(false);
     }
 
+    const buttonReturn = () => {
+        setEditing(false)
+        setClipeInput(initialCityState);
+    }
+
     return(
         <Container>
             <div className="aux-cont">
@@ -272,7 +277,7 @@ const DashboardClipe = () => {
                                     <ButtonInput 
                                         type="submit" 
                                         value="Voltar"
-                                            
+                                        onclick={buttonReturn}    
                                     />
                                 </div>
                             </AreaButton>
@@ -294,7 +299,7 @@ const DashboardClipe = () => {
                     <div className="search-content">
                         <input 
                             className="input-search" 
-                            placeholder="Digite o nome do grupo para Pesquisar"
+                            placeholder="Digite o nome do clipe para Pesquisar"
                             value={searchInput}
                             onChange={handleSearch}      
                         />
