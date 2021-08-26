@@ -8,6 +8,7 @@ import DashboardUsuario from './pages/DashboardPages/DashboardUsuario/index';
 import Dashboard from './pages/DashboardPages/Dashboard';
 import CardItemDashboard from './components/CardItemDashboard';
 import Heart from './components/Heart';
+import Clipe from './pages/Clipe';
 
 
 const Routes = () => {
@@ -16,7 +17,7 @@ const Routes = () => {
     return(
         <>
             <Switch>
-                <CustomRoute exact path="/"  />
+                <CustomRoute exact path="/clipe"  component={Clipe}/>
                 <CustomRoute path="/login" component={Login} />
                 <CustomRoute path="/register" component={Cadastro} />
                 <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } />

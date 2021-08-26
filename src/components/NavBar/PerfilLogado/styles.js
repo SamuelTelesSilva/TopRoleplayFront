@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    display: ${props => props.autenticado ? 'flex' : 'none'};
+    display: flex;
     align-items: center;
     
 
     .img-perfil{
+        display: ${props => props.autenticado ? 'flex' : 'none'};
         margin-right: 15px;
     }
 
@@ -19,6 +20,7 @@ export const Container = styled.div`
         
     }
     .nome-perfil{
+        display: ${props => props.autenticado ? 'flex' : 'none'};
         margin-right: 15px;
         color: white;
         font-size: 16px;

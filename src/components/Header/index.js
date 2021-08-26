@@ -1,11 +1,12 @@
 import React from 'react';
 import { Container } from './styles';
+import NavBar from '../NavBar/Toolbar/index';
 
-const Footer = () => {
+const Header = () => {
     return(
         <Container>
-            Footer
+            <NavBar/>
         </Container>
     );
 }
-export default Footer;
+export default Header;

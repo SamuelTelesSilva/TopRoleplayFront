@@ -8,11 +8,13 @@ const PerfilLogado = () => {
     
     const { authenticated } = useAuth();
 
-
     //Pegando os dados do localStorage
     const nomePerfil = localStorage.getItem('nome');
     const urlAvatar = localStorage.getItem('urlAvatar');
 
+    const efetuarLogin = () => {
+        history.push('/login');
+    }
     const sairDoPerfil = () =>{
         localStorage.removeItem('id');
         localStorage.removeItem('token');
@@ -25,6 +27,7 @@ const PerfilLogado = () => {
 
     return(
         <Container autenticado={authenticated}>
+
             <div className="img-perfil">
                 <div className="perfil">
                     <img src={urlAvatar} alt={urlAvatar}/>
@@ -34,7 +37,11 @@ const PerfilLogado = () => {
                 {nomePerfil}
             </div>
             <div className="botao-sair">
-                <Button title="Sair" onclick={sairDoPerfil}/>
+                <Button 
+                    title={ authenticated ? 'Sair' : 'Entrar'} 
+                    onclick={ authenticated ? sairDoPerfil : efetuarLogin }
+                    
+                />
             </div>
         </Container>
     );
