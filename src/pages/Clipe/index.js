@@ -56,9 +56,6 @@ const Clipe = () => {
         setPaginaAtual(value-1);
     };
 
-
-    console.log(filteredClipe)
-
     return(
         <Layout>
             <Container>

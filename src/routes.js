@@ -21,7 +21,7 @@ const Routes = () => {
                 <CustomRoute path="/login" component={Login} />
                 <CustomRoute path="/register" component={Cadastro} />
                 <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } />
-                <CustomRoute path="/dashboard" component={ Dashboard } />
+                <CustomRoute isPrivate path="/dashboard" component={ Dashboard } />
                 <CustomRoute path="/card" component={ CardMain } />
                 <CustomRoute path="/hearts" component={ Heart } />
             </Switch>

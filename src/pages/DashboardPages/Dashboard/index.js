@@ -21,12 +21,12 @@ export default function Dashboard(){
             <Header />
             <Main>
                 <Switch>
-                    <CustomRoute path='/dashboard/cidades' component={DashboardCidade}/>
-                    <CustomRoute path='/dashboard/streamers' component={DashboardStreamer}/>
-                    <CustomRoute path='/dashboard/clipes' component={DashboardClipe}/>
-                    <CustomRoute path='/dashboard/grupos' component={DashboardGrupo}/>
-                    <CustomRoute path='/dashboard/eventos' component={DashboardEvento}/>
-                    <CustomRoute path='/dashboard/noticias' component={DashboardNoticia}/>
+                    <CustomRoute isPrivate path='/dashboard/cidades' component={DashboardCidade}/>
+                    <CustomRoute isPrivate path='/dashboard/streamers' component={DashboardStreamer}/>
+                    <CustomRoute isPrivate path='/dashboard/clipes' component={DashboardClipe}/>
+                    <CustomRoute isPrivate path='/dashboard/grupos' component={DashboardGrupo}/>
+                    <CustomRoute isPrivate path='/dashboard/eventos' component={DashboardEvento}/>
+                    <CustomRoute isPrivate path='/dashboard/noticias' component={DashboardNoticia}/>
                 </Switch>
             </Main>
             <BarDashboard />

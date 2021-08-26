@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Container, PerfilUsuario, MenuLateral, MenuConf, Button, ButtonToggle } from './styles';
 import { NavLink } from 'react-router-dom';
+import history from '../../history';
+
 
 export default function BarDashboard(){
 
@@ -40,6 +42,18 @@ export default function BarDashboard(){
         }
     ]
     
+
+    const sairDoPerfil = () => {
+        
+        localStorage.removeItem('id');
+        localStorage.removeItem('token');
+        localStorage.removeItem('nome');
+        localStorage.removeItem('urlAvatar');
+        localStorage.removeItem('senhaUser');
+        window.location.reload(); //fazendo um reload
+        history.push('/login');
+        
+    }
     
 
     return(
@@ -78,7 +92,7 @@ export default function BarDashboard(){
             }}/>
             <MenuConf>
                 <div className="cont-button">
-                    <Button >
+                    <Button onClick={sairDoPerfil}>
                         Sair
                     </Button>
                 </div>

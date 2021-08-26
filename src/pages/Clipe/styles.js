@@ -21,6 +21,7 @@ export const Container = styled.div`
             background-color: var(--corFundoPrincipal);
             border: 2px solid var(--corSecundaria);
             color: white;
+            margin-right: 12px;
         }
     }
 
