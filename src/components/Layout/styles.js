@@ -10,8 +10,20 @@ export const Grid = styled.div`
     ;
     height: 100%;
 
+    .aux-grid-content{
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+    }
+
     /* Mobile de 0 até 640px*/
     @media screen and (max-width: 640px){ 
         grid-template-rows: 70px auto 87px;
+
+        .aux-grid-content{
+            display: flex;
+            justify-content: center;
+        }
     }
 `;

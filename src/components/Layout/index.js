@@ -7,7 +7,9 @@ const Layout = (props) => {
     return(
         <Grid>
             <Header/>
-            {props.children}
+            <div className="aux-grid-content">
+                {props.children}
+            </div>
             <Footer/>
         </Grid>
     );

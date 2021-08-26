@@ -6,9 +6,9 @@ import Cadastro from './pages/Cadastro';
 import Login from './pages/Login/index';
 import DashboardUsuario from './pages/DashboardPages/DashboardUsuario/index';
 import Dashboard from './pages/DashboardPages/Dashboard';
-import CardItemDashboard from './components/CardItemDashboard';
 import Heart from './components/Heart';
 import Clipe from './pages/Clipe';
+import CardMain from './components/CardMain';
 
 
 const Routes = () => {
@@ -22,7 +22,7 @@ const Routes = () => {
                 <CustomRoute path="/register" component={Cadastro} />
                 <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } />
                 <CustomRoute path="/dashboard" component={ Dashboard } />
-                <CustomRoute path="/card" component={ CardItemDashboard } />
+                <CustomRoute path="/card" component={ CardMain } />
                 <CustomRoute path="/hearts" component={ Heart } />
             </Switch>
         </>

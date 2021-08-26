@@ -1,16 +1,62 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Grid, Main, Footer, Header} from './styles';
 import { useAuth } from '../../providers/auth';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button/index';
+import { efetuarLogin } from '../../service/usuarioService';
+import api from '../../service/api';
+import history from '../../history';
 
 const Login = () =>{
-    const { handleLogin, loginInput, setLoginInput, msgError} = useAuth();
-
-    //Pegando os valores do input e enviando para o loginInput do auth
+    const { setAuthenticated } = useAuth();
+    const [msgError, setMsgError] = useState('');
+    const [loginInput, setLoginInput] = useState({
+        username: '',
+        password: ''
+    });
+    
+    //Pegando os valores do input
     const changeValue = event => {
         const {name, value} = event.target;
         setLoginInput({...loginInput, [name]: value});
+    }
+    //--------------------------------------------------------
+
+
+    const handleLogin = async() =>{
+        
+        const data = {
+            username: loginInput.username,
+            password: loginInput.password
+        }
+
+        if(loginInput.username === ''){
+            setMsgError('Precisa preencher o campo username');
+        }else if(loginInput.password === ''){
+            setMsgError('Precisa preencher o campo password');
+        }else{
+            await efetuarLogin(data)
+            .then(response =>{
+
+                //Setando os valores no localStorage
+                localStorage.setItem('token', JSON.stringify(response.data.token));
+                localStorage.setItem('id', response.data.id);
+                localStorage.setItem('nome', response.data.nome);
+                localStorage.setItem('urlAvatar', response.data.urlAvatar);
+                localStorage.setItem('senhaUser', response.data.senha);
+
+                api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
+                setAuthenticated(true);
+
+                history.push('/dashboard/usuario');
+            }).catch(error => {
+                if(error.request.status === 401){
+                    setMsgError('Login e senha invalidos');
+                }else{
+                    setMsgError('Ocorreu um erro inesperado, por favor tente novamente. Se o erro persistir entre em contato.');
+                }
+            });
+        }
     }
 
     return(
