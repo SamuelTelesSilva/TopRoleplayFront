@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Container, AreaForm, AreaButton, AreaContent, AreaSearch, Form } from './styles';
-import { getAll, registerCity, searchByName, updateCity, remove} from '../../service/cityService';
-import ButtonInput from '../../components/ButtonInput';
-import api from '../../service/api';
-import CardItemDashboard from '../../components/CardItemDashboard';
-import Paginacao from '../../components/Paginacao';
-import ModalMsgEdit from '../../components/Modal/ModalMsgEdit';
-import { useAuth } from '../../providers/auth';
-import ModalMsgCreate from '../../components/Modal/ModalMsgCreate';
-import ModalRemove from '../../components/Modal/ModalRemove';
+import { 
+    Container, 
+    AreaForm, 
+    AreaButton, 
+    AreaContent, 
+    AreaSearch, 
+    Form 
+} from './styles';
+import { 
+    getAll, 
+    registerCity, 
+    searchByName, 
+    updateCity, 
+    remove
+} from '../../../service/cityService';
+import ButtonInput from '../../../components/ButtonInput';
+import api from '../../../service/api';
+import CardItemDashboard from '../../../components/CardItemDashboard';
+import Paginacao from '../../../components/Paginacao';
+import ModalMsgEdit from '../../../components/Modal/ModalMsgEdit';
+import { useAuth } from '../../../providers/auth';
+import ModalMsgCreate from '../../../components/Modal/ModalMsgCreate';
+import ModalRemove from '../../../components/Modal/ModalRemove';
 
 
 const DashboardCidade = () => {

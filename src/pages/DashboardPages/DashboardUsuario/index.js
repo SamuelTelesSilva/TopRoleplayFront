@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {Grid, Main, ImageGallery, ImagePerfil, FormEditarPerfil} from './styles';
-import NavBar from '../../components/NavBar/Toolbar/index';
-import Footer from '../../components/Footer/index';
-import { avatarLinks } from '../../service/avatarLinks';
+import NavBar from '../../../components/NavBar/Toolbar/index';
+import Footer from '../../../components/Footer/index';
+import { avatarLinks } from '../../../service/avatarLinks';
 import Slider from "react-slick";
-import useWindowDimensions  from '../../components/useWindowDimensions/index';
-import api from '../../service/api';
-import Button from '../../components/Button/index';
+import useWindowDimensions  from '../../../components/useWindowDimensions/index';
+import api from '../../../service/api';
+import Button from '../../../components/Button/index';
 
 
 

@@ -12,48 +12,46 @@ import {
     IconDelete
 } from './styles';
 import { 
-    registerClipe,
+    registerEvento,
     getAll,
     searchByTitle,
-    updateClipe,
-    removeClipe
-} from '../../service/clipeService';
-import ButtonInput from '../../components/ButtonInput';
-import { getAllSelect } from '../../service/streamerService';
-import api from '../../service/api';
-import Paginacao from '../../components/Paginacao';
-import ModalRemove from '../../components/Modal/ModalRemove'; 
-import ModalMsgEdit from '../../components/Modal/ModalMsgEdit'; 
-import ModalMsgCreate from '../../components/Modal/ModalMsgCreate';
-import { useAuth } from '../../providers/auth';
+    updateEvento,
+    removeEvento
+} from '../../../service/eventoService';
+import ButtonInput from '../../../components/ButtonInput';
+import api from '../../../service/api';
+import Paginacao from '../../../components/Paginacao';
+import ModalRemove from '../../../components/Modal/ModalRemove'; 
+import ModalMsgEdit from '../../../components/Modal/ModalMsgEdit'; 
+import ModalMsgCreate from '../../../components/Modal/ModalMsgCreate';
+import { useAuth } from '../../../providers/auth';
 
 
 
-const DashboardClipe = () => {
+const DashboardEvento = () => {
     //Setando o id da pagina, esta sendo utilizado para controlar o menu
-    localStorage.setItem('idPagina', '3');
+    localStorage.setItem('idPagina', '5');
 
     const initialCityState = {
         id: null,
         titulo: '',
-        url: '',
-        coracao: 200,
+        urlStream1: '',
+        urlStream2: '',
+        urlStream3: '',
+        urlStream4: '',
         urlImageCapa: '',
-        urlImageCard: '',
-        streamerName: '',
-        streamerId: null
+        urlImageCard: ''
+       
     }
 
     const [editing , setEditing] = useState(false);
-    const [getStreamer, setGetStreamer] = useState([]);
-    const [clipeInput, setClipeInput] = useState(initialCityState);
-    const [selectedStreamer, setSelectedStreamer] = useState("selecione");
+    const [eventoInput, setEventoInput] = useState(initialCityState);
     const token = localStorage.getItem('token');
     const [limit] = useState(15);
     const [paginaAtual, setPaginaAtual] = useState(0);
     const [pages, setPages] = useState();
     const [searchInput, setSearchInput] = useState("");
-    const [filteredClipe, setFilteredClipe] = useState([]);
+    const [filteredEvento, setFilteredEvento] = useState([]);
     const [activeModal, setActiveModal] = useState(false);
     const [idRemove, setIdRemove] = useState(false);
     const {
@@ -75,56 +73,43 @@ const DashboardClipe = () => {
             if(searchInput === ""){
                 getAll(limit, paginaAtual).then((response) =>{
                     setPages(response.data['totalPages']);
-                    setFilteredClipe(response.data.content);
+                    setFilteredEvento(response.data.content);
                 }).catch(
                     (e)=>{console.log(e)
                 });
             }else{
                 searchByTitle(limit, paginaAtual, searchInput)
                 .then((response) => {
-                    setFilteredClipe(response.data.content)
+                    setFilteredEvento(response.data.content)
                     setPages(response.data['totalPages']);
                 }).catch(e => {
                     console.log("Erro ao utilizar o searchByName " + e);
                 });
             }
-
-            //Pegando todos os Streamers
-            getAllSelect().then((response) => {
-                setGetStreamer(response.data.content)
-            }
-            ).catch((e) => {console.log(e)});
-
         }
         searchAndGetAll();
     },[paginaAtual, limit, searchInput, pages, token]);
 
     const changeValue = (event) => {
         const {name, value} = event.target;
-        setClipeInput({...clipeInput, [name]: value})    
+        setEventoInput({...eventoInput, [name]: value})    
     }
 
     async function handleSubmit(){
         api.defaults.headers.common.Authorization = `Bearer ${JSON.parse(token)}`;
 
         const data = {
-            'titulo': clipeInput.titulo,
-            'url': clipeInput.url,
-            'coracao': 200,
-            'urlImageCapa': clipeInput.urlImageCapa,
-            'urlImageCard': clipeInput.urlImageCard,
-            'streamer': {
-                'id': selectedStreamer
-            }
+            'titulo': eventoInput.titulo,
+            'urlVideo1': eventoInput.urlStream1,
+            'urlVideo2': eventoInput.urlStream2,
+            'urlVideo3': eventoInput.urlStream3,
+            'urlVideo4': eventoInput.urlStream4,
+            'urlImgCapa': eventoInput.urlImageCapa,
+            'urlImgCard': eventoInput.urlImageCard,
         }
-
-        if(selectedStreamer === 'selecione'){
-            alert('Você tem que atribuir um streamer para adicionar um clipe');
-        }else{
-            await registerClipe(data).then(response => {
-                response.status === 201 ? setActiveModalMsgCreate(true) : alert('Ocorreu um erro')
-            }).catch( (e)=>{console.log(e)} );
-        }
+        await registerEvento(data).then(response => {
+            response.status === 201 ? setActiveModalMsgCreate(true) : alert('Ocorreu um erro')
+        }).catch( (e)=>{console.log(e)} );
     }
 
     const handleChangePagination = (event, value) => {
@@ -135,34 +120,35 @@ const DashboardClipe = () => {
         setSearchInput(event.target.value);
     }
 
-    const dadosEditarClipe = (item) => {
+    const dadosEditarEvento = (item) => {
         setEditing(true);
 
-        setClipeInput({
+        setEventoInput({
             id: item.id,
             titulo: item.titulo,
-            url: item.url,
-            urlImageCapa: item.urlImageCapa,
-            urlImageCard: item.urlImageCard,
-            streamerName: item.streamer.nome,
-            streamerId: item.streamer.id
+            urlStream1: item.urlVideo1,
+            urlStream2: item.urlVideo2,
+            urlStream3: item.urlVideo3,
+            urlStream4: item.urlVideo4,
+            urlImageCapa: item.urlImgCapa,
+            urlImageCard: item.urlImgCard,
         });
     }
 
-    const editarClipe = () => {
+    const editarEvento = () => {
         
 
         const data = {
-            'titulo': clipeInput.titulo,
-            'url': clipeInput.url,
-            'urlImageCapa': clipeInput.urlImageCapa,
-            'urlImageCard': clipeInput.urlImageCard,
-            'streamer': {
-                'id': selectedStreamer === 'selecione' ? clipeInput.streamerId : selectedStreamer
-            }
+            'titulo': eventoInput.titulo,
+            'urlVideo1': eventoInput.urlStream1,
+            'urlVideo2': eventoInput.urlStream2,
+            'urlVideo3': eventoInput.urlStream3,
+            'urlVideo4': eventoInput.urlStream4,
+            'urlImgCapa': eventoInput.urlImageCapa,
+            'urlImgCard': eventoInput.urlImageCard,   
         }
 
-        updateClipe(clipeInput.id, data).then((response)=>{
+        updateEvento(eventoInput.id, data).then((response)=>{
             response.status === 200 ? setActiveModalMsgEdit(true) : alert('Ocorreu um erro')
         }).catch((e)=>{console.log(e)})
     }
@@ -172,8 +158,8 @@ const DashboardClipe = () => {
         setActiveModal(true);
     }
 
-    const removerClipe = (id) => {
-        removeClipe(id).then((response)=>{
+    const removerEvento = (id) => {
+        removeEvento(id).then((response)=>{
             response.status === 200 ? window.location.reload() : alert('Ocorreu um erro')
         }).catch((e)=>{
             console.log(e)
@@ -183,14 +169,14 @@ const DashboardClipe = () => {
 
     const buttonReturn = () => {
         setEditing(false)
-        setClipeInput(initialCityState);
+        setEventoInput(initialCityState);
     }
 
     return(
         <Container>
             <div className="aux-cont">
                 <ModalRemove 
-                    accepted={() => removerClipe(idRemove)}
+                    accepted={() => removerEvento(idRemove)}
                     denied={() => setActiveModal(false)}
                     active={activeModal}
                 /> 
@@ -200,26 +186,53 @@ const DashboardClipe = () => {
                 />
                 <ModalMsgCreate
                     active={activeModalMsgCreate}
-                    msgModalCreate="Clipe adicionado com sucesso!"
+                    msgModalCreate="Evento adicionado com sucesso!"
                 />
                 <AreaForm>
                     <Form>
-                        <div className="title-input">Título do Clipe</div>
+                        <div className="title-input">Título do Evento</div>
                         <input 
                             className="input-form" 
                             type="text" 
-                            placeholder="Digite o título do Clipe"
+                            placeholder="Digite o título do Evento"
                             name="titulo"
-                            value={clipeInput.titulo}
+                            value={eventoInput.titulo}
                             onChange={changeValue}
                         />
-                        <div className="title-input">Url do Clipe</div>
+                        <div className="title-input">Url da Stream 1</div>
                         <input 
                             className="input-form" 
                             type="text" 
-                            placeholder="Digite a url do Clipe"
-                            name="url"
-                            value={clipeInput.url}
+                            placeholder="Digite a url da Stream"
+                            name="urlStream1"
+                            value={eventoInput.urlStream1}
+                            onChange={changeValue}
+                        />
+                        <div className="title-input">Url da Stream 2</div>
+                        <input 
+                            className="input-form" 
+                            type="text" 
+                            placeholder="Digite a url da Stream"
+                            name="urlStream2"
+                            value={eventoInput.urlStream2}
+                            onChange={changeValue}
+                        />
+                        <div className="title-input">Url da Stream 3</div>
+                        <input 
+                            className="input-form" 
+                            type="text" 
+                            placeholder="Digite a url da Stream"
+                            name="urlStream3"
+                            value={eventoInput.urlStream3}
+                            onChange={changeValue}
+                        />
+                        <div className="title-input">Url da Stream 4</div>
+                        <input 
+                            className="input-form" 
+                            type="text" 
+                            placeholder="Digite a url da Stream"
+                            name="urlStream4"
+                            value={eventoInput.urlStream4}
                             onChange={changeValue}
                         />
                         <div className="title-input">Url Imagem capa</div>
@@ -228,7 +241,7 @@ const DashboardClipe = () => {
                             type="text" 
                             placeholder="Url da imagem de capa"
                             name="urlImageCapa"
-                            value={clipeInput.urlImageCapa}    
+                            value={eventoInput.urlImageCapa}    
                             onChange={changeValue}
                         />
                         <div className="title-input">Url imagem Card</div>
@@ -237,30 +250,9 @@ const DashboardClipe = () => {
                             type="text" 
                             placeholder="Url da imagem para o Card"
                             name="urlImageCard"   
-                            value={ clipeInput.urlImageCard } 
+                            value={ eventoInput.urlImageCard } 
                             onChange={ changeValue }
                         />
-                        <div className="title-input">Streamer Responsável</div>
-                        
-                        { editing ? 
-                            (
-                                <div className="streamer-edit-select">
-                                    Streamer Atual: { clipeInput.streamerName }
-                                </div>
-                            ) : '' 
-                        }
-                        <div className="area-select-streamer">
-                            <select value={selectedStreamer} size="1" onChange={e => setSelectedStreamer(e.target.value)}>
-                                <option value="selecione">selecione</option>
-                                {
-                                    getStreamer.map((item) => (
-                                        <option key={item.id} value={item.id}>
-                                            Id: {item.id} - Nome: {item.nome}
-                                        </option>
-                                    ))
-                                }
-                            </select>
-                        </div>
                     </Form>
                     
                     {
@@ -270,14 +262,14 @@ const DashboardClipe = () => {
                                     <ButtonInput 
                                         type="submit" 
                                         value="Atualizar"
-                                        onclick={() => editarClipe()}
+                                        onclick={() => editarEvento()}
                                     />
                                 </div>
                                 <div className="button-return">
                                     <ButtonInput 
                                         type="submit" 
                                         value="Voltar"
-                                        onclick={buttonReturn}    
+                                        onclick={buttonReturn}
                                     />
                                 </div>
                             </AreaButton>
@@ -299,7 +291,7 @@ const DashboardClipe = () => {
                     <div className="search-content">
                         <input 
                             className="input-search" 
-                            placeholder="Digite o nome do clipe para Pesquisar"
+                            placeholder="Digite o nome do Evento para Pesquisar"
                             value={searchInput}
                             onChange={handleSearch}      
                         />
@@ -312,19 +304,25 @@ const DashboardClipe = () => {
                                 <tr>
                                     <th>ID</th>
                                     <th>Título</th>
-                                    <th>Streamer</th>
+                                    <th>Url Stream 1</th>
+                                    <th>Url Stream 2</th>
+                                    <th>Url Stream 3</th>
+                                    <th>Url Stream 4</th>
                                     <th>Editar</th>
                                     <th>Remover</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    filteredClipe.map((item) => (
+                                    filteredEvento.map((item) => (
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
                                             <td>{item.titulo}</td>
-                                            <td>{item.streamer.nome}</td>
-                                            <td onClick={()=> dadosEditarClipe(item)}>
+                                            <td>{item.urlVideo1}</td>
+                                            <td>{item.urlVideo2}</td>
+                                            <td>{item.urlVideo3}</td>
+                                            <td>{item.urlVideo4}</td>
+                                            <td onClick={()=> dadosEditarEvento(item)}>
                                                 <IconEdit/>
                                             </td>
                                             <td onClick={() => activeModalDelete(item.id)}>
@@ -345,4 +343,5 @@ const DashboardClipe = () => {
         </Container>
     );
 }
-export default DashboardClipe;
+export default DashboardEvento;
+

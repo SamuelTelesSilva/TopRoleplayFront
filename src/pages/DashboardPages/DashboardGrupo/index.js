@@ -21,17 +21,17 @@ import {
     removeLeader,
     removeMember,
     removeCity
-} from '../../service/groupService';
-import { getAllSelect } from '../../service/streamerService';
-import { getAllSelectCity } from '../../service/cityService';
-import { useAuth } from '../../providers/auth';
-import ButtonInput from '../../components/ButtonInput';
-import Paginacao from '../../components/Paginacao';
-import api from '../../service/api';
-import CardItemDashboard from '../../components/CardItemDashboard';
-import ModalMsgEdit from '../../components/Modal/ModalMsgEdit';
-import ModalMsgCreate from '../../components/Modal/ModalMsgCreate';
-import ModalRemove from '../../components/Modal/ModalRemove';
+} from '../../../service/groupService';
+import { getAllSelect } from '../../../service/streamerService';
+import { getAllSelectCity } from '../../../service/cityService';
+import { useAuth } from '../../../providers/auth';
+import ButtonInput from '../../../components/ButtonInput';
+import Paginacao from '../../../components/Paginacao';
+import api from '../../../service/api';
+import CardItemDashboard from '../../../components/CardItemDashboard';
+import ModalMsgEdit from '../../../components/Modal/ModalMsgEdit';
+import ModalMsgCreate from '../../../components/Modal/ModalMsgCreate';
+import ModalRemove from '../../../components/Modal/ModalRemove';
 
 
 const DashboardGrupo = () => {

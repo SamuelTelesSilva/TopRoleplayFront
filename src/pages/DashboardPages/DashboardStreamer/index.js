@@ -7,9 +7,9 @@ import {
     AreaAssociation, 
     AreaSearch
 } from './styles';
-import ButtonInput from '../../components/ButtonInput';
-import CardItemDashboard from '../../components/CardItemDashboard';
-import Paginacao from '../../components/Paginacao';
+import ButtonInput from '../../../components/ButtonInput';
+import CardItemDashboard from '../../../components/CardItemDashboard';
+import Paginacao from '../../../components/Paginacao';
 import { 
     registerStreamer, 
     getAll, 
@@ -18,14 +18,14 @@ import {
     remove, 
     registerAssociationStreamer, 
     updateStreamerAssociation
-} from '../../service/streamerService';
-import { getAllSelect } from '../../service/cityService';
-import api from '../../service/api';
-import Form from '../../components/Form';
-import ModalRemove from '../../components/Modal/ModalRemove'; 
-import ModalMsgEdit from '../../components/Modal/ModalMsgEdit'; 
-import { useAuth } from '../../providers/auth';
-import ModalMsgCreate from '../../components/Modal/ModalMsgCreate';
+} from '../../../service/streamerService';
+import { getAllSelect } from '../../../service/cityService';
+import api from '../../../service/api';
+import Form from '../../../components/Form';
+import ModalRemove from '../../../components/Modal/ModalRemove'; 
+import ModalMsgEdit from '../../../components/Modal/ModalMsgEdit'; 
+import { useAuth } from '../../../providers/auth';
+import ModalMsgCreate from '../../../components/Modal/ModalMsgCreate';
 
 const DashboardStreamer = () => {
 
