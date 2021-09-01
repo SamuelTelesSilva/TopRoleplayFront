@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Button from '../../../components/Button';
 import Layout from '../../../components/Layout';
 import TitleBar from '../../../components/TitleBar';
 import { getClipeById } from '../../../service/clipeService';
@@ -7,7 +8,6 @@ import { Container } from './styles';
 
 const Detalhes = ( props ) => {
     const [clipe, setClipe] = useState([]);
-    const [link, setLink] = useState("ObservantPiliableWheelCorgiDerp-VGyj_CSBgVCqe16T");
 
     useEffect(()=>{
         const { id } = props.match.params;
@@ -39,6 +39,13 @@ const Detalhes = ( props ) => {
                         />
                     </div>
                 </div>
+                <div className="area-button-streamer">
+                    <Button title="Conheça o Streamer"/>
+                </div>
+                <div className="bar-clipe-title">
+                    <TitleBar title="Últimos Clipes"/>
+                </div>
+
             </Container>
         </Layout>
     );

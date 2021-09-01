@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 
 export const Container = styled.div`
+    display: block;
     border: 1px solid red;
     margin: 8px 0px 8px 0px;
     color: white;
@@ -12,17 +13,25 @@ export const Container = styled.div`
 
     .cont-iframe{
         display: flex;
+        margin-top: 16px;
         justify-content: center;
         width: 100%;
         height: auto;
         border: 1px solid blue;
     }
+
     .iframe{
         display: flex;
         width: 640px;
         height: 360px;
     }
 
+    .area-button-streamer{
+        display: flex;
+        margin: 16px 0px 16px 0px;
+        justify-content: center;
+        border: 1px solid white;
+    }
     
 
 
@@ -34,6 +43,10 @@ export const Container = styled.div`
         }
 
         .cont-iframe{
+            justify-content: start;
+        }
+
+        .area-button-streamer{
             justify-content: start;
         }
     }
