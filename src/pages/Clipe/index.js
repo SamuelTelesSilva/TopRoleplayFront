@@ -10,6 +10,7 @@ import {
 } from '../../service/clipeService';
 
 
+
 //Fazer ficar no meio da tela com o layout
 
 const Clipe = () => {
@@ -21,9 +22,7 @@ const Clipe = () => {
     const [filteredClipe, setFilteredClipe] = useState([]);
 
     useEffect(()=>{
-    
         const searchAndGetAll = () => {
-
             if(searchInput === ""){
                 getAll(limit, paginaAtual).then((response) =>{
                     setPages(response.data['totalPages']);
@@ -40,9 +39,6 @@ const Clipe = () => {
                     console.log("Erro ao utilizar o searchByName " + e);
                 });
             }
-
-            
-
         }
         searchAndGetAll();
     },[paginaAtual, limit, searchInput, pages]);
@@ -70,11 +66,11 @@ const Clipe = () => {
                 </div>
                 
                 <div className="area-content">
-
                     {
                         filteredClipe.map(item => (
                             <div className="area-cards" key={item.id}>
-                                <CardMain 
+                                <CardMain
+                                    clipeID={item.id} 
                                     imgCard={item.urlImageCard}
                                     title={item.titulo}
                                     streamer={item.streamer.nome}
@@ -82,10 +78,9 @@ const Clipe = () => {
                             </div>
                         ))
                     }
-                    
                 </div>
                 <div className="area-pagination">
-                    <Paginacao count={pages} onchange={handleChangePagination}/>        
+                    <Paginacao count={ pages } onchange={ handleChangePagination }/>        
                 </div>
             </Container>
         </Layout>

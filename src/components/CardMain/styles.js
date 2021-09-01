@@ -31,6 +31,10 @@ export const Container = styled.div`
             white-space: nowrap;    
             font-size: 16px;
             text-align: center;   
+
+            a{
+                color: white;
+            }
         }
 
         .card-name-streamer{
