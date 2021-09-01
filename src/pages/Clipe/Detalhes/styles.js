@@ -11,7 +11,7 @@ export const Container = styled.div`
     height: auto;
 
 
-    .cont-iframe{
+    .cont-iframe-player{
         display: flex;
         margin-top: 16px;
         justify-content: center;
@@ -32,23 +32,31 @@ export const Container = styled.div`
         justify-content: center;
         border: 1px solid white;
     }
+
+    .player-react{
+        border: 1px solid red;
+        display: flex;
+        width: 640px;
+        height: auto;
+    }
     
 
 
     @media screen and (max-width: 640px){ 
         width: 100%;
 
-        .iframe{
+        .iframe, .player-react{
             width: 100%;
         }
 
-        .cont-iframe{
+        .cont-iframe-player{
             justify-content: start;
         }
 
         .area-button-streamer{
             justify-content: start;
         }
+
     }
 
     @media screen and (min-width: 1023px) and (max-width: 1026px){ 

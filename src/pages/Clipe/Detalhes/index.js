@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactPlayer from 'react-player';
 import Button from '../../../components/Button';
 import Layout from '../../../components/Layout';
 import TitleBar from '../../../components/TitleBar';
@@ -21,24 +22,37 @@ const Detalhes = ( props ) => {
     },[props.match.params])
 
 
-    console.log(clipe)
+    console.log(clipe.twitch)
     return(
         <Layout enableJustify="true">
             <Container>
                 <div className="bar-clipe-title">
                     <TitleBar title={clipe.titulo}/>
                 </div>
-                <div className="cont-iframe">
-                    <div className="iframe">
-                        <iframe
-                            title={clipe.titulo}
-                            src={`https://clips.twitch.tv/embed?clip=${clipe.url}&parent=localhost`}
-                            height="360"
-                            width="100%"
-                            allowFullScreen
-                        />
-                    </div>
+                <div className="cont-iframe-player">
+                    {
+                        clipe.twitch ? (
+                            <div className="iframe">
+                                <iframe
+                                    title={clipe.titulo}
+                                    src={`https://clips.twitch.tv/embed?clip=${clipe.url}&parent=localhost`}
+                                    height="360"
+                                    width="100%"
+                                    allowFullScreen
+                                />
+                            </div>
+                        ) : (
+                            <div className="player-react">
+                                <ReactPlayer 
+                                    url="https://www.twitch.tv/baianons"
+                                    height="360px"
+                                    width="100%"
+                                />
+                            </div>
+                        )  
+                    }
                 </div>
+                
                 <div className="area-button-streamer">
                     <Button title="Conheça o Streamer"/>
                 </div>
