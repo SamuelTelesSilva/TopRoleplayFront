@@ -7,7 +7,7 @@ import { Container } from './styles';
 
 const Detalhes = ( props ) => {
     const [clipe, setClipe] = useState([]);
-
+    const [link, setLink] = useState("ObservantPiliableWheelCorgiDerp-VGyj_CSBgVCqe16T");
 
     useEffect(()=>{
         const { id } = props.match.params;
@@ -20,21 +20,24 @@ const Detalhes = ( props ) => {
         
     },[props.match.params])
 
+
     console.log(clipe)
     return(
-        <Layout>
+        <Layout enableJustify="true">
             <Container>
                 <div className="bar-clipe-title">
-                    <TitleBar title="Últimos Clipes"/>
+                    <TitleBar title={clipe.titulo}/>
                 </div>
-                <div>
-                    <iframe
-                        src="https://clips.twitch.tv/embed?clip=ObservantPiliableWheelCorgiDerp-VGyj_CSBgVCqe16T&parent=localhost"
-                        height="360"
-                        width="640"
-                        allowFullScreen
-                        >
-                    </iframe>
+                <div className="cont-iframe">
+                    <div className="iframe">
+                        <iframe
+                            title={clipe.titulo}
+                            src={`https://clips.twitch.tv/embed?clip=${clipe.url}&parent=localhost`}
+                            height="360"
+                            width="100%"
+                            allowFullScreen
+                        />
+                    </div>
                 </div>
             </Container>
         </Layout>

@@ -23,7 +23,7 @@ export const Grid = styled.div`
 
         .aux-grid-content{
             display: flex;
-            justify-content: center;
+            justify-content: ${props => props.enableJustify ? 'start' : 'center'};
         }
     }
 `;

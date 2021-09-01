@@ -5,7 +5,7 @@ import { Grid } from './styles';
 
 const Layout = (props) => {
     return(
-        <Grid>
+        <Grid enableJustify={props.enableJustify}>
             <Header/>
             <div className="aux-grid-content">
                 {props.children}

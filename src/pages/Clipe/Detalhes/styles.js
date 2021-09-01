@@ -10,18 +10,31 @@ export const Container = styled.div`
     height: auto;
 
 
-
-    .bar-clipe-title{
-
+    .cont-iframe{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: auto;
+        border: 1px solid blue;
     }
+    .iframe{
+        display: flex;
+        width: 640px;
+        height: 360px;
+    }
+
+    
 
 
     @media screen and (max-width: 640px){ 
-        
-        max-width: 260px;
+        width: 100%;
 
-        .area-content{
-            
+        .iframe{
+            width: 100%;
+        }
+
+        .cont-iframe{
+            justify-content: start;
         }
     }
 
