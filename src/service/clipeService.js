@@ -4,6 +4,10 @@ export const getAll = (limit, paginaAtual) => {
     return http.get(`/api/clipe?sort=id,desc&size=${limit}&page=${paginaAtual}`);
 };
 
+export const getClipeById = (id) => {
+    return http.get(`/api/clipe/${id}`)
+}
+
 export const getAllSelect = () => {
     return http.get(`/api/clipe?sort=id,desc`);
 };

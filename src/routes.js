@@ -19,7 +19,7 @@ const Routes = () => {
         <>
             <Switch>
                 <CustomRoute exact path="/clipe"  component={ Clipe }/>
-                <CustomRoute path="/clipe/:id/:title"  component={ Detalhes }/>  {/* 1 - Criar o link com o parametro */}
+                <CustomRoute path="/clipe/:id/:title"  component={ Detalhes }/>
                 <CustomRoute path="/login" component={ Login } />
                 <CustomRoute path="/register" component={ Cadastro } />
                 <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } />

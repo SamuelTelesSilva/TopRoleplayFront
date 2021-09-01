@@ -10,7 +10,7 @@ const CardMain = (props) => {
             </div>
             <div className="area-content-card">
                 <div className="card-title">
-                    <Link to={`/clipe/${props.clipeID}/${props.title}`} style={{ textDecoration: 'none'}}> {/* 2 - Criar o link para passar os parametros para o router */}
+                    <Link to={`/clipe/${props.clipeID}/${props.title}`} style={{ textDecoration: 'none'}}>
                         {props.title}
                     </Link>
                 </div>
