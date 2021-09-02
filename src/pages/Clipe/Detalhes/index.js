@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import Button from '../../../components/Button';
+import CarouselClipe from '../../../components/Carousels/CarouselClipe';
 import Layout from '../../../components/Layout';
 import TitleBar from '../../../components/TitleBar';
 import { getClipeById } from '../../../service/clipeService';
@@ -18,11 +19,14 @@ const Detalhes = ( props ) => {
         }).catch((e)=>{
             console.log(e);
         });
-        
     },[props.match.params])
 
 
-    console.log(clipe.twitch)
+    if(clipe.length !== 0){
+        console.log()
+    }
+
+
     return(
         <Layout enableJustify="true">
             <Container>
@@ -52,16 +56,25 @@ const Detalhes = ( props ) => {
                         )  
                     }
                 </div>
-                
-                <div className="area-button-streamer">
-                    <Button title="Conheça o Streamer"/>
+                <div className="area-button-streamer">     
+                    <a 
+                        href={`${clipe.length !== 0 ? clipe.streamer.urlPlataformaStream : '/'}`}>
+                        <Button title="Conheça o Streamer"/>
+                    </a>
                 </div>
                 <div className="bar-clipe-title">
                     <TitleBar title="Últimos Clipes"/>
                 </div>
-
+                <div className="area-carousel-clip">
+                    <CarouselClipe />
+                </div>
             </Container>
         </Layout>
     );
 } 
 export default Detalhes;
+
+/**
+ *  <a href={`https://${clipe.length !== 0 ? clipe.streamer.urlPlataformaStream : '/'}`}><Button title="Conheça o Streamer"/></a>
+ * 
+ */

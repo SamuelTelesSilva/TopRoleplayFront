@@ -10,6 +10,7 @@ import Heart from './components/Heart';
 import Clipe from './pages/Clipe';
 import CardMain from './components/CardMain';
 import Detalhes from './pages/Clipe/Detalhes';
+import CarouselClipe from './components/Carousels/CarouselClipe';
 
 
 const Routes = () => {
@@ -20,6 +21,7 @@ const Routes = () => {
             <Switch>
                 <CustomRoute exact path="/clipe"  component={ Clipe }/>
                 <CustomRoute path="/clipe/:id/:title"  component={ Detalhes }/>
+                <CustomRoute path="/carousel"  component={ CarouselClipe }/>
                 <CustomRoute path="/login" component={ Login } />
                 <CustomRoute path="/register" component={ Cadastro } />
                 <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } />

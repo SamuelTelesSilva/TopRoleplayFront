@@ -4,8 +4,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     display: block;
-    border: 1px solid red;
-    margin: 8px 0px 8px 0px;
+    margin: 8px 0px 18px 0px;
     color: white;
     width: 1080px;
     height: auto;
@@ -17,27 +16,35 @@ export const Container = styled.div`
         justify-content: center;
         width: 100%;
         height: auto;
-        border: 1px solid blue;
     }
 
     .iframe{
         display: flex;
         width: 640px;
-        height: 360px;
+        height: auto;
     }
 
     .area-button-streamer{
         display: flex;
-        margin: 16px 0px 16px 0px;
+        margin: 32px 0px 16px 0px;
         justify-content: center;
-        border: 1px solid white;
+        width: 100%;
+
+        a{
+            width: 200px;
+            text-decoration: none;
+        }
+        
     }
 
     .player-react{
-        border: 1px solid red;
         display: flex;
         width: 640px;
         height: auto;
+    }
+
+    .area-carousel-clip{
+        width: 100%;
     }
     
 
@@ -50,10 +57,6 @@ export const Container = styled.div`
         }
 
         .cont-iframe-player{
-            justify-content: start;
-        }
-
-        .area-button-streamer{
             justify-content: start;
         }
 
