@@ -69,9 +69,9 @@ const CarouselClipe = () => {
             clips.length === 0 ? '' : (
               <Slider {...settings} >
                 {clips.map((clip) =>(
-                    <div key={clip.id}>
-                        <img src={clip.urlImageCard} alt={clip.titulo}/>
-                    </div>
+                  <div key={clip.id}>
+                    <img src={clip.urlImageCard} alt={clip.titulo}/>
+                  </div>
                 ))}
               </Slider>
             )

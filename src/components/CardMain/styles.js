@@ -1,18 +1,27 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    max-width: 260px;
+    max-width: 230px;
     height: auto;
-
-
     border-radius: 5px;
-    background-color: var(--corSecundaria);
     color: white;
+
+    .cont-aux{
+        
+        display: flex;
+        z-index: 1;
+        justify-content: center;
+        align-items: center;
+
+    }
 
 
     .area-img-card{
-        max-width: 260px;
-        max-height: 220px;
+        max-width: 230px;
+        height: 220px;
+        z-index: 1;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        opacity: 1;
 
         img{
             width: 100%;
@@ -21,32 +30,29 @@ export const Container = styled.div`
         }
     }
 
-    .area-content-card{
-        margin: 3px;
-        height: 45px;
-
-        .card-title{
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;    
-            font-size: 16px;
-            text-align: center;   
-
-            a{
-                color: white;
-            }
-        }
-
-        .card-name-streamer{
-            display: flex;
-            justify-content: center;
-            margin-top: 3px;
-            color: var(--corTerciaria);
-        }
-        
+    .area-info{
+        display: none;
     }
+
+    :hover{
+        cursor: pointer;
+
+        .area-info{
+            display: flex;
+            position: absolute;
+            z-index: 2;
+            font-size: 20px;
+            box-shadow: inset 0 0 0.5em var(--corSecundaria), 0 0 1em var(--corSecundaria);
+        }
+        .area-img-card{
+            transition: 0.3s;
+            opacity: 0.5;
+        }
+    }
+    
 
     @media screen and (max-width: 640px){ 
 
     }
 `;
+

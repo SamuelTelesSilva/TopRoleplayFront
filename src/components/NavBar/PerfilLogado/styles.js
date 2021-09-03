@@ -24,6 +24,7 @@ export const Container = styled.div`
         margin-right: 15px;
         color: white;
         font-size: 16px;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
 
     .botao-sair{

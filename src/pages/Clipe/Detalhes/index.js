@@ -48,7 +48,7 @@ const Detalhes = ( props ) => {
                         ) : (
                             <div className="player-react">
                                 <ReactPlayer 
-                                    url="https://www.twitch.tv/baianons"
+                                    url={`${clipe.url}`}
                                     height="360px"
                                     width="100%"
                                 />

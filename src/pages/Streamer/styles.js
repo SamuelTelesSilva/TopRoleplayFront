@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    margin-top: 8px;
+    display: block;
     color: white;
-    height: auto;
-    min-height: 100%;
     width: 1080px;
+    min-height: 970px;
     
 
-    .bar-clipe-title-search{
+    .bar-streamer-title-search{
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin: 16px 0px 16px 0px;
 
         .input-search{
             width: 50%;
@@ -21,8 +21,11 @@ export const Container = styled.div`
             background-color: var(--corFundoPrincipal);
             border: 2px solid var(--corSecundaria);
             color: white;
-            margin-right: 12px;
         }
+    }
+
+    .area-title-bar{
+        margin-top: 16px;
     }
 
     .area-content{
@@ -30,7 +33,8 @@ export const Container = styled.div`
         width: 100%;
         height: auto;
         flex-wrap: wrap;
-        min-height: 600px; 
+        justify-content: center;
+        min-height: 460px;
 
         .area-cards{
             max-width: 260px;
@@ -39,16 +43,17 @@ export const Container = styled.div`
     }
 
     .area-pagination{
-        max-width: 1068px;
+        width: 100%;
         margin: 16px 0px 16px 0px;
     }
 
-
     @media screen and (max-width: 640px){ 
-        
-        max-width: 260px;
 
-        .bar-clipe-title-search{
+        width: 96%;
+        height: auto;
+        margin: 2% 2%;
+
+        .bar-streamer-title-search{
             display: block;
 
             .input-search{
@@ -56,8 +61,9 @@ export const Container = styled.div`
                margin-top: 10px;
             }
         }
+
         .area-content{
-            display: block;
+            display: flex;
             width: 100%;
             height: auto;
             flex-wrap: wrap;

@@ -1,39 +1,34 @@
-import React, {useEffect, useState} from 'react';
-import CardClipe from '../../components/CardClipe';
-import Layout from '../../components/Layout';
-import Paginacao from '../../components/Paginacao';
-import TitleBar from '../../components/TitleBar';
+import React, { useEffect, useState } from 'react';
 import { Container } from './styles';
-import { 
-    getAll,
-    searchByTitle
-} from '../../service/clipeService';
+import Layout from '../../components/Layout/index';
+import CarouselMain from '../../components/Carousels/CarouselMain';
+import TitleBar from '../../components/TitleBar';
+import { getAll, searchByName } from '../../service/streamerService';
+import Paginacao from '../../components/Paginacao';
+import CardMain from '../../components/CardMain';
 
 
+const Streamer = () => {
 
-//Fazer ficar no meio da tela com o layout
-
-const Clipe = () => {
-
-    const [limit] = useState(24);
+    const [limit] = useState(8);
     const [paginaAtual, setPaginaAtual] = useState(0);
     const [pages, setPages] = useState();
     const [searchInput, setSearchInput] = useState("");
-    const [filteredClipe, setFilteredClipe] = useState([]);
+    const [filteredStreamer, setFilteredStreamer] = useState([]);
 
     useEffect(()=>{
         const searchAndGetAll = () => {
             if(searchInput === ""){
                 getAll(limit, paginaAtual).then((response) =>{
                     setPages(response.data['totalPages']);
-                    setFilteredClipe(response.data.content);
+                    setFilteredStreamer(response.data.content);
                 }).catch(
                     (e)=>{console.log(e)
                 });
             }else{
-                searchByTitle(limit, paginaAtual, searchInput)
+                searchByName(limit, paginaAtual, searchInput)
                 .then((response) => {
-                    setFilteredClipe(response.data.content)
+                    setFilteredStreamer(response.data.content)
                     setPages(response.data['totalPages']);
                 }).catch(e => {
                     console.log("Erro ao utilizar o searchByName " + e);
@@ -55,26 +50,32 @@ const Clipe = () => {
     return(
         <Layout>
             <Container>
-                <div className="bar-clipe-title-search">
-                    <TitleBar title="Últimos Clipes"/>
+                <div className="bar-streamer-title-search">
+                    <TitleBar title="Principais Streamers"/>
                     <input 
                         className="input-search"
-                        placeholder="Digite o titulo do clipe para Pesquisar"
+                        placeholder="Digite o nome do Streamer para Pesquisar"
                         value={searchInput}
-                        onChange={handleSearch}      
+                        onChange={handleSearch}       
                     />
                 </div>
-                
+                <div className="area-carousel">
+                    <CarouselMain />
+                </div>
+                <div className="area-title-bar">
+                    <TitleBar title="Streamers"/>
+                </div>
                 <div className="area-content">
                     {
-                        filteredClipe.map(item => (
-                            <div className="area-cards" key={item.id}>
-                                <CardClipe
-                                    clipeID={item.id} 
-                                    imgCard={item.urlImageCard}
-                                    title={item.titulo}
-                                    streamer={item.streamer.nome}
+                        filteredStreamer.map(streamer => (
+                            <div className="area-cards" key={streamer.id}>
+                                
+                                <CardMain
+                                    imgCard={streamer.urlImageCard}
+                                    altImg={streamer.nome}
+                                    streamer={streamer.nome}
                                 />
+                                
                             </div>
                         ))
                     }
@@ -85,5 +86,7 @@ const Clipe = () => {
             </Container>
         </Layout>
     );
+
 }
-export default Clipe;
+export default Streamer;
+
