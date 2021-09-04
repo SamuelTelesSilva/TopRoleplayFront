@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.div`
     display: block;
     color: white;
-    width: 1080px;
+    width: 100%;
+    max-width: 1080px;
     min-height: 970px;
     
 

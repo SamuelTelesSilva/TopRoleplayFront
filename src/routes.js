@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import {useAuth} from './providers/auth';
+import { useAuth } from './providers/auth';
 
 import Cadastro from './pages/Cadastro';
 import Login from './pages/Login/index';
@@ -12,7 +12,8 @@ import CardMain from './components/CardMain';
 import Detalhes from './pages/Clipe/Detalhes';
 import Streamer from './pages/Streamer';
 import CardCarousel from './components/Carousels/CardCarousel';
-
+import CarouselVideoPlayer from './components/Carousels/CarouselVideoPlayer/index'
+import StreamerDetail from './pages/Streamer/Detalhes/index'
 
 const Routes = () => {
     const { CustomRoute } = useAuth();
@@ -23,7 +24,9 @@ const Routes = () => {
                 <CustomRoute exact path="/clipe" component={ Clipe }/>
                 <CustomRoute path="/clipe/:id/:title"  component={ Detalhes }/>
                 <CustomRoute path="/carousel"  component={ CardCarousel }/>
+                <CustomRoute path="/c"  component={ CarouselVideoPlayer }/>
                 <CustomRoute path="/streamer"  component={ Streamer }/>
+                <CustomRoute path="/detail"  component={ StreamerDetail }/>
                 <CustomRoute path="/login" component={ Login } />
                 <CustomRoute path="/register" component={ Cadastro } />
                 <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } />
