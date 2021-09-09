@@ -69,13 +69,12 @@ const Streamer = () => {
                     {
                         filteredStreamer.map(streamer => (
                             <div className="area-cards" key={streamer.id}>
-                                
                                 <CardMain
+                                    id={streamer.id}
                                     imgCard={streamer.urlImageCard}
                                     altImg={streamer.nome}
                                     streamer={streamer.nome}
                                 />
-                                
                             </div>
                         ))
                     }

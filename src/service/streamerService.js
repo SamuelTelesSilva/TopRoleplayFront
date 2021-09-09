@@ -8,6 +8,10 @@ export const getAllSelect = () => {
     return http.get(`/api/streamer?sort=id,desc`);
 };
 
+export const getStreamerById = (id) => {
+    return http.get(`/api/streamer/${id}`)
+}
+
 export const searchByName = (limit, paginaAtual, name) => {
     return http.get(`/api/streamer/search/${name}?size=${limit}&page=${paginaAtual}`);
 };

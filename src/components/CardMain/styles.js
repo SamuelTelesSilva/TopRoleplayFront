@@ -6,13 +6,17 @@ export const Container = styled.div`
     border-radius: 5px;
     color: white;
 
+
+    a{
+        color: white;
+    }
+
     .cont-aux{
         
         display: flex;
         z-index: 1;
         justify-content: center;
-        align-items: center;
-
+        align-items: center;   
     }
 
 

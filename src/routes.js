@@ -26,7 +26,7 @@ const Routes = () => {
                 <CustomRoute path="/carousel"  component={ CardCarousel }/>
                 <CustomRoute path="/c"  component={ CarouselVideoPlayer }/>
                 <CustomRoute path="/streamer"  component={ Streamer }/>
-                <CustomRoute path="/detail"  component={ StreamerDetail }/>
+                <CustomRoute path="/streamer-detail/:id" component={ StreamerDetail }/>
                 <CustomRoute path="/login" component={ Login } />
                 <CustomRoute path="/register" component={ Cadastro } />
                 <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } />

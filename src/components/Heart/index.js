@@ -3,7 +3,6 @@ import { HeartEmpty, HeartFull } from './styles';
 
 
 const Heart = (props) => {
-
     const [hearts] = useState(props.heartsValue);
 
     if(hearts <= 100){

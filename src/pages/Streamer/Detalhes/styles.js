@@ -3,7 +3,7 @@ import {Heart, HeartFill} from '@styled-icons/bootstrap';
 
 export const Container = styled.div`
     display: block;
-    border: 1px solid red;
+    
     margin: 16px 0px 16px 0px;
     color: white;
     height: auto;
@@ -15,7 +15,7 @@ export const Container = styled.div`
         display: flex;
         width: 100%;
         justify-content: center;
-        border: 1px solid white;
+        
         margin-top: 8px;
     }
 
@@ -29,12 +29,15 @@ export const Container = styled.div`
 
     .cont-perfil-streamer{
         display: flex;
+        width: 100%;
+        border: 1px solid var(--corSecundaria);
+        
         margin: 16px 0px 16px 0px; 
-        border: 1px solid green;
+        
     }
 
     .img-perfil-streamer{
-        border: 1px solid white;
+        
         width: 200px;
         height: 200px;
 
@@ -63,6 +66,11 @@ export const Container = styled.div`
         display: flex;
         justify-content: center;
         margin: 8px 0px 16px 0px;
+        
+        a{
+            color: white;
+            text-decoration: none;
+        }
     }
 
     .rede-social{
@@ -87,7 +95,7 @@ export const Container = styled.div`
         display: flex;
         justify-content: center;
         width: 100%;
-        border: 1px solid white;
+        
     }
 
 
@@ -95,13 +103,25 @@ export const Container = styled.div`
         width: 100%;
 
         .player-react{
+            display: flex;
             width: 100%;
             max-width: 640px;
         }
 
-        .cont-perfil-streamer{
-
+        .cont-redes-sociais-aux{
+            display: flex;
+            justify-content: center;
         }
+
+        .cont-redes-sociais{
+            display: block;
+            margin: 8px 0px 16px 0px;
+        }
+
+        .rede-social{
+            margin: 0px 0px 8px 0px;
+        }
+
     }
 
     @media screen and (min-width: 1023px) and (max-width: 1026px){ 
