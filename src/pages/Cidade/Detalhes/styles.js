@@ -27,7 +27,7 @@ export const Container = styled.div`
         
     }
 
-    .cont-perfil-streamer{
+    .cont-perfil-city{
         display: flex;
         width: 100%;
         border: 1px solid var(--corSecundaria);
@@ -36,10 +36,10 @@ export const Container = styled.div`
         
     }
 
-    .img-perfil-streamer{
+    .img-perfil-city{
         
-        width: 200px;
-        height: 200px;
+        width: 450px;
+        height: auto;
 
         img{
             width: 100%;
@@ -47,20 +47,16 @@ export const Container = styled.div`
         }
     }
 
-    .detail-perfil-streamer{
+    .detail-perfil-city{
         display: flex;
         align-items: center;
-        margin-left: 10px;
-        
+        margin-left: 10px; 
     }
 
-    .detail-streamer{
+    .detail-city{
         display: block;
     }
 
-    .area-title-bar{
-        
-    }
 
     .cont-redes-sociais{
         display: flex;
@@ -91,7 +87,7 @@ export const Container = styled.div`
         }
     }
 
-    .cont-votar-streamer{
+    .cont-votar-city{
         display: flex;
         justify-content: center;
         width: 100%;
@@ -120,6 +116,27 @@ export const Container = styled.div`
 
         .rede-social{
             margin: 0px 0px 8px 0px;
+        }
+
+        .img-perfil-city{
+            width: 100%;
+            height: auto;
+
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .cont-perfil-city{
+            display: block;
+            width: 100%;
+        }
+
+        .detail-perfil-city{
+            display: flex;
+            justify-content: center;
+            margin-left: 0px; 
         }
 
     }

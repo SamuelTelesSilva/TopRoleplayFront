@@ -74,6 +74,7 @@ const Streamer = () => {
                                     imgCard={streamer.urlImageCard}
                                     altImg={streamer.nome}
                                     streamer={streamer.nome}
+                                    linkCard={`/streamer-detail/${streamer.id}`}
                                 />
                             </div>
                         ))

@@ -1,24 +1,23 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../../../components/Layout';
 import { Container, HeartEmpty } from './styles';
 import ReactPlayer from 'react-player';
 import TitleBar from '../../../components/TitleBar';
-import { getStreamerById } from '../../../service/streamerService'
+import { getCityById } from '../../../service/cityService'
 import Heart from '../../../components/Heart';
 
 const Detalhes = (props) => {
-    
-    const [streamer, setStreamer] = useState([]);
+
+    const [cidade, setCidade] = useState([]);
 
     useEffect(()=>{
         const { id } = props.match.params;
         
-        getStreamerById(id).then((response)=>{
-            setStreamer(response.data)
+        getCityById(id).then((response)=>{
+            setCidade(response.data)
         }).catch(
             (e)=>{console.log(e)}
         );
-        
     },[props.match.params]);
 
     return(
@@ -26,36 +25,26 @@ const Detalhes = (props) => {
             <Container>
 
                 <div className="area-title-bar">
-                    <TitleBar title={streamer.nome}/>
+                    <TitleBar title={cidade.nome}/>
                 </div>
 
-                <div className="cont-perfil-streamer">
-                    <div className="img-perfil-streamer">
+                <div className="cont-perfil-city">
+                    <div className="img-perfil-city">
                         <img 
-                            src={streamer.urlImageCard}
-                            alt={streamer.nome} 
+                            src={cidade.urlImageCard}
+                            alt={cidade.nome} 
                         />
                     </div>
-                    <div className="detail-perfil-streamer">
-                        <div className="detail-streamer">
-                            <div>Nome: {streamer.nome} </div>
+                    <div className="detail-perfil-city">
+                        <div className="detail-city">
+                            <div>Nome: {cidade.nome} </div>
                             <div>
                                 Corações:
-                                {streamer.length !== 0 ? 
-                                    <Heart heartsValue={ streamer.coracao }/> : <div>Carregando...</div> 
+                                {cidade.length !== 0 ? 
+                                    <Heart heartsValue={ cidade.coracao }/> : <div>Carregando...</div> 
                                 }
                             </div>
                         </div>    
-                    </div>
-                </div>
-
-                <div className="cont-player-react">
-                    <div className="player-react">
-                        <ReactPlayer 
-                            url={streamer.urlPlataformaStream}
-                            height="360px"
-                            width="100%"
-                        />
                     </div>
                 </div>
 
@@ -66,31 +55,24 @@ const Detalhes = (props) => {
                 <div className="cont-redes-sociais-aux">
                     <div className="cont-redes-sociais">
                         <a
-                            href={streamer.urlFacebook}
-                        >
-                            <div className="rede-social">
-                                Facebook
-                            </div>
-                        </a>
-                        <a
-                            href={streamer.urlInstagram}
+                            href={cidade.urlInstagram}
                         >
                             <div className="rede-social">
                                 Instagram
                             </div>
                         </a>
                         <a
-                            href={streamer.urlTwitter}
+                            href={cidade.urlTwitter}
                         >
                             <div className="rede-social">
                                 Twitter
                             </div>
                         </a>
                         <a
-                            href={streamer.urlPlataformaStream}
+                            href={cidade.urlDiscord}
                         >
                             <div className="rede-social">
-                                Stream
+                                Discord
                             </div>
                         </a>
                     </div>
@@ -98,10 +80,10 @@ const Detalhes = (props) => {
                 
 
                 <div className="area-title-bar">
-                    <TitleBar title="Seu Streamer Favorito?"/>
+                    <TitleBar title="Sua Cidade Favorita?"/>
                 </div>
 
-                <div className="cont-votar-streamer">
+                <div className="cont-votar-city">
                     <HeartEmpty />
                 </div>
                 

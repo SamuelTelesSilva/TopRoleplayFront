@@ -46,7 +46,6 @@ export const Container = styled.div`
             position: absolute;
             z-index: 2;
             font-size: 20px;
-            box-shadow: inset 0 0 0.5em var(--corSecundaria), 0 0 1em var(--corSecundaria);
         }
         .area-img-card{
             transition: 0.3s;

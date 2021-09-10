@@ -6,7 +6,7 @@ const CardMain = (props) => {
     return(
         <Container>
             <Link
-                to={`/streamer-detail/${props.id}`}
+                to={props.linkCard}
                 style={{ textDecoration: 'none'}}
             >
                 <div className="cont-aux">
@@ -22,3 +22,5 @@ const CardMain = (props) => {
     );
 }
 export default CardMain;
+
+//

@@ -15,6 +15,8 @@ import CardCarousel from './components/Carousels/CardCarousel';
 import CarouselVideoPlayer from './components/Carousels/CarouselVideoPlayer/index'
 import StreamerDetail from './pages/Streamer/Detalhes/index'
 import Cidade from './pages/Cidade';
+import CityDetail from './pages/Cidade/Detalhes/index'
+
 
 const Routes = () => {
     const { CustomRoute } = useAuth();
@@ -28,6 +30,7 @@ const Routes = () => {
                 <CustomRoute path="/c"  component={ CarouselVideoPlayer }/>
                 <CustomRoute path="/streamer"  component={ Streamer }/>
                 <CustomRoute path="/cidade"  component={ Cidade }/>
+                <CustomRoute path="/cidade-detail/:id"  component={ CityDetail }/>
                 <CustomRoute path="/streamer-detail/:id" component={ StreamerDetail }/>
                 <CustomRoute path="/login" component={ Login } />
                 <CustomRoute path="/register" component={ Cadastro } />
