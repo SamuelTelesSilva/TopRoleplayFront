@@ -14,9 +14,7 @@ const CardMain = (props) => {
                         <img src={props.imgCard} alt={props.altImg}/>
                     </div>
                     <div className="area-info">
-                        
-                            {props.streamer}
-                    
+                        {props.streamer || props.city}
                     </div>
                 </div>
             </Link>

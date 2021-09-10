@@ -14,6 +14,7 @@ import Streamer from './pages/Streamer';
 import CardCarousel from './components/Carousels/CardCarousel';
 import CarouselVideoPlayer from './components/Carousels/CarouselVideoPlayer/index'
 import StreamerDetail from './pages/Streamer/Detalhes/index'
+import Cidade from './pages/Cidade';
 
 const Routes = () => {
     const { CustomRoute } = useAuth();
@@ -26,6 +27,7 @@ const Routes = () => {
                 <CustomRoute path="/carousel"  component={ CardCarousel }/>
                 <CustomRoute path="/c"  component={ CarouselVideoPlayer }/>
                 <CustomRoute path="/streamer"  component={ Streamer }/>
+                <CustomRoute path="/cidade"  component={ Cidade }/>
                 <CustomRoute path="/streamer-detail/:id" component={ StreamerDetail }/>
                 <CustomRoute path="/login" component={ Login } />
                 <CustomRoute path="/register" component={ Cadastro } />
