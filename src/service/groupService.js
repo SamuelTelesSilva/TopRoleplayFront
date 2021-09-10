@@ -8,6 +8,10 @@ export const getAllSelect = () => {
     return http.get(`/api/grupo?sort=id,desc`);
 };
 
+export const getGroupById = (id) => {
+    return http.get(`/api/grupo/${id}`)
+}
+
 export const searchByName = (limit, paginaAtual, name) => {
     return http.get(`/api/grupo/search/${name}?size=${limit}&page=${paginaAtual}`);
 };

@@ -37,23 +37,47 @@ export const CidadeDestaque = [
   
   {
     id: 1,
-    streamer: 'Cidade Alta',
+    nome: 'Cidade Alta',
     imgCapa: 'https://scontent-gru1-2.xx.fbcdn.net/v/t1.6435-9/159958443_268427684735114_1575449350818617925_n.png?_nc_cat=110&ccb=1-5&_nc_sid=e3f864&_nc_ohc=PY0_Y7_4OuQAX-YBG3D&_nc_ht=scontent-gru1-2.xx&oh=b1e0a7942a5d61d08123be630293bc26&oe=615FFB60',
     link: '/cidade-detail/28'
   },
 
   {
     id: 2,
-    streamer: 'Complexo',
+    nome: 'Complexo',
     imgCapa: 'https://gkpb.com.br/wp-content/uploads/2021/08/gkpb-fluxo-gta-rp.jpg',
     link: '/cidade-detail/27'
   },
   
   {
     id: 3,
-    streamer: 'Hype',
+    nome: 'Hype',
     imgCapa: 'https://i.ytimg.com/vi/KaL5v-iI35Q/maxresdefault.jpg',
     link: '/cidade-detail/22'
+  },
+];
+
+
+export const GrupoDestaque = [
+  
+  {
+    id: 1,
+    nome: 'Laranjas',
+    imgCapa: 'https://i.ytimg.com/vi/eo_n_-fhOek/maxresdefault.jpg',
+    link: '/grupo-detail/4'
+  },
+
+  {
+    id: 2,
+    nome: 'Grota',
+    imgCapa: 'https://gkpb.com.br/wp-content/uploads/2021/08/gkpb-fluxo-gta-rp-696x392.jpg',
+    link: '/grupo-detail/4'
+  },
+  {
+    id: 3,
+    nome: 'Elements',
+    imgCapa: 'https://i.ytimg.com/vi/pBobysZQiBk/maxresdefault.jpg',
+    link: '/grupo-detail/4'
   },
 ];
 
@@ -139,8 +163,25 @@ const CarouselMain = (props) => {
         >
           <CardCarousel 
             urlImgCard={city.imgCapa} 
-            imgAlt={city.city}
+            imgAlt={city.nome}
             key={city.id}
+            onclick={() => console.log("adsdasdasdasd")}
+          />
+        </Link>
+      ))
+    );
+  }
+  if(props.page === "grupo"){
+    element = (
+      GrupoDestaque.map((grupo) =>(
+        <Link
+          to={grupo.link}
+          key={grupo.id}
+        >
+          <CardCarousel 
+            urlImgCard={grupo.imgCapa} 
+            imgAlt={grupo.nome}
+            key={grupo.id}
             onclick={() => console.log("adsdasdasdasd")}
           />
         </Link>

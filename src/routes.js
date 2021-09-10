@@ -16,6 +16,8 @@ import CarouselVideoPlayer from './components/Carousels/CarouselVideoPlayer/inde
 import StreamerDetail from './pages/Streamer/Detalhes/index'
 import Cidade from './pages/Cidade';
 import CityDetail from './pages/Cidade/Detalhes/index'
+import Grupo from './pages/Grupo';
+import GrupoDetail from './pages/Grupo/Detalhes/index';
 
 
 const Routes = () => {
@@ -30,6 +32,8 @@ const Routes = () => {
                 <CustomRoute path="/c"  component={ CarouselVideoPlayer }/>
                 <CustomRoute path="/streamer"  component={ Streamer }/>
                 <CustomRoute path="/cidade"  component={ Cidade }/>
+                <CustomRoute path="/grupo"  component={ Grupo }/>
+                <CustomRoute path="/grupo-detail/:id"  component={ GrupoDetail }/>
                 <CustomRoute path="/cidade-detail/:id"  component={ CityDetail }/>
                 <CustomRoute path="/streamer-detail/:id" component={ StreamerDetail }/>
                 <CustomRoute path="/login" component={ Login } />
