@@ -55,6 +55,9 @@ export const Container = styled.div`
 
     .detail-group{
         display: block;
+        span{
+            margin: 0px 5px 0px 5px;
+        }
     }
 
 
@@ -94,21 +97,27 @@ export const Container = styled.div`
         
     }
 
+    .area-content-leader{
+        min-height: 250px;
+    }
+    .area-content-member{
+        min-height: 460px;
+    }
+
     .area-content-leader, .area-content-member{
         display: flex;
-        width: 100%;
-        height: auto;
+        width: 100%;        
         flex-wrap: wrap;
         justify-content: center;
-        min-height: 460px;
-        border: 1px solid red;
+        align-items: center;
+        margin-bottom: 16px;
 
         .area-cards-lider, .area-cards-membro{
-            border: 1px solid red;
             max-width: 260px;
             margin: 8px 9px 0px 0px;
         }
     }
+
 
 
     @media screen and (max-width: 640px){ 

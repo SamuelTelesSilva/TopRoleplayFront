@@ -16,12 +16,15 @@ const Grupo = () => {
     const [searchInput, setSearchInput] = useState("");
     const [filteredGroup, setFilteredGroup] = useState([]);
 
+
     useEffect(()=>{
         const searchAndGetAll = () => {
             if(searchInput === ""){
                 getAll(limit, paginaAtual).then((response) =>{
                     setPages(response.data['totalPages']);
                     setFilteredGroup(response.data.content);
+
+
                 }).catch(
                     (e)=>{console.log(e)
                 });
@@ -37,6 +40,9 @@ const Grupo = () => {
         }
         searchAndGetAll();
     },[paginaAtual, limit, searchInput, pages]);
+
+
+    
 
     const handleSearch = event => {
         setSearchInput(event.target.value);

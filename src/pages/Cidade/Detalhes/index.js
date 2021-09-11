@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../../../components/Layout';
 import { Container, HeartEmpty } from './styles';
-import ReactPlayer from 'react-player';
 import TitleBar from '../../../components/TitleBar';
 import { getCityById } from '../../../service/cityService'
 import Heart from '../../../components/Heart';

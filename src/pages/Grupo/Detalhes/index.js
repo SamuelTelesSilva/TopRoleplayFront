@@ -10,23 +10,20 @@ const Detalhes = (props) => {
 
     const [grupo, setGrupo] = useState([]);
 
-    useEffect(()=>{
+    useEffect(()=>{  
         const { id } = props.match.params;
-        
         getGroupById(id).then((response)=>{
-            setGrupo(response.data)
+            setGrupo(response.data[0])
         }).catch(
             (e)=>{console.log(e)}
         );
+    
     },[props.match.params]);
-
-
-    console.log(grupo)
-
+    
     return(
         <Layout>
             <Container>
-
+            
                 <div className="area-title-bar">
                     <TitleBar title={grupo.nome}/>
                 </div>
@@ -43,9 +40,23 @@ const Detalhes = (props) => {
                             <div>Nome: {grupo.nome} </div>
                             <div>
                                 Corações:
-                                {grupo.length !== 0 ? 
-                                    <Heart heartsValue={ grupo.coracao }/> : <div>Carregando...</div> 
-                                }
+                                <span>
+                                    {grupo.length !== 0 ? 
+                                        <Heart heartsValue={ grupo.coracao }/> : <div>Carregando...</div> 
+                                    }
+                                </span>
+                            </div>
+                            <div>
+                                Cidades:
+                                {
+                                    grupo.length === 0 ? <div>Carregando...</div> : 
+                                    grupo.cidades.map( city => (
+                                        <span key={city.id}>
+                                            {city.nome}
+                                            {grupo.cidades.length > 1 ? ',': ''}
+                                        </span>
+                                    ))   
+                                } 
                             </div>
                         </div>    
                     </div>
@@ -55,57 +66,40 @@ const Detalhes = (props) => {
                     <TitleBar title="Líder"/>
                 </div>
                 <div className="area-content-leader">
-                    <div className="area-cards-lider" key={grupo.id}>
-                        <CardMain
-                            id={grupo.id}
-                            imgCard={grupo.urlImageCard}
-                            altImg={grupo.nome}
-                            group="MenorXD"
-                        />
-                    </div>
-
+                    {   
+                        grupo.length === 0 ? <div>Carregando...</div> : 
+                        grupo.lideresGrupo.map( streamer => (
+                            <div className="area-cards-lider" key={streamer.id}>
+                                <CardMain
+                                    id={streamer.id}
+                                    imgCard={streamer.urlImageCard}
+                                    altImg={streamer.nome}
+                                    group={streamer.nome}
+                                    linkCard={`/streamer-detail/${streamer.id}`}
+                                />
+                            </div>
+                        ))
+                    }
                 </div>
 
                 <div className="area-title-bar">
                     <TitleBar title="Membros"/>
                 </div>
                 <div className="area-content-member">
-                    <div className="area-cards-membro" key={grupo.id}>
-                        <CardMain
-                            id={grupo.id}
-                            imgCard={grupo.urlImageCard}
-                            altImg={grupo.nome}
-                            group="Brasil"
-                        />
-                    </div>
-
-                    <div className="area-cards-membro" key={grupo.id}>
-                        <CardMain
-                            id={grupo.id}
-                            imgCard={grupo.urlImageCard}
-                            altImg={grupo.nome}
-                            group="Brasil"
-                        />
-                    </div>
-
-                    <div className="area-cards-membro" key={grupo.id}>
-                        <CardMain
-                            id={grupo.id}
-                            imgCard={grupo.urlImageCard}
-                            altImg={grupo.nome}
-                            group="Brasil"
-                        />
-                    </div>
-
-                    <div className="area-cards-membro" key={grupo.id}>
-                        <CardMain
-                            id={grupo.id}
-                            imgCard={grupo.urlImageCard}
-                            altImg={grupo.nome}
-                            group="Brasil"
-                        />
-                    </div>
-
+                    {   
+                        grupo.length === 0 ? <div>Carregando...</div> : 
+                        grupo.membros.map( streamer => (
+                            <div className="area-cards-membro" key={streamer.id}>
+                                <CardMain
+                                    id={streamer.id}
+                                    imgCard={streamer.urlImageCard}
+                                    altImg={streamer.nome}
+                                    group={streamer.nome}
+                                    linkCard={`/streamer-detail/${streamer.id}`}
+                                />
+                            </div>
+                        ))
+                    }
                 </div>
                 
 
@@ -147,7 +141,7 @@ const Detalhes = (props) => {
                 <div className="cont-votar-group">
                     <HeartEmpty />
                 </div>
-                
+            
             </Container>
         </Layout>
     );
