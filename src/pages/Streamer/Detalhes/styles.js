@@ -38,8 +38,8 @@ export const Container = styled.div`
 
     .img-perfil-streamer{
         
-        width: 200px;
-        height: 200px;
+        width: 450px;
+        height: auto;
 
         img{
             width: 100%;
@@ -50,8 +50,7 @@ export const Container = styled.div`
     .detail-perfil-streamer{
         display: flex;
         align-items: center;
-        margin-left: 10px;
-        
+        margin-left: 10px;  
     }
 
     .detail-streamer{
@@ -120,6 +119,26 @@ export const Container = styled.div`
 
         .rede-social{
             margin: 0px 0px 8px 0px;
+        }
+
+        .cont-perfil-streamer{
+            display: block;
+        }
+
+
+        .img-perfil-streamer{
+        
+            width: 100%;
+            height: auto;
+
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .detail-perfil-streamer{
+            justify-content: center;
         }
 
     }

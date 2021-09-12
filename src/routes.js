@@ -18,6 +18,7 @@ import Cidade from './pages/Cidade';
 import CityDetail from './pages/Cidade/Detalhes/index'
 import Grupo from './pages/Grupo';
 import GrupoDetail from './pages/Grupo/Detalhes/index';
+import Home from './pages/Home';
 
 
 const Routes = () => {
@@ -26,7 +27,8 @@ const Routes = () => {
     return(
         <>
             <Switch>
-                <CustomRoute exact path="/clipe" component={ Clipe }/>
+                <CustomRoute exact path="/" component={ Home }/>
+                <CustomRoute path="/clipe" component={ Clipe }/>
                 <CustomRoute path="/clipe/:id/:title"  component={ Detalhes }/>
                 <CustomRoute path="/carousel"  component={ CardCarousel }/>
                 <CustomRoute path="/c"  component={ CarouselVideoPlayer }/>
