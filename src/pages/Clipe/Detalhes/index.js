@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import Button from '../../../components/Button';
-import CarouselClipe from '../../../components/Carousels/CarouselClipe';
+import CarouselClipe from '../../../components/Carousels/CarouselHome';
 import Layout from '../../../components/Layout';
 import TitleBar from '../../../components/TitleBar';
-import { getClipeById } from '../../../service/clipeService';
+import { getAllSelect, getClipeById } from '../../../service/clipeService';
 import { Container } from './styles';
 
 
 const Detalhes = ( props ) => {
     const [clipe, setClipe] = useState([]);
+    const [clips, setClips] = useState([]);
 
     useEffect(()=>{
         const { id } = props.match.params;
@@ -19,7 +20,14 @@ const Detalhes = ( props ) => {
         }).catch((e)=>{
             console.log(e);
         });
-    },[props.match.params])
+
+        getAllSelect().then( response => {
+            setClips(response.data.content);
+        }).catch(e=>{
+            console.log(e);
+        });
+
+    },[props.match.params]);
 
 
     if(clipe.length !== 0){
@@ -66,7 +74,15 @@ const Detalhes = ( props ) => {
                     <TitleBar title="Últimos Clipes"/>
                 </div>
                 <div className="area-carousel-clip">
-                    <CarouselClipe />
+                    <CarouselClipe>
+                        {
+                            clips.map((clip) =>(
+                                <div key={clip.id} className="aux-cont-card">
+                                    <img src={clip.urlImageCard} alt={clip.titulo}/>
+                                </div>
+                            ))
+                        }
+                    </CarouselClipe>
                 </div>
             </Container>
         </Layout>

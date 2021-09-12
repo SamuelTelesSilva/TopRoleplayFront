@@ -35,4 +35,9 @@ export const updateStreamerAssociation = (idNewCity, idCurrentStreamer, idCurren
 export const remove = id => {
     return http.delete(`/api/streamer/${id}`);
 };
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+    getAll
+}
   

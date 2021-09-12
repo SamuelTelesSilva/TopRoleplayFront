@@ -60,7 +60,7 @@ const Streamer = () => {
                     />
                 </div>
                 <div className="area-carousel">
-                    <CarouselMain  page="streamer"/>
+                    <CarouselMain page="streamer"/>
                 </div>
                 <div className="area-title-bar">
                     <TitleBar title="Streamers"/>

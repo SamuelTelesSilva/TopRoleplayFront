@@ -7,8 +7,21 @@ export const Container = styled.div`
     min-height: 970px;
     border: 1px solid red;
 
+    .cont-title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .cont-ver-todos{
+        a{
+            text-decoration: none;
+            color: white;
+        }
+    }
+
     .cont-slide-principal{
-        margin: 16px 0px 16px 0px;
         border: 1px solid white;
         width: 100%;
         min-height: 350px;
@@ -16,31 +29,29 @@ export const Container = styled.div`
 
 
     .cont-slide-clipes{
-        margin: 8px 0px 16px 0px;
         border: 1px solid white;
         width: 100%;
-        min-height: 250px;
+        min-height: 200px;
     }
 
     .cont-slide-streamer{
-        margin: 8px 0px 16px 0px;
+
         border: 1px solid white;
         width: 100%;
-        min-height: 250px;
+        min-height: 200px;
     }
 
     .cont-slide-cidade{
-        margin: 8px 0px 16px 0px;
+
         border: 1px solid white;
         width: 100%;
-        min-height: 250px;
+        min-height: 200px;
     }
 
     .cont-publicity{
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 8px 0px 16px 0px;
         border: 1px solid white;
         width: 100%;
         min-height: 200px;
@@ -55,14 +66,18 @@ export const Container = styled.div`
     }
 
     .cont-slide-grupo{
-        margin: 8px 0px 16px 0px;
+
         border: 1px solid white;
         width: 100%;
-        min-height: 250px;
+        min-height: 200px;
     }
 
 
     @media screen and (max-width: 640px){
+
+        .cont-slide-principal{
+            min-height: 210px;
+        }
 
     }
 

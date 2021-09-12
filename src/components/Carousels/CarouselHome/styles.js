@@ -11,9 +11,10 @@ export const Container = styled.div`
 
         img{
             width: 300px;
-            height: auto;
+            height: 200px;
             padding: 10px;
             border-radius: 25px;
+            
         }
     }
 
@@ -21,11 +22,8 @@ export const Container = styled.div`
         width: 100%;
     }
 
-
     @media screen and (max-width: 640px){ 
-
         width: 100%;
-        
         
         .carousel{
             width: ${props => props.width-50}px;
@@ -37,10 +35,9 @@ export const Container = styled.div`
             justify-content: center;
 
             img{
-                width: 100%;
-                max-width: 250px;
-                height: auto;
-                padding: 10px;
+               width: 300px;
+                height: 200px;
+                padding: 2px;
                 border-radius: 25px;
             }
         }

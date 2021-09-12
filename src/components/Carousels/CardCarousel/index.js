@@ -4,7 +4,6 @@ import { Container, IconPlay } from './styles';
 
 
 const CardCarousel = (props) => {
-
     return(
         <Container>
             <div className="cont-aux" onClick={props.onclick}>

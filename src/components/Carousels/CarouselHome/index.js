@@ -5,7 +5,7 @@ import { getAllSelect } from '../../../service/clipeService';
 import useWindowDimensions from '../../useWindowDimensions';
 
 
-const CarouselClipe = () => {
+const CarouselHome = (props) => {
 
     const [clips, setClips] = useState([]);
     const { width } = useWindowDimensions();
@@ -41,7 +41,7 @@ const CarouselClipe = () => {
         {
           breakpoint: 650,
           settings: {
-            slidesToShow: 2,
+            slidesToShow: 1.10,
             slidesToScroll: 1,
             initialSlide: 2,
             arrows: false,
@@ -51,7 +51,7 @@ const CarouselClipe = () => {
         {
           breakpoint: 480,
           settings: {
-            slidesToShow: 1.55,
+            slidesToShow: 1.1,
             slidesToScroll: 1,
             initialSlide: 2,
             arrows: false,
@@ -68,11 +68,7 @@ const CarouselClipe = () => {
           {
             clips.length === 0 ? '' : (
               <Slider {...settings} >
-                {clips.map((clip) =>(
-                  <div key={clip.id}>
-                    <img src={clip.urlImageCard} alt={clip.titulo}/>
-                  </div>
-                ))}
+                {props.children}
               </Slider>
             )
           }
@@ -80,4 +76,4 @@ const CarouselClipe = () => {
       </Container>
     );
 }
-export default CarouselClipe;
+export default CarouselHome;

@@ -53,3 +53,7 @@ export const removeCity = (idGrupo, idCidade) => {
     return http.delete(`/api/grupo/${idGrupo}/cidade/${idCidade}`);
 };
   
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+    getAll
+}

@@ -27,4 +27,9 @@ export const updateClipe = (id, data) => {
 export const removeClipe = id => {
     return http.delete(`/api/clipe/${id}`);
 };
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+    getAll
+}
   

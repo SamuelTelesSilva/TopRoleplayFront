@@ -31,4 +31,9 @@ export const updateCity = (id, data) => {
 export const remove = id => {
     return http.delete(`/api/cidade/${id}`);
 };
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+    getAll
+}
   

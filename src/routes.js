@@ -29,7 +29,7 @@ const Routes = () => {
             <Switch>
                 <CustomRoute exact path="/" component={ Home }/>
                 <CustomRoute path="/clipe" component={ Clipe }/>
-                <CustomRoute path="/clipe/:id/:title"  component={ Detalhes }/>
+                <CustomRoute path="/clipe-detalhes/:id/:title"  component={ Detalhes }/>
                 <CustomRoute path="/carousel"  component={ CardCarousel }/>
                 <CustomRoute path="/c"  component={ CarouselVideoPlayer }/>
                 <CustomRoute path="/streamer"  component={ Streamer }/>

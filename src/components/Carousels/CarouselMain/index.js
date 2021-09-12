@@ -92,7 +92,7 @@ const CarouselMain = (props) => {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 1.25,
+    slidesToShow: 1.0,
     slidesToScroll: 1,
     initialSlide: 0,
     className: "carousel",
@@ -100,7 +100,7 @@ const CarouselMain = (props) => {
       {
         breakpoint: 1025,
         settings: {
-          slidesToShow: 1.25,
+          slidesToShow: 1.0,
           slidesToScroll: 3,
           infinite: false,
           dots: false,
@@ -110,7 +110,7 @@ const CarouselMain = (props) => {
       {
         breakpoint: 650,
         settings: {
-          slidesToShow: 2.5,
+          slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 2,
           arrows: false,
@@ -120,7 +120,7 @@ const CarouselMain = (props) => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1.5,
+          slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 2,
           arrows: false,
@@ -148,7 +148,7 @@ const CarouselMain = (props) => {
             urlImgCard={streamer.imgCapa} 
             imgAlt={streamer.streamer}
             key={streamer.id}
-            onclick={() => console.log("adsdasdasdasd")}
+
           />
         </Link>
       ))
@@ -165,7 +165,7 @@ const CarouselMain = (props) => {
             urlImgCard={city.imgCapa} 
             imgAlt={city.nome}
             key={city.id}
-            onclick={() => console.log("adsdasdasdasd")}
+
           />
         </Link>
       ))
@@ -182,7 +182,7 @@ const CarouselMain = (props) => {
             urlImgCard={grupo.imgCapa} 
             imgAlt={grupo.nome}
             key={grupo.id}
-            onclick={() => console.log("adsdasdasdasd")}
+
           />
         </Link>
       ))

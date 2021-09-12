@@ -9,8 +9,7 @@ export const Container = styled.div`
     
         img{
             width: 100%;
-            height: 300px;
-            padding: 5px;
+            height: 400px;
         }
     }
 
@@ -32,9 +31,9 @@ export const Container = styled.div`
             justify-content: center;
 
             img{
-                width: 100%;
-                max-width: 250px;
-                height: 150px;
+                padding: 0px;
+                width: 300px;
+                height: 200px;
                 border-radius: 25px;
             }
         }

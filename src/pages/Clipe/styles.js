@@ -35,6 +35,7 @@ export const Container = styled.div`
         .area-cards{
             max-width: 260px;
             margin: 8px 9px 0px 0px;
+            
         }
     }
 
