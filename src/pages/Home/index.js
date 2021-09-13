@@ -9,7 +9,7 @@ import streamer from '../../service/streamerService';
 import cidade from '../../service/cityService';
 import grupo from '../../service/groupService';
 import { Container } from './styles';
-import CardMain from '../../components/CardMain';
+import CardHome from '../../components/CardHome';
 
 
 const Home = () =>{
@@ -51,6 +51,8 @@ const Home = () =>{
     }, [limit,page]);
 
 
+    console.log(clips)
+
     return(
         <Layout>
             <Container>
@@ -68,11 +70,19 @@ const Home = () =>{
                 <div className="cont-slide-clipes">
                     <CarouselHome>
                         {
-                            clips.map((clip) =>(
-                                <div key={clip.id} className="aux-cont-card">
-                                    <img src={clip.urlImageCard} alt={clip.titulo}/>
-                                </div>
-                            ))
+                            clips.length !== 0 ?
+                                clips.map((clip) =>(
+                                    <div key={clip.id} className="aux-cont-card">
+                                        <CardHome
+                                            id={clip.id}
+                                            imgCard={clip.urlImageCard}
+                                            altImg={clip.titulo}
+                                            clipe={clip.titulo}
+                                            linkCard={`/clipe-detalhes/${clip.id}/${clip.titulo}`}
+                                        />
+                                    </div>
+                                ))
+                            : <div>Carregando...</div>
                         }
                     </CarouselHome>
                 </div>
@@ -87,11 +97,19 @@ const Home = () =>{
                 <div className="cont-slide-streamer">
                     <CarouselHome>
                         {
-                            streamers.map((clip) =>(
-                                <div key={clip.id} className="aux-cont-card">
-                                    <img src={clip.urlImageCard} alt={clip.titulo}/>
-                                </div>
-                            ))
+                            streamers.length !== 0 ?
+                                streamers.map((str) =>(
+                                    <div key={str.id} className="aux-cont-card">
+                                        <CardHome
+                                            id={str.id}
+                                            imgCard={str.urlImageCard}
+                                            altImg={str.nome}
+                                            streamer={str.nome}
+                                            linkCard={`/streamer-detail/${str.id}`}
+                                        />
+                                    </div>
+                                ))
+                            : <div>Carregando...</div>
                         }
                     </CarouselHome>
                 </div>
@@ -107,11 +125,19 @@ const Home = () =>{
                 <div className="cont-slide-grupo">
                     <CarouselHome>
                         {
-                            grupos.map((clip) =>(
-                                <div key={clip.id} className="aux-cont-card">
-                                    <img src={clip.urlImageCard} alt={clip.titulo}/>
-                                </div>
-                            ))
+                            grupos.length !== 0 ?
+                                grupos.map((group) =>(
+                                    <div key={group.id} className="aux-cont-card">
+                                        <CardHome
+                                            id={group.id}
+                                            imgCard={group.urlImageCard}
+                                            altImg={group.nome}
+                                            group={group.nome}
+                                            linkCard={`/grupo-detail/${group.id}`}
+                                        />
+                                    </div>
+                                )) 
+                            : <div>Carregando...</div>
                         }
                     </CarouselHome>
                 </div>
@@ -132,17 +158,19 @@ const Home = () =>{
                 <div className="cont-slide-cidade">
                     <CarouselHome>
                         {
-                            cidades.map((city) =>(
-                                <div key={city.id} className="aux-cont-card">
-                                    <CardMain
-                                        id={city.id}
-                                        imgCard={city.urlImageCard}
-                                        altImg={city.nome}
-                                        group={city.nome}
-                                        linkCard={`/cidade-detail/${city.id}`}
-                                    />
-                                </div>
-                            ))
+                            cidades.length !== 0 ?
+                                cidades.map((city) =>(
+                                    <div key={city.id} className="aux-cont-card">
+                                        <CardHome
+                                            id={city.id}
+                                            imgCard={city.urlImageCard}
+                                            altImg={city.nome}
+                                            city={city.nome}
+                                            linkCard={`/cidade-detail/${city.id}`}
+                                        />
+                                    </div>
+                                ))
+                            : <div>Carregando...</div>
                         }
                     </CarouselHome>
                 </div>
@@ -154,3 +182,6 @@ const Home = () =>{
 export default Home;
 
 
+/**
+ * 
+ */

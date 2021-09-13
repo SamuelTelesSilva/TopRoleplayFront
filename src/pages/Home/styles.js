@@ -5,13 +5,13 @@ export const Container = styled.div`
     width: 100%;
     max-width: 1080px;
     min-height: 970px;
-    border: 1px solid red;
+    margin-top: 16px;
+
 
     .cont-title{
         display: flex;
         justify-content: space-between;
         align-items: center;
-
     }
 
     .cont-ver-todos{
@@ -22,37 +22,23 @@ export const Container = styled.div`
     }
 
     .cont-slide-principal{
-        border: 1px solid white;
         width: 100%;
         min-height: 350px;
+        margin-bottom: 16px;
     }
 
-
-    .cont-slide-clipes{
-        border: 1px solid white;
+    .cont-slide-streamer, .cont-slide-cidade, .cont-slide-clipes{
+        
         width: 100%;
         min-height: 200px;
-    }
-
-    .cont-slide-streamer{
-
-        border: 1px solid white;
-        width: 100%;
-        min-height: 200px;
-    }
-
-    .cont-slide-cidade{
-
-        border: 1px solid white;
-        width: 100%;
-        min-height: 200px;
+        margin-bottom: 8px;
     }
 
     .cont-publicity{
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 1px solid white;
+        
         width: 100%;
         min-height: 200px;
     }
@@ -62,14 +48,15 @@ export const Container = styled.div`
         max-width: 600px;
         height: 120px;
         border: 1px solid red;
-
     }
 
     .cont-slide-grupo{
-
-        border: 1px solid white;
         width: 100%;
         min-height: 200px;
+    }
+
+    .aux-cont-card{
+        padding: 5px;
     }
 
 

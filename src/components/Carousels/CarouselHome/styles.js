@@ -8,14 +8,6 @@ export const Container = styled.div`
         display: flex;
         width: 100%;
         justify-content: center;
-
-        img{
-            width: 300px;
-            height: 200px;
-            padding: 10px;
-            border-radius: 25px;
-            
-        }
     }
 
     .carousel{
@@ -33,13 +25,6 @@ export const Container = styled.div`
             display: flex;
             width: 100%;
             justify-content: center;
-
-            img{
-               width: 300px;
-                height: 200px;
-                padding: 2px;
-                border-radius: 25px;
-            }
         }
     }
 

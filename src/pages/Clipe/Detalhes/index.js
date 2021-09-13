@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
+import { Link } from 'react-router-dom';
 import Button from '../../../components/Button';
-import CarouselClipe from '../../../components/Carousels/CarouselHome';
+import CardHome from '../../../components/CardHome';
+import CarouselHome from '../../../components/Carousels/CarouselHome';
 import Layout from '../../../components/Layout';
 import TitleBar from '../../../components/TitleBar';
-import { getAllSelect, getClipeById } from '../../../service/clipeService';
+import { getAll, getClipeById } from '../../../service/clipeService';
 import { Container } from './styles';
 
 
@@ -21,7 +23,7 @@ const Detalhes = ( props ) => {
             console.log(e);
         });
 
-        getAllSelect().then( response => {
+        getAll(11, 0).then( response => {
             setClips(response.data.content);
         }).catch(e=>{
             console.log(e);
@@ -70,19 +72,32 @@ const Detalhes = ( props ) => {
                         <Button title="Conheça o Streamer"/>
                     </a>
                 </div>
-                <div className="bar-clipe-title">
+                <div className="cont-title">
                     <TitleBar title="Últimos Clipes"/>
+                    <div className="cont-ver-todos">
+                        <Link to="/clipe">
+                            Ver Todos
+                        </Link>
+                    </div>
                 </div>
                 <div className="area-carousel-clip">
-                    <CarouselClipe>
+                    <CarouselHome>
                         {
-                            clips.map((clip) =>(
-                                <div key={clip.id} className="aux-cont-card">
-                                    <img src={clip.urlImageCard} alt={clip.titulo}/>
-                                </div>
-                            ))
+                            clips.length !== 0 ?
+                                clips.map((clip) =>(
+                                    <div key={clip.id} className="aux-cont-card">
+                                        <CardHome
+                                            id={clip.id}
+                                            imgCard={clip.urlImageCard}
+                                            altImg={clip.titulo}
+                                            clipe={clip.titulo}
+                                            linkCard={`/clipe-detalhes/${clip.id}/${clip.titulo}`}
+                                        />
+                                    </div>
+                                ))
+                            : <div>Carregando...</div>
                         }
-                    </CarouselClipe>
+                    </CarouselHome>
                 </div>
             </Container>
         </Layout>

@@ -46,7 +46,23 @@ export const Container = styled.div`
     .area-carousel-clip{
         width: 100%;
     }
+
+    .aux-cont-card{
+        padding: 5px;
+    }
     
+    .cont-title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .cont-ver-todos{
+        a{
+            text-decoration: none;
+            color: white;
+        }
+    }
 
 
     @media screen and (max-width: 640px){ 
