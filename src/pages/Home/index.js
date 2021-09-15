@@ -62,7 +62,7 @@ const Home = () =>{
                 <div className="cont-title">
                     <TitleBar title="Últimos Clipes"/>
                     <div className="cont-ver-todos">
-                        <Link to="/clipe">
+                        <Link to="/clipes">
                             Ver Todos
                         </Link>
                     </div>
@@ -78,7 +78,7 @@ const Home = () =>{
                                             imgCard={clip.urlImageCard}
                                             altImg={clip.titulo}
                                             clipe={clip.titulo}
-                                            linkCard={`/clipe-detalhes/${clip.id}/${clip.titulo}`}
+                                            linkCard={`/clipe/${clip.id}/${clip.titulo}`}
                                         />
                                     </div>
                                 ))
@@ -89,7 +89,7 @@ const Home = () =>{
                 <div className="cont-title">
                     <TitleBar title="Streamers"/>
                     <div className="cont-ver-todos">
-                        <Link to="/streamer">
+                        <Link to="/streamers">
                             Ver Todos
                         </Link>
                     </div>
@@ -105,7 +105,7 @@ const Home = () =>{
                                             imgCard={str.urlImageCard}
                                             altImg={str.nome}
                                             streamer={str.nome}
-                                            linkCard={`/streamer-detail/${str.id}`}
+                                            linkCard={`/streamer/${str.id}`}
                                         />
                                     </div>
                                 ))
@@ -115,9 +115,9 @@ const Home = () =>{
                 </div>
 
                 <div className="cont-title">
-                    <TitleBar title="Policia/Facções"/>
+                    <TitleBar title="Policia/Facção"/>
                     <div className="cont-ver-todos">
-                        <Link to="/grupo">
+                        <Link to="/grupos">
                             Ver Todos
                         </Link>
                     </div>
@@ -133,7 +133,7 @@ const Home = () =>{
                                             imgCard={group.urlImageCard}
                                             altImg={group.nome}
                                             group={group.nome}
-                                            linkCard={`/grupo-detail/${group.id}`}
+                                            linkCard={`/grupo/${group.id}`}
                                         />
                                     </div>
                                 )) 
@@ -150,7 +150,7 @@ const Home = () =>{
                 <div className="cont-title">
                     <TitleBar title="Cidades"/>
                     <div className="cont-ver-todos">
-                        <Link to="/cidade">
+                        <Link to="/cidades">
                             Ver Todos
                         </Link>
                     </div>
@@ -166,7 +166,7 @@ const Home = () =>{
                                             imgCard={city.urlImageCard}
                                             altImg={city.nome}
                                             city={city.nome}
-                                            linkCard={`/cidade-detail/${city.id}`}
+                                            linkCard={`/cidade/${city.id}`}
                                         />
                                     </div>
                                 ))

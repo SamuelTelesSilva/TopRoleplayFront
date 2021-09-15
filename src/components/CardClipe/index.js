@@ -11,7 +11,7 @@ const CardClipe = (props) => {
             <div className="area-content-card">
                 <div className="card-title">
                     <Link 
-                        to={`/clipe-detalhes/${props.clipeID}/${props.title}`} 
+                        to={`/clipe/${props.clipeID}/${props.title}`} 
                         style={{ textDecoration: 'none'}}
                     >
                         {props.title}

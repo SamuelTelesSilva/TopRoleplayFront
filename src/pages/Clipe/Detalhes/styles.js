@@ -4,11 +4,10 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     display: block;
-    margin: 8px 0px 18px 0px;
     color: white;
     width: 1080px;
     height: auto;
-
+    margin: 16px 0px 16px 0px;
 
     .cont-iframe-player{
         display: flex;

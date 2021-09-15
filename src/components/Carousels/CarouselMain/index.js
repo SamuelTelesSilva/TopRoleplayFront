@@ -12,7 +12,7 @@ export const streamersDestaque = [
     streamer: 'Coringa',
     isTwitch: true,
     imgCapa: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400/36852b101728679.5f259b7eed03d.png',
-    link: '/streamer-detail/128'
+    link: '/streamer/128'
   },
 
   {
@@ -20,7 +20,7 @@ export const streamersDestaque = [
     streamer: 'Gaules',
     isTwitch: true,
     imgCapa: 'https://mir-s3-cdn-cf.behance.net/project_modules/fs/d5c84a103630841.5f510d0e75811.jpg',
-    link: '/streamer-detail/124'
+    link: '/streamer/124'
   },
   
   {
@@ -28,7 +28,7 @@ export const streamersDestaque = [
     streamer: 'GabePeixe',
     isTwitch: false,
     imgCapa: 'https://scontent-gru2-2.xx.fbcdn.net/v/t1.6435-9/211403535_342050333950310_1350648798444546705_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=e3f864&_nc_ohc=2J4SLAUvQoIAX9F7HxJ&_nc_ht=scontent-gru2-2.xx&oh=af876de1b0ea225894edbd5ccec569c2&oe=61561D50',
-    link: '/streamer-detail/123'
+    link: '/streamer/123'
   },
 ];
 
@@ -39,21 +39,21 @@ export const CidadeDestaque = [
     id: 1,
     nome: 'Cidade Alta',
     imgCapa: 'https://scontent-gru1-2.xx.fbcdn.net/v/t1.6435-9/159958443_268427684735114_1575449350818617925_n.png?_nc_cat=110&ccb=1-5&_nc_sid=e3f864&_nc_ohc=PY0_Y7_4OuQAX-YBG3D&_nc_ht=scontent-gru1-2.xx&oh=b1e0a7942a5d61d08123be630293bc26&oe=615FFB60',
-    link: '/cidade-detail/28'
+    link: '/cidade/28'
   },
 
   {
     id: 2,
     nome: 'Complexo',
     imgCapa: 'https://gkpb.com.br/wp-content/uploads/2021/08/gkpb-fluxo-gta-rp.jpg',
-    link: '/cidade-detail/27'
+    link: '/cidade/27'
   },
   
   {
     id: 3,
     nome: 'Hype',
     imgCapa: 'https://i.ytimg.com/vi/KaL5v-iI35Q/maxresdefault.jpg',
-    link: '/cidade-detail/22'
+    link: '/cidade/22'
   },
 ];
 
@@ -64,20 +64,20 @@ export const GrupoDestaque = [
     id: 1,
     nome: 'Laranjas',
     imgCapa: 'https://i.ytimg.com/vi/eo_n_-fhOek/maxresdefault.jpg',
-    link: '/grupo-detail/4'
+    link: '/grupo/4'
   },
 
   {
     id: 2,
     nome: 'Grota',
     imgCapa: 'https://gkpb.com.br/wp-content/uploads/2021/08/gkpb-fluxo-gta-rp-696x392.jpg',
-    link: '/grupo-detail/4'
+    link: '/grupo/4'
   },
   {
     id: 3,
     nome: 'Elements',
     imgCapa: 'https://i.ytimg.com/vi/pBobysZQiBk/maxresdefault.jpg',
-    link: '/grupo-detail/4'
+    link: '/grupo/4'
   },
 ];
 

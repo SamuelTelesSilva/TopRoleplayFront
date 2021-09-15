@@ -6,6 +6,7 @@ import TitleBar from '../../components/TitleBar';
 import { getAll, searchByName } from '../../service/groupService';
 import Paginacao from '../../components/Paginacao';
 import CardMain from '../../components/CardMain';
+import NavegacaoEstrutural from '../../components/NavegacaoEstrutural';
 
 
 const Grupo = () => {
@@ -56,6 +57,10 @@ const Grupo = () => {
     return(
         <Layout>
             <Container>
+                <NavegacaoEstrutural
+                    opcao='1'
+                    nameLink1="Grupos"
+                />
                 <div className="bar-group-title-search">
                     <TitleBar title="Principais Grupos"/>
                     <input 
@@ -80,7 +85,7 @@ const Grupo = () => {
                                     imgCard={grupo.urlImageCard}
                                     altImg={grupo.nome}
                                     group={grupo.nome}
-                                    linkCard={`/grupo-detail/${grupo.id}`}
+                                    linkCard={`/grupo/${grupo.id}`}
                                 />
                             </div>
                         ))

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    margin-top: 8px;
     color: white;
     height: auto;
     min-height: 100%;
     width: 1080px;
-    
+    margin: 16px 0px 16px 0px;
+
 
     .bar-clipe-title-search{
         display: flex;

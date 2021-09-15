@@ -6,6 +6,7 @@ import TitleBar from '../../components/TitleBar';
 import { getAll, searchByName } from '../../service/cityService';
 import Paginacao from '../../components/Paginacao';
 import CardMain from '../../components/CardMain';
+import NavegacaoEstrutural from '../../components/NavegacaoEstrutural';
 
 
 const Cidade = () => {
@@ -50,6 +51,10 @@ const Cidade = () => {
     return(
         <Layout>
             <Container>
+                <NavegacaoEstrutural
+                    opcao='1'
+                    nameLink1="Cidades"
+                />
                 <div className="bar-city-title-search">
                     <TitleBar title="Principais Cidades"/>
                     <input 
@@ -74,7 +79,7 @@ const Cidade = () => {
                                     imgCard={city.urlImageCard}
                                     altImg={city.nome}
                                     city={city.nome}
-                                    linkCard={`/cidade-detail/${city.id}`}
+                                    linkCard={`/cidade/${city.id}`}
                                 />
                             </div>
                         ))

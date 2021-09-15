@@ -5,6 +5,7 @@ import Button from '../../../components/Button';
 import CardHome from '../../../components/CardHome';
 import CarouselHome from '../../../components/Carousels/CarouselHome';
 import Layout from '../../../components/Layout';
+import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
 import TitleBar from '../../../components/TitleBar';
 import { getAll, getClipeById } from '../../../service/clipeService';
 import { Container } from './styles';
@@ -40,6 +41,12 @@ const Detalhes = ( props ) => {
     return(
         <Layout enableJustify="true">
             <Container>
+                <NavegacaoEstrutural
+                    opcao='2'
+                    href="/clipes"
+                    nameLink1="Clipes"
+                    nameLink2={clipe.titulo}
+                />
                 <div className="bar-clipe-title">
                     <TitleBar title={clipe.titulo}/>
                 </div>
@@ -75,7 +82,7 @@ const Detalhes = ( props ) => {
                 <div className="cont-title">
                     <TitleBar title="Últimos Clipes"/>
                     <div className="cont-ver-todos">
-                        <Link to="/clipe">
+                        <Link to="/clipes">
                             Ver Todos
                         </Link>
                     </div>
@@ -91,7 +98,7 @@ const Detalhes = ( props ) => {
                                             imgCard={clip.urlImageCard}
                                             altImg={clip.titulo}
                                             clipe={clip.titulo}
-                                            linkCard={`/clipe-detalhes/${clip.id}/${clip.titulo}`}
+                                            linkCard={`/clipe/${clip.id}/${clip.titulo}`}
                                         />
                                     </div>
                                 ))

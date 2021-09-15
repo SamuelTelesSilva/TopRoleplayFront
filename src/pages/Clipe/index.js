@@ -8,6 +8,7 @@ import {
     getAll,
     searchByTitle
 } from '../../service/clipeService';
+import NavegacaoEstrutural from '../../components/NavegacaoEstrutural';
 
 
 
@@ -55,6 +56,11 @@ const Clipe = () => {
     return(
         <Layout>
             <Container>
+                <NavegacaoEstrutural
+                    opcao='1'
+                    href="/"
+                    nameLink1="Clipes"
+                />
                 <div className="bar-clipe-title-search">
                     <TitleBar title="Últimos Clipes"/>
                     <input 

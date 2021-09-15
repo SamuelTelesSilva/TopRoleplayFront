@@ -3,14 +3,20 @@ import Layout from '../../../components/Layout';
 import { Container, HeartEmpty } from './styles';
 import ReactPlayer from 'react-player';
 import TitleBar from '../../../components/TitleBar';
-import { getStreamerById } from '../../../service/streamerService'
+import { getStreamerById, getAll} from '../../../service/streamerService'
 import Heart from '../../../components/Heart';
+import { Link } from 'react-router-dom';
+import CarouselHome from '../../../components/Carousels/CarouselHome';
+import CardHome from '../../../components/CardHome';
+import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
 
 const Detalhes = (props) => {
 
 
     
     const [streamer, setStreamer] = useState([]);
+    const [streamers, setStreamers] = useState([]);
+
 
     useEffect(()=>{
         const { id } = props.match.params;
@@ -20,6 +26,12 @@ const Detalhes = (props) => {
         }).catch(
             (e)=>{console.log(e)}
         );
+
+        getAll(11,0).then( response => {
+            setStreamers(response.data.content);
+        }).catch(e=>{
+            console.log(e);
+        });
         
     },[props.match.params]);
 
@@ -28,7 +40,12 @@ const Detalhes = (props) => {
     return(
         <Layout>
             <Container>
-
+                <NavegacaoEstrutural
+                    opcao='2'
+                    href="/streamers"
+                    nameLink1="Streamers"
+                    nameLink2={streamer.nome}
+                />
                 <div className="area-title-bar">
                     <TitleBar title={streamer.nome}/>
                 </div>
@@ -100,13 +117,40 @@ const Detalhes = (props) => {
                     </div>
                 </div>
                 
-
                 <div className="area-title-bar">
                     <TitleBar title="Seu Streamer Favorito?"/>
                 </div>
 
                 <div className="cont-votar-streamer">
                     <HeartEmpty />
+                </div>
+
+                <div className="cont-title">
+                    <TitleBar title="Streamers"/>
+                    <div className="cont-ver-todos">
+                        <Link to="/streamers">
+                            Ver Todos
+                        </Link>
+                    </div>
+                </div>
+                <div className="cont-slide-streamer">
+                    <CarouselHome>
+                        {
+                            streamers.length !== 0 ?
+                                streamers.map((str) =>(
+                                    <div key={str.id} className="aux-cont-card">
+                                        <CardHome
+                                            id={str.id}
+                                            imgCard={str.urlImageCard}
+                                            altImg={str.nome}
+                                            streamer={str.nome}
+                                            linkCard={`/streamer/${str.id}`}
+                                        />
+                                    </div>
+                                ))
+                            : <div>Carregando...</div>
+                        }
+                    </CarouselHome>
                 </div>
                 
             </Container>

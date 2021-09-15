@@ -91,7 +91,26 @@ export const Container = styled.div`
         display: flex;
         justify-content: center;
         width: 100%;
-        
+        margin-top: 18px;
+    }
+
+
+    .aux-cont-card{
+        padding: 5px;
+    }
+    
+    .cont-title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 60px;
+    }
+    
+    .cont-ver-todos{
+        a{
+            text-decoration: none;
+            color: white;
+        }
     }
 
 

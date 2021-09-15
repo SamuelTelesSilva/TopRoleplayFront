@@ -19,6 +19,7 @@ import CityDetail from './pages/Cidade/Detalhes/index'
 import Grupo from './pages/Grupo';
 import GrupoDetail from './pages/Grupo/Detalhes/index';
 import Home from './pages/Home';
+import NavegacaoEstrutural from './components/NavegacaoEstrutural';
 
 
 const Routes = () => {
@@ -28,24 +29,30 @@ const Routes = () => {
         <>
             <Switch>
                 <CustomRoute exact path="/" component={ Home }/>
-                <CustomRoute path="/clipe" component={ Clipe }/>
-                <CustomRoute path="/clipe-detalhes/:id/:title"  component={ Detalhes }/>
-                <CustomRoute path="/carousel"  component={ CardCarousel }/>
-                <CustomRoute path="/c"  component={ CarouselVideoPlayer }/>
-                <CustomRoute path="/streamer"  component={ Streamer }/>
-                <CustomRoute path="/cidade"  component={ Cidade }/>
-                <CustomRoute path="/grupo"  component={ Grupo }/>
-                <CustomRoute path="/grupo-detail/:id"  component={ GrupoDetail }/>
-                <CustomRoute path="/cidade-detail/:id"  component={ CityDetail }/>
-                <CustomRoute path="/streamer-detail/:id" component={ StreamerDetail }/>
+
+                <CustomRoute path="/clipes" component={ Clipe }/>
+                <CustomRoute path="/clipe/:id/:title"  component={ Detalhes }/>
+
+                <CustomRoute path="/streamers"  component={ Streamer }/>
+                <CustomRoute path="/streamer/:id" component={ StreamerDetail }/>
+
+                <CustomRoute path="/cidades"  component={ Cidade }/>
+                <CustomRoute path="/cidade/:id"  component={ CityDetail }/>
+
+                <CustomRoute path="/grupos"  component={ Grupo }/>
+                <CustomRoute path="/grupo/:id"  component={ GrupoDetail }/>
+                
+                
                 <CustomRoute path="/login" component={ Login } />
                 <CustomRoute path="/register" component={ Cadastro } />
+
                 <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } />
+               
                 <CustomRoute isPrivate path="/dashboard" component={ Dashboard } />
-                <CustomRoute path="/card" component={ CardMain } />
-                <CustomRoute path="/hearts" component={ Heart } />
+
             </Switch>
         </>
     );
 };
 export default Routes;
+//Tenho que deixar o dashboard para ADM

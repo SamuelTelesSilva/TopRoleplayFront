@@ -3,7 +3,6 @@ import {Heart, HeartFill} from '@styled-icons/bootstrap';
 
 export const Container = styled.div`
     display: block;
-    
     margin: 16px 0px 16px 0px;
     color: white;
     height: auto;
@@ -94,7 +93,6 @@ export const Container = styled.div`
         display: flex;
         justify-content: center;
         width: 100%;
-        
     }
 
     .area-content-leader{
@@ -115,6 +113,23 @@ export const Container = styled.div`
         .area-cards-lider, .area-cards-membro{
             max-width: 260px;
             margin: 8px 9px 0px 0px;
+        }
+    }
+
+    .aux-cont-card{
+        padding: 5px;
+    }
+    
+    .cont-title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .cont-ver-todos{
+        a{
+            text-decoration: none;
+            color: white;
         }
     }
 
@@ -175,6 +190,7 @@ export const Container = styled.div`
                 margin: 8px 0px 0px 0px;
             }
         }
+
 
     }
 

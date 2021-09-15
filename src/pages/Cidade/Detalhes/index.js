@@ -2,12 +2,18 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../../../components/Layout';
 import { Container, HeartEmpty } from './styles';
 import TitleBar from '../../../components/TitleBar';
-import { getCityById } from '../../../service/cityService'
+import { getCityById, getAll } from '../../../service/cityService'
 import Heart from '../../../components/Heart';
+import { Link } from 'react-router-dom';
+import CarouselHome from '../../../components/Carousels/CarouselHome';
+import CardHome from '../../../components/CardHome';
+import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
 
 const Detalhes = (props) => {
 
     const [cidade, setCidade] = useState([]);
+    const [cidades, setCidades] = useState([]);
+
 
     useEffect(()=>{
         const { id } = props.match.params;
@@ -17,11 +23,23 @@ const Detalhes = (props) => {
         }).catch(
             (e)=>{console.log(e)}
         );
+
+        getAll(11,0).then( response => {
+            setCidades(response.data.content);
+        }).catch(e=>{
+            console.log(e);
+        });
     },[props.match.params]);
 
     return(
         <Layout>
             <Container>
+                <NavegacaoEstrutural
+                    opcao='2'
+                    href="/cidades"
+                    nameLink1="Cidade"
+                    nameLink2={cidade.nome}
+                />
 
                 <div className="area-title-bar">
                     <TitleBar title={cidade.nome}/>
@@ -84,6 +102,34 @@ const Detalhes = (props) => {
 
                 <div className="cont-votar-city">
                     <HeartEmpty />
+                </div>
+
+                <div className="cont-title">
+                    <TitleBar title="Cidades"/>
+                    <div className="cont-ver-todos">
+                        <Link to="/cidades">
+                            Ver Todos
+                        </Link>
+                    </div>
+                </div>
+                <div className="cont-slide-cidade">
+                    <CarouselHome>
+                        {
+                            cidades.length !== 0 ?
+                                cidades.map((city) =>(
+                                    <div key={city.id} className="aux-cont-card">
+                                        <CardHome
+                                            id={city.id}
+                                            imgCard={city.urlImageCard}
+                                            altImg={city.nome}
+                                            city={city.nome}
+                                            linkCard={`/cidade/${city.id}`}
+                                        />
+                                    </div>
+                                ))
+                            : <div>Carregando...</div>
+                        }
+                    </CarouselHome>
                 </div>
                 
             </Container>

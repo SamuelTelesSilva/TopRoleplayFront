@@ -2,13 +2,19 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../../../components/Layout';
 import { Container, HeartEmpty } from './styles';
 import TitleBar from '../../../components/TitleBar';
-import { getGroupById } from '../../../service/groupService'
+import { getGroupById, getAll } from '../../../service/groupService'
 import Heart from '../../../components/Heart';
 import CardMain from '../../../components/CardMain';
+import { Link } from 'react-router-dom';
+import CarouselHome from '../../../components/Carousels/CarouselHome';
+import CardHome from '../../../components/CardHome';
+import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
 
 const Detalhes = (props) => {
 
     const [grupo, setGrupo] = useState([]);
+    const [grupos, setGrupos] = useState([]);
+
 
     useEffect(()=>{  
         const { id } = props.match.params;
@@ -17,13 +23,24 @@ const Detalhes = (props) => {
         }).catch(
             (e)=>{console.log(e)}
         );
+
+        getAll(11,0).then( response => {
+            setGrupos(response.data.content);
+        }).catch(e=>{
+            console.log(e);
+        });
     
     },[props.match.params]);
     
     return(
         <Layout>
             <Container>
-            
+                <NavegacaoEstrutural
+                    opcao="2"
+                    href="/grupos"
+                    nameLink1="Grupos"
+                    nameLink2={grupo.nome}
+                />
                 <div className="area-title-bar">
                     <TitleBar title={grupo.nome}/>
                 </div>
@@ -75,7 +92,7 @@ const Detalhes = (props) => {
                                     imgCard={streamer.urlImageCard}
                                     altImg={streamer.nome}
                                     group={streamer.nome}
-                                    linkCard={`/streamer-detail/${streamer.id}`}
+                                    linkCard={`/streamer/${streamer.id}`}
                                 />
                             </div>
                         ))
@@ -95,7 +112,7 @@ const Detalhes = (props) => {
                                     imgCard={streamer.urlImageCard}
                                     altImg={streamer.nome}
                                     group={streamer.nome}
-                                    linkCard={`/streamer-detail/${streamer.id}`}
+                                    linkCard={`/streamer/${streamer.id}`}
                                 />
                             </div>
                         ))
@@ -140,6 +157,34 @@ const Detalhes = (props) => {
 
                 <div className="cont-votar-group">
                     <HeartEmpty />
+                </div>
+
+                <div className="cont-title">
+                    <TitleBar title="Policia/Facção"/>
+                    <div className="cont-ver-todos">
+                        <Link to="/grupos">
+                            Ver Todos
+                        </Link>
+                    </div>
+                </div>
+                <div className="cont-slide-grupo">
+                    <CarouselHome>
+                        {
+                            grupos.length !== 0 ?
+                                grupos.map((group) =>(
+                                    <div key={group.id} className="aux-cont-card">
+                                        <CardHome
+                                            id={group.id}
+                                            imgCard={group.urlImageCard}
+                                            altImg={group.nome}
+                                            group={group.nome}
+                                            linkCard={`/grupo/${group.id}`}
+                                        />
+                                    </div>
+                                )) 
+                            : <div>Carregando...</div>
+                        }
+                    </CarouselHome>
                 </div>
             
             </Container>

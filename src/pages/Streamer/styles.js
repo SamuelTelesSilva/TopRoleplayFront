@@ -6,7 +6,7 @@ export const Container = styled.div`
     width: 100%;
     max-width: 1080px;
     min-height: 970px;
-    
+    margin: 16px 0px 16px 0px;
 
     .bar-streamer-title-search{
         display: flex;

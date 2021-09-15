@@ -6,6 +6,7 @@ import TitleBar from '../../components/TitleBar';
 import { getAll, searchByName } from '../../service/streamerService';
 import Paginacao from '../../components/Paginacao';
 import CardMain from '../../components/CardMain';
+import NavegacaoEstrutural from '../../components/NavegacaoEstrutural';
 
 
 const Streamer = () => {
@@ -50,6 +51,10 @@ const Streamer = () => {
     return(
         <Layout>
             <Container>
+                <NavegacaoEstrutural
+                    opcao='1'
+                    nameLink1="Streamers"
+                />
                 <div className="bar-streamer-title-search">
                     <TitleBar title="Principais Streamers"/>
                     <input 
@@ -74,7 +79,7 @@ const Streamer = () => {
                                     imgCard={streamer.urlImageCard}
                                     altImg={streamer.nome}
                                     streamer={streamer.nome}
-                                    linkCard={`/streamer-detail/${streamer.id}`}
+                                    linkCard={`/streamer/${streamer.id}`}
                                 />
                             </div>
                         ))
