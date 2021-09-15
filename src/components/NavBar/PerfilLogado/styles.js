@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SettingsOutline } from '@styled-icons/evaicons-outline/SettingsOutline';
 
 export const Container = styled.div`
     display: flex;
@@ -29,5 +30,22 @@ export const Container = styled.div`
 
     .botao-sair{
         width: 80px;
+        
+    }
+
+    .icon-conf-perfil{
+        display: flex;
+        justify-content: center;
+        width: 50px;
+    }
+`;
+
+
+export const SettingsOutlineIcon = styled(SettingsOutline)`
+    color: white;
+    width: 25px;
+
+    :hover{
+        cursor: pointer;
     }
 `;

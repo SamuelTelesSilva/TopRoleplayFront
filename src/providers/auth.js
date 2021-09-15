@@ -25,7 +25,7 @@ export const AuthProvider = (props) => {
         }
     
         if(isPrivate && !authenticated){
-            return <Redirect to="/login" />
+            return <Redirect to="/" />
         }
     
         return <Route {...rest} />
