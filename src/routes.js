@@ -1,29 +1,30 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Switch } from 'react-router-dom';
 import { useAuth } from './providers/auth';
-
 import Cadastro from './pages/Cadastro';
 import Login from './pages/Login/index';
 import DashboardUsuario from './pages/DashboardPages/DashboardUsuario/index';
 import Dashboard from './pages/DashboardPages/Dashboard';
-import Heart from './components/Heart';
 import Clipe from './pages/Clipe';
-import CardMain from './components/CardMain';
 import Detalhes from './pages/Clipe/Detalhes';
 import Streamer from './pages/Streamer';
-import CardCarousel from './components/Carousels/CardCarousel';
-import CarouselVideoPlayer from './components/Carousels/CarouselVideoPlayer/index'
 import StreamerDetail from './pages/Streamer/Detalhes/index'
 import Cidade from './pages/Cidade';
 import CityDetail from './pages/Cidade/Detalhes/index'
 import Grupo from './pages/Grupo';
 import GrupoDetail from './pages/Grupo/Detalhes/index';
 import Home from './pages/Home';
-import NavegacaoEstrutural from './components/NavegacaoEstrutural';
+
+
 
 
 const Routes = () => {
     const { CustomRoute } = useAuth();
+    const [role, setRole] = useState(localStorage.getItem('role'));
+
+    useEffect(()=>{
+        setRole(localStorage.getItem('role'));
+    },[]);
 
     return(
         <>
@@ -46,9 +47,13 @@ const Routes = () => {
                 <CustomRoute path="/login" component={ Login } />
                 <CustomRoute path="/register" component={ Cadastro } />
 
-                <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } />
-               
-                <CustomRoute isPrivate path="/dashboard" component={ Dashboard } />
+                <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } /> 
+                {
+                    role === 'ROLE_ADMIN' ?
+                        <CustomRoute isPrivate path="/dashboard" component={ Dashboard } /> :
+                    ''  
+                }
+                
 
             </Switch>
         </>

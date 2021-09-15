@@ -44,11 +44,13 @@ const Login = () =>{
                 localStorage.setItem('nome', response.data.nome);
                 localStorage.setItem('urlAvatar', response.data.urlAvatar);
                 localStorage.setItem('senhaUser', response.data.senha);
+                localStorage.setItem('role', response.data.roles[0]);
+            
 
                 api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
                 setAuthenticated(true);
 
-                history.push('/dashboard/usuario');
+                history.push('/');
             }).catch(error => {
                 if(error.request.status === 401){
                     setMsgError('Login e senha invalidos');

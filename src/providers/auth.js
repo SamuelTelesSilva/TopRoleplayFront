@@ -12,7 +12,9 @@ export const AuthProvider = (props) => {
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const [msgModal, setMsgModal] = useState("");
-    
+    const [role, setRole] = useState();
+
+
     /**
      * Função para autenticar as paginas
      * @param {*} param0 
@@ -34,6 +36,7 @@ export const AuthProvider = (props) => {
     //Pegando e verificando o token
     useEffect(() =>{
         const token = localStorage.getItem('token');
+        setRole(localStorage.getItem('role'));
 
         if(token){
             api.defaults.headers.Autorization = `Bearer ${JSON.parse(token)}`;
@@ -57,7 +60,9 @@ export const AuthProvider = (props) => {
             activeModalMsgCreate,
             setActiveModalMsgCreate,
             msgModal,
-            setMsgModal
+            setMsgModal,
+            role, 
+            setRole
             }}>
             {props.children}
         </AuthContext.Provider>

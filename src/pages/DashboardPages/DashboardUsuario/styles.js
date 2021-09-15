@@ -25,7 +25,7 @@ export const Main = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-bottom: 30px;
+    margin: 16px 0px 30px 0px;
 
     .container{
         display: block;

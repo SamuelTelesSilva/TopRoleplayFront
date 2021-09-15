@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { SettingsOutline } from '@styled-icons/evaicons-outline/SettingsOutline';
+import { Create } from '@styled-icons/ionicons-outline/Create';
 
 export const Container = styled.div`
     display: flex;
@@ -42,6 +43,15 @@ export const Container = styled.div`
 
 
 export const SettingsOutlineIcon = styled(SettingsOutline)`
+    color: white;
+    width: 25px;
+
+    :hover{
+        cursor: pointer;
+    }
+`;
+
+export const CreateIcon = styled(Create)`
     color: white;
     width: 25px;
 

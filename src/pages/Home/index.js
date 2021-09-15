@@ -50,9 +50,6 @@ const Home = () =>{
 
     }, [limit,page]);
 
-
-    console.log(clips)
-
     return(
         <Layout>
             <Container>
@@ -142,7 +139,7 @@ const Home = () =>{
                     </CarouselHome>
                 </div>
             
-                <div className="cont-publicity">
+                <div className="cont-publicity" style={{display: 'none'}}>
                     <div className="publicity">
                         Propaganda
                     </div>

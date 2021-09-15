@@ -35,8 +35,6 @@ const Detalhes = (props) => {
         
     },[props.match.params]);
 
-    console.log(streamer)
-
     return(
         <Layout>
             <Container>

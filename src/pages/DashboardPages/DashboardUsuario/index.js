@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import useWindowDimensions  from '../../../components/useWindowDimensions/index';
 import api from '../../../service/api';
 import Button from '../../../components/Button/index';
+import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
 
 
 
@@ -190,6 +191,10 @@ const DashboardUsuario = () => {
             <NavBar/>
             <Main width={width}>
                 <div className="container">
+                    <NavegacaoEstrutural
+                        opcao='1'
+                        nameLink1="Painel do Usuário"
+                    />
                     <ImagePerfil>
                         <div className="img-perfil">
                             <img src={urlImgPerfilSelected} alt={urlImgPerfilSelected}/>
