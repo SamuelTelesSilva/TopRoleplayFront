@@ -14,7 +14,7 @@ export const Input = styled.input`
     width: 100%;
     height: 50px;
     font-size: 16px;
-
+    
     :hover{
         cursor: pointer;
     }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../../../components/Layout';
-import { Container, HeartEmpty } from './styles';
+import { Container, HeartEmpty, HeartFull } from './styles';
 import TitleBar from '../../../components/TitleBar';
-import { getCityById, getAll } from '../../../service/cityService'
+import { getCityById, getAll, updateVotacao } from '../../../service/cityService'
 import Heart from '../../../components/Heart';
 import { Link } from 'react-router-dom';
 import CarouselHome from '../../../components/Carousels/CarouselHome';
@@ -13,7 +13,7 @@ const Detalhes = (props) => {
 
     const [cidade, setCidade] = useState([]);
     const [cidades, setCidades] = useState([]);
-
+    const [ativarIcon, setAtivarIcon] = useState(false);
 
     useEffect(()=>{
         const { id } = props.match.params;
@@ -30,6 +30,23 @@ const Detalhes = (props) => {
             console.log(e);
         });
     },[props.match.params]);
+
+
+    const votacao = () => {
+        const { id } = props.match.params;
+    
+        if(localStorage.getItem('votedCity') === 'true'){
+            alert('Você ja votou')
+        }else{
+            localStorage.setItem('votedCity', true);
+            setAtivarIcon(true)
+            
+            updateVotacao(id).then().catch(e => {
+                console.log(e);
+            });
+        }
+    }
+
 
     return(
         <Layout>
@@ -101,7 +118,12 @@ const Detalhes = (props) => {
                 </div>
 
                 <div className="cont-votar-city">
-                    <HeartEmpty />
+                    <div className="votar-cidade" onClick={votacao}>
+                        {localStorage.getItem('votedCity') === 'true' ?
+                            <HeartFull/> : 
+                            <HeartEmpty/>
+                        }
+                    </div>  
                 </div>
 
                 <div className="cont-title">

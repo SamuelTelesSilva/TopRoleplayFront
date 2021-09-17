@@ -28,6 +28,11 @@ export const updateStreamer = (id, data) => {
     return http.put(`/api/streamer/${id}`, data);
 };
 
+
+export const updateVotacao = (id) => {
+    return http.put(`/api/streamer/votar/${id}`);
+};
+
 export const updateStreamerAssociation = (idNewCity, idCurrentStreamer, idCurrentCity) => {
     return http.put(`/api/streamer/newcity/${idNewCity}/newstreamer/${idCurrentStreamer}/cidade/${idCurrentCity}/streamer/${idCurrentStreamer}`);
 };

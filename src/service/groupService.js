@@ -40,6 +40,9 @@ export const registerCity = (idGrupo, idCidade) => {
     return http.post(`/api/grupo/${idGrupo}/cidade/${idCidade}`);
 };
 
+export const updateVotacao = (id) => {
+    return http.put(`/api/grupo/votar/${id}`);
+};
 
 export const removeLeader = (idGrupo, idLider) => {
     return http.delete(`/api/grupo/${idGrupo}/lider/${idLider}`);

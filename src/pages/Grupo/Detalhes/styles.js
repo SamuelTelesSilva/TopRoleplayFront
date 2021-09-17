@@ -133,6 +133,12 @@ export const Container = styled.div`
         }
     }
 
+    .votar-grupo{
+        :hover{
+            cursor: pointer;
+        }
+    }
+
 
 
     @media screen and (max-width: 640px){ 

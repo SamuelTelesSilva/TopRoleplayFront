@@ -28,6 +28,10 @@ export const updateCity = (id, data) => {
     return http.put(`/api/cidade/${id}`, data);
 };
 
+export const updateVotacao = (id) => {
+    return http.put(`/api/cidade/votar/${id}`);
+};
+
 export const remove = id => {
     return http.delete(`/api/cidade/${id}`);
 };

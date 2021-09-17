@@ -1,9 +1,9 @@
-import React,{useState, useEffect} from 'react';
+import React,{ useState, useEffect } from 'react';
 import Layout from '../../../components/Layout';
-import { Container, HeartEmpty } from './styles';
+import { Container, HeartEmpty, HeartFull } from './styles';
 import ReactPlayer from 'react-player';
 import TitleBar from '../../../components/TitleBar';
-import { getStreamerById, getAll} from '../../../service/streamerService'
+import { getStreamerById, getAll, updateVotacao} from '../../../service/streamerService'
 import Heart from '../../../components/Heart';
 import { Link } from 'react-router-dom';
 import CarouselHome from '../../../components/Carousels/CarouselHome';
@@ -11,12 +11,9 @@ import CardHome from '../../../components/CardHome';
 import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
 
 const Detalhes = (props) => {
-
-
-    
     const [streamer, setStreamer] = useState([]);
     const [streamers, setStreamers] = useState([]);
-
+    const [ativarIcon, setAtivarIcon] = useState(false);
 
     useEffect(()=>{
         const { id } = props.match.params;
@@ -35,6 +32,22 @@ const Detalhes = (props) => {
         
     },[props.match.params]);
 
+
+    const votacao = () => {
+        const { id } = props.match.params;
+    
+        if(localStorage.getItem('voted') === 'true'){
+            alert('Você ja votou')
+        }else{
+            localStorage.setItem('voted', true);
+            setAtivarIcon(true)
+            
+            updateVotacao(id).then().catch(e => {
+                console.log(e);
+            });
+        }
+    }
+    
     return(
         <Layout>
             <Container>
@@ -120,7 +133,12 @@ const Detalhes = (props) => {
                 </div>
 
                 <div className="cont-votar-streamer">
-                    <HeartEmpty />
+                    <div className="votar-streamer" onClick={votacao}>
+                        {localStorage.getItem('voted') === 'true' ?
+                            <HeartFull/> : 
+                            <HeartEmpty/>
+                        }
+                    </div>            
                 </div>
 
                 <div className="cont-title">

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../../../components/Layout';
-import { Container, HeartEmpty } from './styles';
+import { Container, HeartEmpty, HeartFull } from './styles';
 import TitleBar from '../../../components/TitleBar';
-import { getGroupById, getAll } from '../../../service/groupService'
+import { getGroupById, getAll, updateVotacao } from '../../../service/groupService'
 import Heart from '../../../components/Heart';
 import CardMain from '../../../components/CardMain';
 import { Link } from 'react-router-dom';
@@ -14,7 +14,7 @@ const Detalhes = (props) => {
 
     const [grupo, setGrupo] = useState([]);
     const [grupos, setGrupos] = useState([]);
-
+    const [ativarIcon, setAtivarIcon] = useState(false);
 
     useEffect(()=>{  
         const { id } = props.match.params;
@@ -31,6 +31,22 @@ const Detalhes = (props) => {
         });
     
     },[props.match.params]);
+
+
+    const votacao = () => {
+        const { id } = props.match.params;
+    
+        if(localStorage.getItem('votedGroup') === 'true'){
+            alert('Você ja votou')
+        }else{
+            localStorage.setItem('votedGroup', true);
+            setAtivarIcon(true)
+            
+            updateVotacao(id).then().catch(e => {
+                console.log(e);
+            });
+        }
+    }
     
     return(
         <Layout>
@@ -156,7 +172,12 @@ const Detalhes = (props) => {
                 </div>
 
                 <div className="cont-votar-group">
-                    <HeartEmpty />
+                    <div className="votar-grupo" onClick={votacao}>
+                        {localStorage.getItem('votedGroup') === 'true' ?
+                            <HeartFull/> : 
+                            <HeartEmpty/>
+                        }
+                    </div>
                 </div>
 
                 <div className="cont-title">

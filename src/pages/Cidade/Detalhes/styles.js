@@ -113,6 +113,12 @@ export const Container = styled.div`
         }
     }
 
+    .votar-cidade{
+        :hover{
+            cursor: pointer;
+        }
+    }
+
 
     @media screen and (max-width: 640px){ 
         width: 100%;

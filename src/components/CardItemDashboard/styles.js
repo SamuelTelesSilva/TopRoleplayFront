@@ -23,9 +23,10 @@ export const AreaImgCard = styled.div`
     .area-img{
         img{
             max-width: 130px;
-            height: auto;
+            height: 130px;
             border-radius: 50%;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            
         }
     }
 `;
