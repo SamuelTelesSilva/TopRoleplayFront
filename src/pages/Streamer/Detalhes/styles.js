@@ -99,7 +99,6 @@ export const Container = styled.div`
         justify-content: center;
         width: 100%;
         margin-top: 18px;
-        border: 1px solid red;
     }
 
     .votar-streamer{

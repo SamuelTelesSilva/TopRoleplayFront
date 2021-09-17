@@ -13,11 +13,12 @@ import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
 const Detalhes = (props) => {
     const [streamer, setStreamer] = useState([]);
     const [streamers, setStreamers] = useState([]);
+    const [streamerId, setStreamerId] = useState();
     const [ativarIcon, setAtivarIcon] = useState(false);
 
     useEffect(()=>{
         const { id } = props.match.params;
-        
+        setStreamerId(id);
         getStreamerById(id).then((response)=>{
             setStreamer(response.data)
         }).catch(
@@ -34,15 +35,12 @@ const Detalhes = (props) => {
 
 
     const votacao = () => {
-        const { id } = props.match.params;
-    
-        if(localStorage.getItem('voted') === 'true'){
+        if(localStorage.getItem('votedStreamer' + streamerId) === 'true'){
             alert('Você ja votou')
         }else{
-            localStorage.setItem('voted', true);
+            localStorage.setItem('votedStreamer' + streamerId, true);
             setAtivarIcon(true)
-            
-            updateVotacao(id).then().catch(e => {
+            updateVotacao(streamerId).then().catch(e => {
                 console.log(e);
             });
         }
@@ -134,7 +132,7 @@ const Detalhes = (props) => {
 
                 <div className="cont-votar-streamer">
                     <div className="votar-streamer" onClick={votacao}>
-                        {localStorage.getItem('voted') === 'true' ?
+                        {localStorage.getItem('votedStreamer'+streamerId) === 'true' ?
                             <HeartFull/> : 
                             <HeartEmpty/>
                         }

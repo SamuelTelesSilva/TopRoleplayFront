@@ -12,12 +12,14 @@ import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
 const Detalhes = (props) => {
 
     const [cidade, setCidade] = useState([]);
+    const [cidadeId, setCidadeId] = useState();
     const [cidades, setCidades] = useState([]);
     const [ativarIcon, setAtivarIcon] = useState(false);
 
     useEffect(()=>{
         const { id } = props.match.params;
-        
+        setCidadeId(id);
+
         getCityById(id).then((response)=>{
             setCidade(response.data)
         }).catch(
@@ -33,15 +35,12 @@ const Detalhes = (props) => {
 
 
     const votacao = () => {
-        const { id } = props.match.params;
-    
-        if(localStorage.getItem('votedCity') === 'true'){
+        if(localStorage.getItem('votedCity' + cidadeId) === 'true'){
             alert('Você ja votou')
         }else{
-            localStorage.setItem('votedCity', true);
+            localStorage.setItem('votedCity' + cidadeId, true);
             setAtivarIcon(true)
-            
-            updateVotacao(id).then().catch(e => {
+            updateVotacao(cidadeId).then().catch(e => {
                 console.log(e);
             });
         }
@@ -119,7 +118,7 @@ const Detalhes = (props) => {
 
                 <div className="cont-votar-city">
                     <div className="votar-cidade" onClick={votacao}>
-                        {localStorage.getItem('votedCity') === 'true' ?
+                        {localStorage.getItem('votedCity'+cidadeId) === 'true' ?
                             <HeartFull/> : 
                             <HeartEmpty/>
                         }

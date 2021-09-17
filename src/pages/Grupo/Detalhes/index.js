@@ -13,11 +13,13 @@ import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
 const Detalhes = (props) => {
 
     const [grupo, setGrupo] = useState([]);
+    const [grupoId, setGrupoId] = useState();
     const [grupos, setGrupos] = useState([]);
     const [ativarIcon, setAtivarIcon] = useState(false);
 
     useEffect(()=>{  
         const { id } = props.match.params;
+        setGrupoId(id);
         getGroupById(id).then((response)=>{
             setGrupo(response.data[0])
         }).catch(
@@ -34,19 +36,17 @@ const Detalhes = (props) => {
 
 
     const votacao = () => {
-        const { id } = props.match.params;
-    
-        if(localStorage.getItem('votedGroup') === 'true'){
+        if(localStorage.getItem('votedGroup' + grupoId) === 'true'){
             alert('Você ja votou')
         }else{
-            localStorage.setItem('votedGroup', true);
+            localStorage.setItem('votedGroup' + grupoId, true);
             setAtivarIcon(true)
-            
-            updateVotacao(id).then().catch(e => {
+            updateVotacao(grupoId).then().catch(e => {
                 console.log(e);
             });
         }
     }
+
     
     return(
         <Layout>
@@ -173,7 +173,7 @@ const Detalhes = (props) => {
 
                 <div className="cont-votar-group">
                     <div className="votar-grupo" onClick={votacao}>
-                        {localStorage.getItem('votedGroup') === 'true' ?
+                        {localStorage.getItem('votedGroup'+grupoId) === 'true' ?
                             <HeartFull/> : 
                             <HeartEmpty/>
                         }
