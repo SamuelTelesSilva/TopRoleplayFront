@@ -97,8 +97,9 @@ export const Container = styled.div`
     .cont-votar-streamer{
         display: flex;
         justify-content: center;
+        align-items: center;
         width: 100%;
-        margin-top: 18px;
+        height: 200px;
     }
 
     .votar-streamer{
@@ -111,7 +112,6 @@ export const Container = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 60px;
     }
 
     .cont-ver-todos{

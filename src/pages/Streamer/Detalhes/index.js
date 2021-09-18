@@ -14,7 +14,6 @@ const Detalhes = (props) => {
     const [streamer, setStreamer] = useState([]);
     const [streamers, setStreamers] = useState([]);
     const [streamerId, setStreamerId] = useState();
-    const [ativarIcon, setAtivarIcon] = useState(false);
 
     useEffect(()=>{
         const { id } = props.match.params;
@@ -30,22 +29,39 @@ const Detalhes = (props) => {
         }).catch(e=>{
             console.log(e);
         });
-        
+
     },[props.match.params]);
 
 
-    const votacao = () => {
+    //Precisa ser melhorado, colocando todos os voted dentro de uma lista
+    const addStreamerFavorito = () => {
+        let myStreamer = [];
+
+        if(localStorage.getItem('streamers')){
+            myStreamer = JSON.parse(localStorage.getItem('streamers')); 
+        }
+
         if(localStorage.getItem('votedStreamer' + streamerId) === 'true'){
             alert('Você ja votou')
         }else{
             localStorage.setItem('votedStreamer' + streamerId, true);
-            setAtivarIcon(true)
-            updateVotacao(streamerId).then().catch(e => {
+
+            updateVotacao(streamerId).then(response =>{
+                response.status === 200 ? 
+                    window.location.reload() : alert('Ocorreu um erro')
+            }).catch(e => {
                 console.log(e);
             });
+
+            myStreamer.push({
+                'id' : streamerId,
+                'nome': streamer.nome,
+                'imgCard': streamer.urlImageCard,
+            });
+            localStorage.setItem('streamers', JSON.stringify(myStreamer));  
         }
     }
-    
+
     return(
         <Layout>
             <Container>
@@ -131,8 +147,8 @@ const Detalhes = (props) => {
                 </div>
 
                 <div className="cont-votar-streamer">
-                    <div className="votar-streamer" onClick={votacao}>
-                        {localStorage.getItem('votedStreamer'+streamerId) === 'true' ?
+                    <div className="votar-streamer" onClick={addStreamerFavorito}>
+                        {localStorage.getItem('votedStreamer' + streamerId) === 'true' ?
                             <HeartFull/> : 
                             <HeartEmpty/>
                         }

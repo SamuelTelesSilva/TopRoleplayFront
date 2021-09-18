@@ -36,7 +36,7 @@ const Detalhes = (props) => {
 
     const votacao = () => {
         if(localStorage.getItem('votedCity' + cidadeId) === 'true'){
-            alert('Você ja votou')
+            alert('Já está como favorito')
         }else{
             localStorage.setItem('votedCity' + cidadeId, true);
             setAtivarIcon(true)
