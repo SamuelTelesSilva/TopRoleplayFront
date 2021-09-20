@@ -10,14 +10,20 @@ import CarouselHome from '../../../components/Carousels/CarouselHome';
 import CardHome from '../../../components/CardHome';
 import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
 
-const Detalhes = (props) => {
+const Detalhes = ( props ) => {
+
     const [streamer, setStreamer] = useState([]);
     const [streamers, setStreamers] = useState([]);
     const [streamerId, setStreamerId] = useState();
+    const [dadosStorageIcons, setDadosStorageIcons] = useState([]);
+
 
     useEffect(()=>{
+
+        //Pegando o id na URL
         const { id } = props.match.params;
         setStreamerId(id);
+
         getStreamerById(id).then((response)=>{
             setStreamer(response.data)
         }).catch(
@@ -30,23 +36,38 @@ const Detalhes = (props) => {
             console.log(e);
         });
 
+        //Pegando os dados guardados no localStorage
+        //Método para ativar o icone
+        const capturarDadosLocalStorage = () => {
+            let ativarIcon;
+
+            if(localStorage.getItem('streamers')){
+                ativarIcon = JSON.parse(localStorage.getItem('streamers')); 
+                setDadosStorageIcons(ativarIcon)
+            }
+        }
+        capturarDadosLocalStorage();
+
     },[props.match.params]);
 
 
-    //Precisa ser melhorado, colocando todos os voted dentro de uma lista
+    //Filtrando os dados e comparando com o id da pagina
+    let newStorageIcons = dadosStorageIcons.filter(
+        objeto => objeto.id === streamerId
+    );
+    
+    //Método para add o favorito salvando no localStorage
     const addStreamerFavorito = () => {
         let myStreamer = [];
 
         if(localStorage.getItem('streamers')){
             myStreamer = JSON.parse(localStorage.getItem('streamers')); 
         }
-
-        if(localStorage.getItem('votedStreamer' + streamerId) === 'true'){
-            alert('Você ja votou')
+        if(newStorageIcons.length > 0){
+            alert('Você já votou')
         }else{
-            localStorage.setItem('votedStreamer' + streamerId, true);
 
-            updateVotacao(streamerId).then(response =>{
+            updateVotacao(streamerId).then( response =>{
                 response.status === 200 ? 
                     window.location.reload() : alert('Ocorreu um erro')
             }).catch(e => {
@@ -58,6 +79,7 @@ const Detalhes = (props) => {
                 'nome': streamer.nome,
                 'imgCard': streamer.urlImageCard,
             });
+
             localStorage.setItem('streamers', JSON.stringify(myStreamer));  
         }
     }
@@ -148,10 +170,10 @@ const Detalhes = (props) => {
 
                 <div className="cont-votar-streamer">
                     <div className="votar-streamer" onClick={addStreamerFavorito}>
-                        {localStorage.getItem('votedStreamer' + streamerId) === 'true' ?
+                        { newStorageIcons.length > 0 ?
                             <HeartFull/> : 
                             <HeartEmpty/>
-                        }
+                        }    
                     </div>            
                 </div>
 
