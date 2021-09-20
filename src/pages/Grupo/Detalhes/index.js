@@ -15,11 +15,13 @@ const Detalhes = (props) => {
     const [grupo, setGrupo] = useState([]);
     const [grupoId, setGrupoId] = useState();
     const [grupos, setGrupos] = useState([]);
-    const [ativarIcon, setAtivarIcon] = useState(false);
+    const [dadosStorageIcons, setDadosStorageIcons] = useState([]);
+
 
     useEffect(()=>{  
         const { id } = props.match.params;
         setGrupoId(id);
+
         getGroupById(id).then((response)=>{
             setGrupo(response.data[0])
         }).catch(
@@ -31,19 +33,47 @@ const Detalhes = (props) => {
         }).catch(e=>{
             console.log(e);
         });
+
+        const dadosLocalStorage = () => {
+            let ativarIcon;
+
+            if(localStorage.getItem('group')){
+                ativarIcon = JSON.parse(localStorage.getItem('group')); 
+                setDadosStorageIcons(ativarIcon)
+            }
+        }
+        dadosLocalStorage();
     
     },[props.match.params]);
 
+    let newStorageIcons = dadosStorageIcons.filter(
+        objeto => objeto.id === grupoId
+    );
 
-    const votacao = () => {
-        if(localStorage.getItem('votedGroup' + grupoId) === 'true'){
-            alert('Você ja votou')
+    const addCidadeFavorita = () => {
+        let myGroup = [];
+
+        if(localStorage.getItem('group')){
+            myGroup = JSON.parse(localStorage.getItem('group')); 
+        }
+        if(newStorageIcons.length > 0){
+            alert('Você já votou')
         }else{
-            localStorage.setItem('votedGroup' + grupoId, true);
-            setAtivarIcon(true)
-            updateVotacao(grupoId).then().catch(e => {
+
+            updateVotacao(grupoId).then( response =>{
+                response.status === 200 ? 
+                    window.location.reload() : alert('Ocorreu um erro')
+            }).catch(e => {
                 console.log(e);
             });
+
+            myGroup.push({
+                'id' : grupoId,
+                'nome': grupo.nome,
+                'imgCard': grupo.urlImageCard,
+            });
+
+            localStorage.setItem('group', JSON.stringify(myGroup));  
         }
     }
 
@@ -172,8 +202,8 @@ const Detalhes = (props) => {
                 </div>
 
                 <div className="cont-votar-group">
-                    <div className="votar-grupo" onClick={votacao}>
-                        {localStorage.getItem('votedGroup'+grupoId) === 'true' ?
+                    <div className="votar-grupo" onClick={addCidadeFavorita}>
+                        { newStorageIcons.length > 0 ?
                             <HeartFull/> : 
                             <HeartEmpty/>
                         }

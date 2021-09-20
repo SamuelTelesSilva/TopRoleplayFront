@@ -14,9 +14,10 @@ const Detalhes = (props) => {
     const [cidade, setCidade] = useState([]);
     const [cidadeId, setCidadeId] = useState();
     const [cidades, setCidades] = useState([]);
-    const [ativarIcon, setAtivarIcon] = useState(false);
+    const [dadosStorageIcons, setDadosStorageIcons] = useState([]);
 
     useEffect(()=>{
+
         const { id } = props.match.params;
         setCidadeId(id);
 
@@ -31,18 +32,47 @@ const Detalhes = (props) => {
         }).catch(e=>{
             console.log(e);
         });
+
+        const dadosLocalStorage = () => {
+            let ativarIcon;
+
+            if(localStorage.getItem('city')){
+                ativarIcon = JSON.parse(localStorage.getItem('city')); 
+                setDadosStorageIcons(ativarIcon)
+            }
+        }
+        dadosLocalStorage();
+
     },[props.match.params]);
 
+    let newStorageIcons = dadosStorageIcons.filter(
+        objeto => objeto.id === cidadeId
+    );
 
-    const votacao = () => {
-        if(localStorage.getItem('votedCity' + cidadeId) === 'true'){
-            alert('Já está como favorito')
+    const addCidadeFavorita = () => {
+        let myCity = [];
+
+        if(localStorage.getItem('city')){
+            myCity = JSON.parse(localStorage.getItem('city')); 
+        }
+        if(newStorageIcons.length > 0){
+            alert('Você já votou')
         }else{
-            localStorage.setItem('votedCity' + cidadeId, true);
-            setAtivarIcon(true)
-            updateVotacao(cidadeId).then().catch(e => {
+
+            updateVotacao(cidadeId).then( response =>{
+                response.status === 200 ? 
+                    window.location.reload() : alert('Ocorreu um erro')
+            }).catch(e => {
                 console.log(e);
             });
+
+            myCity.push({
+                'id' : cidadeId,
+                'nome': cidade.nome,
+                'imgCard': cidade.urlImageCard,
+            });
+
+            localStorage.setItem('city', JSON.stringify(myCity));  
         }
     }
 
@@ -117,8 +147,8 @@ const Detalhes = (props) => {
                 </div>
 
                 <div className="cont-votar-city">
-                    <div className="votar-cidade" onClick={votacao}>
-                        {localStorage.getItem('votedCity'+cidadeId) === 'true' ?
+                    <div className="votar-cidade" onClick={ addCidadeFavorita }>
+                        { newStorageIcons.length > 0 ?
                             <HeartFull/> : 
                             <HeartEmpty/>
                         }

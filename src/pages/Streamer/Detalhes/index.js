@@ -38,7 +38,7 @@ const Detalhes = ( props ) => {
 
         //Pegando os dados guardados no localStorage
         //Método para ativar o icone
-        const capturarDadosLocalStorage = () => {
+        const dadosLocalStorage = () => {
             let ativarIcon;
 
             if(localStorage.getItem('streamers')){
@@ -46,7 +46,7 @@ const Detalhes = ( props ) => {
                 setDadosStorageIcons(ativarIcon)
             }
         }
-        capturarDadosLocalStorage();
+        dadosLocalStorage();
 
     },[props.match.params]);
 
