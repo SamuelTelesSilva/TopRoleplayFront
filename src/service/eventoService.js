@@ -8,6 +8,10 @@ export const getAllSelect = () => {
     return http.get(`/api/playervideo?sort=id,desc`);
 };
 
+export const getEventoById = (id) => {
+    return http.get(`/api/playervideo/${id}`)
+}
+
 export const searchByTitle = (limit, paginaAtual, titulo) => {
     return http.get(`/api/playervideo/search/${titulo}?size=${limit}&page=${paginaAtual}`);
 };

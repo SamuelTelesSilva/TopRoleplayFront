@@ -15,7 +15,7 @@ import Grupo from './pages/Grupo';
 import GrupoDetail from './pages/Grupo/Detalhes/index';
 import Home from './pages/Home';
 import Evento from './pages/Evento';
-
+import EventoDetail from './pages/Evento/Detalhes/index';
 
 
 
@@ -47,11 +47,14 @@ const Routes = () => {
                 <CustomRoute path="/grupo/:id"  component={ GrupoDetail }/>
                 
                 <CustomRoute path="/evento" component={ Evento } />
+                <CustomRoute path="/detail/:id" component={ EventoDetail } />
                 
                 <CustomRoute path="/login" component={ Login } />
                 <CustomRoute path="/register" component={ Cadastro } />
 
                 <CustomRoute isPrivate path="/dashboard/usuario" component={ DashboardUsuario } /> 
+
+
                 {
                     role === 'ROLE_ADMIN' ?
                         <CustomRoute isPrivate path="/dashboard" component={ Dashboard } /> :
