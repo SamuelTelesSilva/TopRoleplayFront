@@ -14,6 +14,7 @@ import CityDetail from './pages/Cidade/Detalhes/index'
 import Grupo from './pages/Grupo';
 import GrupoDetail from './pages/Grupo/Detalhes/index';
 import Home from './pages/Home';
+import Evento from './pages/Evento';
 
 
 
@@ -24,6 +25,8 @@ const Routes = () => {
 
     useEffect(()=>{
         setRole(localStorage.getItem('role'));
+
+        //colocar aqui o role que esta  abaixo
     },[]);
 
     return(
@@ -43,6 +46,7 @@ const Routes = () => {
                 <CustomRoute path="/grupos"  component={ Grupo }/>
                 <CustomRoute path="/grupo/:id"  component={ GrupoDetail }/>
                 
+                <CustomRoute path="/evento" component={ Evento } />
                 
                 <CustomRoute path="/login" component={ Login } />
                 <CustomRoute path="/register" component={ Cadastro } />

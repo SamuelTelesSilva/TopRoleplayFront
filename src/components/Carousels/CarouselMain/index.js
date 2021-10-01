@@ -154,6 +154,7 @@ const CarouselMain = (props) => {
       ))
     );
   }
+
   if(props.page === "cidade"){
     element = (
       CidadeDestaque.map((city) =>(
@@ -171,6 +172,7 @@ const CarouselMain = (props) => {
       ))
     );
   }
+
   if(props.page === "grupo"){
     element = (
       GrupoDestaque.map((grupo) =>(
@@ -182,6 +184,24 @@ const CarouselMain = (props) => {
             urlImgCard={grupo.imgCapa} 
             imgAlt={grupo.nome}
             key={grupo.id}
+
+          />
+        </Link>
+      ))
+    );
+  }
+
+  if(props.page === "evento"){
+    element = (
+      streamersDestaque.map((streamer) =>(
+        <Link
+          to={streamer.link}
+          key={streamer.id}
+        >
+          <CardCarousel 
+            urlImgCard={streamer.imgCapa} 
+            imgAlt={streamer.streamer}
+            key={streamer.id}
 
           />
         </Link>
