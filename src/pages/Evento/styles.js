@@ -16,6 +16,10 @@ export const Container = styled.div`
         border: 2px solid white;
         border-radius: 5px;
         margin-top: 16px;
+
+        a{
+            width: 100%;
+        }
     }
 
     .cont-card-button{
@@ -28,7 +32,8 @@ export const Container = styled.div`
         justify-content: center;
         align-items: center;
         z-index: 1;
-    
+        
+        
         img{
             width: 100%;
             height: 400px;

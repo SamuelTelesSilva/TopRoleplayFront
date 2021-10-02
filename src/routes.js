@@ -46,8 +46,8 @@ const Routes = () => {
                 <CustomRoute path="/grupos"  component={ Grupo }/>
                 <CustomRoute path="/grupo/:id"  component={ GrupoDetail }/>
                 
-                <CustomRoute path="/evento" component={ Evento } />
-                <CustomRoute path="/detail/:id" component={ EventoDetail } />
+                <CustomRoute path="/eventos" component={ Evento } />
+                <CustomRoute path="/detail/:id/:title" component={ EventoDetail } />
                 
                 <CustomRoute path="/login" component={ Login } />
                 <CustomRoute path="/register" component={ Cadastro } />

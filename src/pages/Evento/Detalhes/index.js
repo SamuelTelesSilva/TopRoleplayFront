@@ -5,12 +5,16 @@ import Button from '../../../components/Button/index';
 import Layout from '../../../components/Layout';
 import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
 import TitleBar from '../../../components/TitleBar';
+import CarouselHome from '../../../components/Carousels/CarouselHome/index'
 import { getEventoById } from '../../../service/eventoService';
 import { Container } from './styles';
+import CardHome from '../../../components/CardHome';
 
 const Detalhes = (props) => {
 
     const [evento, setEvento] = useState([]);
+    const [streamersLadoA, setStreamersLadoA] = useState([]);
+    const [streamersLadoB, setStreamersLadoB] = useState([]);
     const [telasAtivas, setTelasAtivas] = useState(2);
     const parent = "localhost"; //www.example.com tutorial salvo nos favoritos, 
 
@@ -22,6 +26,8 @@ const Detalhes = (props) => {
 
         getEventoById(id).then(response =>{
             setEvento(response.data);
+            setStreamersLadoA(response.data.streamersLadoA);
+            setStreamersLadoB(response.data.streamersLadoB)
         }).catch(e =>{
             console.log(e)
         })
@@ -64,12 +70,14 @@ const Detalhes = (props) => {
         }
     }
 
+    console.log(streamersLadoA)
 
     return(
         <Layout>
             <Container>
                 <NavegacaoEstrutural
                     opcao='2'
+                    href="/eventos"
                     nameLink1="Eventos"
                     nameLink2="Detalhes do Evento"
                 />
@@ -128,9 +136,59 @@ const Detalhes = (props) => {
                         />
                     </div>
                 </div>
+                <div className="area-title-bar">
+                    <TitleBar title="Equipe do lado A"/>
+                </div>
+                <div className="cont-slide-ladoA">
+                    <CarouselHome>
+                        {
+                            streamersLadoA.length !== 0 ?
+                            streamersLadoA.map((str) =>(
+                                <div key={str.id} className="aux-cont-card">
+                                    <CardHome
+                                        id={str.id}
+                                        imgCard={str.urlImageCard}
+                                        altImg={str.nome}
+                                        streamer={str.nome}
+                                        linkCard={`/streamer/${str.id}`}
+                                    />
+                                </div>
+                            ))
+                            : <div>Carregando...</div>
+                        }
+                    </CarouselHome>
+                </div>
+
+                <div className="area-title-bar">
+                    <TitleBar title="Equipe do lado B"/>
+                </div>
+                <div className="cont-slide-ladoA">
+                    <CarouselHome>
+                        {
+                            streamersLadoB.length !== 0 ?
+                            streamersLadoB.map((str) =>(
+                                <div key={str.id} className="aux-cont-card">
+                                    <CardHome
+                                        id={str.id}
+                                        imgCard={str.urlImageCard}
+                                        altImg={str.nome}
+                                        streamer={str.nome}
+                                        linkCard={`/streamer/${str.id}`}
+                                    />
+                                </div>
+                            ))
+                            : <div>Carregando...</div>
+                        }
+                    </CarouselHome>
+                </div>
                   
             </Container>
         </Layout>
     );
 }
 export default Detalhes;
+
+
+/*
+
+*/

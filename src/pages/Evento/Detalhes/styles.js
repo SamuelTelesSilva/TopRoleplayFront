@@ -8,8 +8,6 @@ export const Container = styled.div`
     min-height: 970px;
     margin: 16px 0px 16px 0px;
     
-
-
     .cont-player-react{
         display: flex;
         justify-content: center;
@@ -55,13 +53,23 @@ export const Container = styled.div`
     .cont-button-telas{
         display: flex;
         width: 100%;
-        
         justify-content: center;
         margin-top: 24px;
     }
 
     .button-telas{
         width: 250px;
+    }
+
+    .cont-slide-ladoA{
+        border: 1px solid red;
+        width: 100%;
+        min-height: 200px;
+        margin-bottom: 8px;
+    }
+
+    .aux-cont-card{
+        padding: 5px;
     }
 
     @media screen and (max-width: 1026px){ 
@@ -82,11 +90,9 @@ export const Container = styled.div`
             margin-right: 0px;
         }
 
-
         .cont-versus{
             margin: 0px;
         }
-
 
         .cont-chat-twitch{
             display: flex;
@@ -97,11 +103,9 @@ export const Container = styled.div`
         .chat-twitch{
             width: 100%;
         }
-
-
     }
 
-
-
-
+    @media screen and (min-width: 1023px) and (max-width: 1026px){ 
+        max-width: 1000px;
+    }
 `;
