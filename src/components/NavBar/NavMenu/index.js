@@ -8,10 +8,7 @@ const NavMenu = () => {
             <nav className="nav">
                 <ul>
                     <li>
-                        <a href="/">Cadastrar-se</a>
-                    </li>
-                    <li>
-                        <a href="/">Login</a>
+                        <a href="/login">Login</a>
                     </li>
                 </ul>
             </nav>

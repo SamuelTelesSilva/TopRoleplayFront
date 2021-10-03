@@ -170,7 +170,7 @@ const Cadastro = () =>{
                                 className="input-button"
                                 type="submit" 
                                 value="Criar conta"
-                                onClick={handleSubmit}    
+                                onClick={ () => alert("Desculpe, estamos em manutenção!!")} 
                                 />
                         </div>
                         <div className="button-entrar">
@@ -189,3 +189,9 @@ const Cadastro = () =>{
     );
 }
 export default Cadastro;
+
+
+
+/*
+    onClick={handleSubmit}
+*/

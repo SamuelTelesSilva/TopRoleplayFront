@@ -20,9 +20,10 @@ export const Container = styled.div`
 
     @media screen and (max-width: 640px){ 
         width: 100%;
+        height: 260px;
         
         .carousel{
-            width: ${props => props.width-50}px;
+            width: ${props => props.width-30}px;
         }
 
         .cont-slider{
@@ -32,11 +33,12 @@ export const Container = styled.div`
 
             img{
                 padding: 0px;
-                width: 300px;
-                height: 200px;
+                width: 100%;
+                height: 250px;
                 border-radius: 25px;
             }
         }
     }
+
 
 `;
