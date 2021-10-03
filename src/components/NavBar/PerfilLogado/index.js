@@ -67,13 +67,21 @@ const PerfilLogado = () => {
             </div>
             {element}
             <div className="botao-sair">
-                <Button 
-                    title={ authenticated ? 'Sair' : 'Entrar'} 
-                    onclick={ authenticated ? sairDoPerfil : efetuarLogin } 
-                />
+
+                
             </div>
             
         </Container>
     );
 }
 export default PerfilLogado;
+
+
+/*
+
+                <Button 
+                    title={ authenticated ? 'Sair' : 'Entrar'} 
+                    onclick={ authenticated ? sairDoPerfil : efetuarLogin } 
+                />
+
+*/

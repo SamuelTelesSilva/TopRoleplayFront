@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 
 export const Container = styled.div`
+    margin-left: 16px;
+
     .nav{
 
         ul{
@@ -10,7 +12,7 @@ export const Container = styled.div`
 
         li{
             list-style: none;
-            
+            margin-bottom: 8px;
         }
 
         a{
