@@ -16,6 +16,11 @@ export const getCityById = (id) => {
     return http.get(`/api/cidade/${id}`)
 }
 
+export const getTopCidades = () => {
+    return http.get("/api/cidade/top");
+};
+
+
 export const searchByName = (limit, paginaAtual, name) => {
     return http.get(`/api/cidade/search/${name}?size=${limit}&page=${paginaAtual}`);
 };

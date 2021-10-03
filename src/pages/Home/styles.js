@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import {HeartFill} from '@styled-icons/bootstrap';
+
 
 export const Container = styled.div`
     color: white;
@@ -12,6 +14,17 @@ export const Container = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    .cont-title-ranking{
+        display: flex;
+        align-items: center;
+
+        img{
+            width: 25px;
+            height: 25px;
+            margin-left: 10px;
+        }
     }
 
     .cont-ver-todos{
@@ -72,4 +85,10 @@ export const Container = styled.div`
         max-width: 1000px;
     }
 
+`;
+
+export const HeartFull = styled(HeartFill)`
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
 `;

@@ -8,6 +8,10 @@ export const getAllSelect = () => {
     return http.get(`/api/streamer?sort=id,desc`);
 };
 
+export const getTopStreamers = () => {
+    return http.get("/api/streamer/top");
+};
+
 export const getStreamerById = (id) => {
     return http.get(`/api/streamer/${id}`)
 }
@@ -27,7 +31,6 @@ export const registerAssociationStreamer = (idCidade, idStreamer) => {
 export const updateStreamer = (id, data) => {
     return http.put(`/api/streamer/${id}`, data);
 };
-
 
 export const updateVotacao = (id) => {
     return http.put(`/api/streamer/votar/${id}`);

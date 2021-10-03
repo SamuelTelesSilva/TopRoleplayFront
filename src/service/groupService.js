@@ -12,6 +12,10 @@ export const getGroupById = (id) => {
     return http.get(`/api/grupo/${id}`)
 }
 
+export const getTopGroup = () => {
+    return http.get("/api/grupo/top");
+};
+
 export const searchByName = (limit, paginaAtual, name) => {
     return http.get(`/api/grupo/search/${name}?size=${limit}&page=${paginaAtual}`);
 };

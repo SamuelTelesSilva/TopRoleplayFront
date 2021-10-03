@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Play } from '@styled-icons/bootstrap/Play';
-
+import {HeartFill} from '@styled-icons/bootstrap';
 
 export const Container = styled.div`
     max-width: 300px;
@@ -59,6 +59,17 @@ export const Container = styled.div`
             opacity: 0.5;
         }
     }
+
+    .cont-title-coracao{
+        display: block;
+    }
+
+    .cont-coracao{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 8px;
+    }
     
 
     @media screen and (max-width: 640px){ 
@@ -70,4 +81,10 @@ export const IconPlay = styled(Play)`
     color: white;
     width: 50px;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+
+export const HeartFull = styled(HeartFill)`
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
 `;

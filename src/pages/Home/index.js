@@ -5,12 +5,14 @@ import CarouselMain from '../../components/Carousels/CarouselMain';
 import Layout from '../../components/Layout';
 import TitleBar from '../../components/TitleBar';
 import clipe from '../../service/clipeService';
-import streamer from '../../service/streamerService';
-import cidade from '../../service/cityService';
-import grupo from '../../service/groupService';
-import { Container } from './styles';
+import streamer, { getTopStreamers } from '../../service/streamerService';
+import cidade, { getTopCidades } from '../../service/cityService';
+import grupo, { getTopGroup } from '../../service/groupService';
+import { Container, HeartFull } from './styles';
 import CardHome from '../../components/CardHome';
-
+import { getRankingById } from '../../service/ranking';
+import iconAk47 from '../../assets/iconAk47.svg';
+import iconRp from '../../assets/iconrp.svg';
 
 const Home = () =>{
 
@@ -20,6 +22,13 @@ const Home = () =>{
     const [grupos, setGrupos] = useState([]);
     const [limit] = useState(11);
     const [page] = useState(0);
+
+    const [topStreamers, setTopStreamers] = useState([]);
+    const [topCidades, setTopCidades] = useState([]);
+    const [topGrupos, setTopGrupos] = useState([]);
+
+    const [topPvp, setTopPvp] = useState([]);
+    const [topRP, setTopRP] = useState([]);
 
     useEffect(()=>{
 
@@ -48,6 +57,33 @@ const Home = () =>{
         });
 
 
+        //top 10 - votação dos usuarios
+        getTopStreamers().then( response => {
+            setTopStreamers(response.data.content);
+        }).catch(e=>{
+            console.log(e);
+        });
+
+        getTopGroup().then( response => {
+            setTopGrupos(response.data.content);
+        }).catch(e=>{
+            console.log(e);
+        });
+
+        getTopCidades().then( response => {
+            setTopCidades(response.data.content);
+        }).catch(e=>{
+            console.log(e);
+        });
+
+        //My Ranking
+        getRankingById(2).then( response => {
+            setTopPvp(response.data.melhoresPvp);
+            setTopRP(response.data.melhoresRp);
+        }).catch(e=>{
+            console.log(e);
+        });
+    
     }, [limit,page]);
 
     return(
@@ -56,8 +92,135 @@ const Home = () =>{
                 <div className="cont-slide-principal">
                     <CarouselMain page="streamer"/>
                 </div>
+
+                <div className="cont-title-ranking">
+                    <TitleBar title="OS MELHORES DO PVP"/>
+                    <img src={iconAk47} alt="icone ak47"/>
+                </div>
+                <div className="cont-slide-streamer">
+                    <CarouselHome>
+                        {
+                            topPvp.length !== 0 ?
+                            topPvp.map((str) =>(
+                                <div key={str.id} className="aux-cont-card">
+                                    <CardHome
+                                        id={str.id}
+                                        imgCard={str.urlImageCard}
+                                        altImg={str.nome}
+                                        streamer={str.nome}
+                                        linkCard={`/streamer/${str.id}/${str.nome}`}
+                                    />
+                                </div>
+                            ))
+                            : <div>Carregando...</div>
+                        }
+                    </CarouselHome>
+                </div>
+
+                <div className="cont-title-ranking">
+                    <TitleBar title="OS MELHORES DO RP"/>
+                    <img src={iconRp} alt="icone rp"/>
+                </div>
+                <div className="cont-slide-streamer">
+                    <CarouselHome>
+                        {
+                            topRP.length !== 0 ?
+                            topRP.map((str) =>(
+                                <div key={str.id} className="aux-cont-card">
+                                    <CardHome
+                                        id={str.id}
+                                        imgCard={str.urlImageCard}
+                                        altImg={str.nome}
+                                        streamer={str.nome}
+                                        linkCard={`/streamer/${str.id}/${str.nome}`}
+                                    />
+                                </div>
+                            ))
+                            : <div>Carregando...</div>
+                        }
+                    </CarouselHome>
+                </div>
+
+                <div className="cont-title-ranking">
+                    <TitleBar title="STREAMERS MAIS POPULARES"/>
+                    <HeartFull />
+                </div>
+                <div className="cont-slide-streamer">
+                    <CarouselHome>
+                        {
+                            topStreamers.length !== 0 ?
+                            topStreamers.map((str) =>(
+                                <div key={str.id} className="aux-cont-card">
+                                    <CardHome
+                                        id={str.id}
+                                        imgCard={str.urlImageCard}
+                                        altImg={str.nome}
+                                        streamer={str.nome}
+                                        linkCard={`/streamer/${str.id}/${str.nome}`}
+                                        ranking={true}
+                                        coracao={str.coracao}
+                                    />
+                                </div>
+                            ))
+                            : <div>Carregando...</div>
+                        }
+                    </CarouselHome>
+                </div>
+
+                <div className="cont-title-ranking">
+                    <TitleBar title="GRUPOS MAIS POPULARES"/>
+                    <HeartFull />
+                </div>
+                <div className="cont-slide-grupo">
+                    <CarouselHome>
+                        {
+                            topGrupos.length !== 0 ?
+                                topGrupos.map((group) =>(
+                                    <div key={group.id} className="aux-cont-card">
+                                        <CardHome
+                                            id={group.id}
+                                            imgCard={group.urlImageCard}
+                                            altImg={group.nome}
+                                            group={group.nome}
+                                            linkCard={`/grupo/${group.id}/${group.nome}`}
+                                            ranking={true}
+                                            coracao={group.coracao}
+                                        />
+                                    </div>
+                                )) 
+                            : <div>Carregando...</div>
+                        }
+                    </CarouselHome>
+                </div>
+
+                <div className="cont-title-ranking">
+                    <TitleBar title="SERVIDORES MAIS POPULARES"/>
+                    <HeartFull />
+                </div>
+                <div className="cont-slide-cidade">
+                    <CarouselHome>
+                        {
+                            topCidades.length !== 0 ?
+                                topCidades.map((city) =>(
+                                    <div key={city.id} className="aux-cont-card">
+                                        <CardHome
+                                            id={city.id}
+                                            imgCard={city.urlImageCard}
+                                            altImg={city.nome}
+                                            city={city.nome}
+                                            linkCard={`/cidade/${city.id}/${city.nome}`}
+                                            ranking={true}
+                                            coracao={city.coracao}
+                                        />
+                                    </div>
+                                ))
+                            : <div>Carregando...</div>
+                        }
+                    </CarouselHome>
+                </div>
+
                 <div className="cont-title">
-                    <TitleBar title="Últimos Clipes"/>
+                    <TitleBar title="ÚLTIMOS CLIPES"/>
                     <div className="cont-ver-todos">
                         <Link to="/clipes">
                             Ver Todos
@@ -84,7 +247,7 @@ const Home = () =>{
                     </CarouselHome>
                 </div>
                 <div className="cont-title">
-                    <TitleBar title="Streamers"/>
+                    <TitleBar title="STREAMERS"/>
                     <div className="cont-ver-todos">
                         <Link to="/streamers">
                             Ver Todos
@@ -112,7 +275,7 @@ const Home = () =>{
                 </div>
 
                 <div className="cont-title">
-                    <TitleBar title="Policia/Facção"/>
+                    <TitleBar title="GRUPOS"/>
                     <div className="cont-ver-todos">
                         <Link to="/grupos">
                             Ver Todos
@@ -145,7 +308,7 @@ const Home = () =>{
                     </div>
                 </div>
                 <div className="cont-title">
-                    <TitleBar title="Cidades"/>
+                    <TitleBar title="CIDADES"/>
                     <div className="cont-ver-todos">
                         <Link to="/cidades">
                             Ver Todos
