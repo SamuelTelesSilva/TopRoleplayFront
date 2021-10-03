@@ -196,7 +196,7 @@ const Detalhes = ( props ) => {
                                             imgCard={str.urlImageCard}
                                             altImg={str.nome}
                                             streamer={str.nome}
-                                            linkCard={`/streamer/${str.id}`}
+                                            linkCard={`/streamer/${str.id}/${str.nome}`}
                                         />
                                     </div>
                                 ))

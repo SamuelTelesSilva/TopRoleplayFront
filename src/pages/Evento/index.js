@@ -31,7 +31,7 @@ const Evento = () => {
                     eventos.map((evento)=>(
                         <div className="cont-card-evento" key={evento.id}>
                             <Link
-                                to={`/detail/${evento.id}/${evento.titulo}`}
+                                to={`/evento/${evento.id}/${evento.titulo}`}
                             >
                                 <div className="card-button-img"> 
                                     <img src={evento.urlImgCapa} alt={evento.urlImgCapa} />

@@ -79,7 +79,7 @@ const Streamer = () => {
                                     imgCard={streamer.urlImageCard}
                                     altImg={streamer.nome}
                                     streamer={streamer.nome}
-                                    linkCard={`/streamer/${streamer.id}`}
+                                    linkCard={`/streamer/${streamer.id}/${streamer.nome}`}
                                 />
                             </div>
                         ))

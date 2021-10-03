@@ -62,7 +62,6 @@ export const Container = styled.div`
     }
 
     .cont-slide-ladoA{
-        border: 1px solid red;
         width: 100%;
         min-height: 200px;
         margin-bottom: 8px;

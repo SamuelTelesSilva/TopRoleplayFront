@@ -85,7 +85,7 @@ const Grupo = () => {
                                     imgCard={grupo.urlImageCard}
                                     altImg={grupo.nome}
                                     group={grupo.nome}
-                                    linkCard={`/grupo/${grupo.id}`}
+                                    linkCard={`/grupo/${grupo.id}/${grupo.nome}`}
                                 />
                             </div>
                         ))

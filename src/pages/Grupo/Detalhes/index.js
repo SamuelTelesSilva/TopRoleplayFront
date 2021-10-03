@@ -138,7 +138,7 @@ const Detalhes = (props) => {
                                     imgCard={streamer.urlImageCard}
                                     altImg={streamer.nome}
                                     group={streamer.nome}
-                                    linkCard={`/streamer/${streamer.id}`}
+                                    linkCard={`/streamer/${streamer.id}/${streamer.nome}`}
                                 />
                             </div>
                         ))
@@ -158,7 +158,7 @@ const Detalhes = (props) => {
                                     imgCard={streamer.urlImageCard}
                                     altImg={streamer.nome}
                                     group={streamer.nome}
-                                    linkCard={`/streamer/${streamer.id}`}
+                                    linkCard={`/streamer/${streamer.id}/${streamer.nome}`}
                                 />
                             </div>
                         ))
@@ -229,7 +229,7 @@ const Detalhes = (props) => {
                                             imgCard={group.urlImageCard}
                                             altImg={group.nome}
                                             group={group.nome}
-                                            linkCard={`/grupo/${group.id}`}
+                                            linkCard={`/grupo/${group.id}/${group.nome}`}
                                         />
                                     </div>
                                 )) 

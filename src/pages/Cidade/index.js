@@ -79,7 +79,7 @@ const Cidade = () => {
                                     imgCard={city.urlImageCard}
                                     altImg={city.nome}
                                     city={city.nome}
-                                    linkCard={`/cidade/${city.id}`}
+                                    linkCard={`/cidade/${city.id}/${city.nome}`}
                                 />
                             </div>
                         ))

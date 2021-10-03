@@ -38,16 +38,16 @@ const Routes = () => {
                 <CustomRoute path="/clipe/:id/:title"  component={ Detalhes }/>
 
                 <CustomRoute path="/streamers"  component={ Streamer }/>
-                <CustomRoute path="/streamer/:id" component={ StreamerDetail }/>
+                <CustomRoute path="/streamer/:id/:nome" component={ StreamerDetail }/>
 
                 <CustomRoute path="/cidades"  component={ Cidade }/>
-                <CustomRoute path="/cidade/:id"  component={ CityDetail }/>
+                <CustomRoute path="/cidade/:id/:nome"  component={ CityDetail }/>
 
                 <CustomRoute path="/grupos"  component={ Grupo }/>
-                <CustomRoute path="/grupo/:id"  component={ GrupoDetail }/>
+                <CustomRoute path="/grupo/:id/:nome"  component={ GrupoDetail }/>
                 
                 <CustomRoute path="/eventos" component={ Evento } />
-                <CustomRoute path="/detail/:id/:title" component={ EventoDetail } />
+                <CustomRoute path="/evento/:id/:title" component={ EventoDetail } />
                 
                 <CustomRoute path="/login" component={ Login } />
                 <CustomRoute path="/register" component={ Cadastro } />

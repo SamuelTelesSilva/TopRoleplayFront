@@ -102,7 +102,7 @@ const Home = () =>{
                                             imgCard={str.urlImageCard}
                                             altImg={str.nome}
                                             streamer={str.nome}
-                                            linkCard={`/streamer/${str.id}`}
+                                            linkCard={`/streamer/${str.id}/${str.nome}`}
                                         />
                                     </div>
                                 ))
@@ -130,7 +130,7 @@ const Home = () =>{
                                             imgCard={group.urlImageCard}
                                             altImg={group.nome}
                                             group={group.nome}
-                                            linkCard={`/grupo/${group.id}`}
+                                            linkCard={`/grupo/${group.id}/${group.nome}`}
                                         />
                                     </div>
                                 )) 
@@ -163,7 +163,7 @@ const Home = () =>{
                                             imgCard={city.urlImageCard}
                                             altImg={city.nome}
                                             city={city.nome}
-                                            linkCard={`/cidade/${city.id}`}
+                                            linkCard={`/cidade/${city.id}/${city.nome}`}
                                         />
                                     </div>
                                 ))
