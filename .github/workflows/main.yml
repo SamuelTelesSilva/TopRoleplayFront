@@ -1,7 +1,4 @@
-on: 
-  push:
-    branches:
-      - main
+on: push
 name: 🚀 Deploy website on push
 jobs:
   web-deploy:
@@ -21,16 +18,10 @@ jobs:
         npm install
         npm run build
     
-    - name: List output files
-      run: find build/ -print
-    
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.1.0
       with:
         server: ${{ secrets.ftp_host }}
         username: ${{ secrets.ftp_user }}
         password: ${{ secrets.ftp_password }}
-        local-dir: build/
         server-dir: public_html/teste/
-
-
