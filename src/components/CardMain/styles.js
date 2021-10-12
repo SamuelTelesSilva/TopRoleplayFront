@@ -21,7 +21,7 @@ export const Container = styled.div`
 
 
     .area-img-card{
-        max-width: 230px;
+        width: 230px;
         height: 220px;
         z-index: 1;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

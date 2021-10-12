@@ -39,7 +39,7 @@ export const Container = styled.div`
     .img-perfil-city{
         
         width: 450px;
-        height: auto;
+        height: 300px;
 
         img{
             width: 100%;

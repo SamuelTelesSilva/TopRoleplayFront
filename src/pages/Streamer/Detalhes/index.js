@@ -1,7 +1,6 @@
 import React,{ useState, useEffect } from 'react';
 import Layout from '../../../components/Layout';
 import { Container, HeartEmpty, HeartFull } from './styles';
-import ReactPlayer from 'react-player';
 import TitleBar from '../../../components/TitleBar';
 import { getStreamerById, getAll, updateVotacao} from '../../../service/streamerService'
 import Heart from '../../../components/Heart';
@@ -9,6 +8,7 @@ import { Link } from 'react-router-dom';
 import CarouselHome from '../../../components/Carousels/CarouselHome';
 import CardHome from '../../../components/CardHome';
 import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
+import Publicity from '../../../components/Publicity';
 
 const Detalhes = ( props ) => {
 
@@ -117,16 +117,12 @@ const Detalhes = ( props ) => {
                     </div>
                 </div>
 
-                <div className="cont-player-react">
-                    <div className="player-react">
-                        <ReactPlayer 
-                            url={streamer.urlPlataformaStream}
-                            height="360px"
-                            width="100%"
-                        />
-                    </div>
-                </div>
-
+                <Publicity
+                    width={300}
+                    height={250}
+                    quantidade={2}
+                />
+                
                 <div className="area-title-bar">
                     <TitleBar title="Redes Sociais"/>
                 </div>
@@ -210,3 +206,18 @@ const Detalhes = ( props ) => {
     );
 }
 export default Detalhes;
+
+
+/*
+import ReactPlayer from 'react-player';
+Player de video desativado
+<div className="cont-player-react">
+    <div className="player-react">
+        <ReactPlayer 
+            url={streamer.urlPlataformaStream}
+            height="360px"
+            width="100%"
+        />
+    </div>
+</div>
+*/

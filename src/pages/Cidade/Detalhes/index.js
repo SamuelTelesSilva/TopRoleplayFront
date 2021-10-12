@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import CarouselHome from '../../../components/Carousels/CarouselHome';
 import CardHome from '../../../components/CardHome';
 import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
+import Publicity from '../../../components/Publicity';
 
 const Detalhes = (props) => {
 
@@ -110,6 +111,12 @@ const Detalhes = (props) => {
                         </div>    
                     </div>
                 </div>
+
+                <Publicity
+                    width={300}
+                    height={250}
+                    quantidade={2}
+                />
 
                 <div className="area-title-bar">
                     <TitleBar title="Redes Sociais"/>

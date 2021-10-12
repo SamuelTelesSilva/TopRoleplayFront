@@ -16,7 +16,7 @@ const Detalhes = (props) => {
     const [streamersLadoA, setStreamersLadoA] = useState([]);
     const [streamersLadoB, setStreamersLadoB] = useState([]);
     const [telasAtivas, setTelasAtivas] = useState(2);
-    const parent = "localhost"; //www.example.com tutorial salvo nos favoritos, 
+    const parent = "www.toproleplay.com"; //www.example.com tutorial salvo nos favoritos, 
 
     let tela2 = null;
     let tela4 = null;

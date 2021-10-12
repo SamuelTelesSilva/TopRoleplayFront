@@ -47,21 +47,7 @@ export const Container = styled.div`
         margin-bottom: 8px;
     }
 
-    .cont-publicity{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-        width: 100%;
-        min-height: 200px;
-    }
-
-    .publicity{
-        width: 100%;
-        max-width: 600px;
-        height: 120px;
-        border: 1px solid red;
-    }
+    
 
     .cont-slide-grupo{
         width: 100%;

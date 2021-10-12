@@ -7,9 +7,10 @@ import useWindowDimensions from '../../useWindowDimensions';
 
 const CarouselHome = (props) => {
 
-    const [clips, setClips] = useState([]);
-    const { width } = useWindowDimensions();
+  //const [clips, setClips] = useState([]);
+  const { width } = useWindowDimensions();
 
+    /*
     useEffect(()=>{
       getAllSelect().then( response => {
         setClips(response.data.content);
@@ -17,6 +18,7 @@ const CarouselHome = (props) => {
         console.log(e);
       });
     }, []);
+    */
 
     //setttings do Slick
     var settings = {
@@ -66,14 +68,21 @@ const CarouselHome = (props) => {
       <Container width={ width }>
         <div className="cont-slider">
           {
-            clips.length === 0 ? '' : (
-              <Slider {...settings} >
-                {props.children}
-              </Slider>
-            )
+            <Slider {...settings} >
+              {props.children}
+            </Slider>
           }
         </div>
       </Container>
     );
 }
 export default CarouselHome;
+
+/*
+não sei pq esta aqui
+clips.length === 0 ? '' : (
+              <Slider {...settings} >
+                {props.children}
+              </Slider>
+            )
+            */

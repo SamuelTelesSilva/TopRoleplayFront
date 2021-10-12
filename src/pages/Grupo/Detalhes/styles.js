@@ -38,7 +38,7 @@ export const Container = styled.div`
     .img-perfil-group{
         
         width: 450px;
-        height: auto;
+        height: 300px;
 
         img{
             width: 100%;

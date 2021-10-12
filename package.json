@@ -1,5 +1,6 @@
 {
   "name": "toproleplay",
+  "homepage": "http://toproleplay.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

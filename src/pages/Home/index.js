@@ -13,6 +13,7 @@ import CardHome from '../../components/CardHome';
 import { getRankingById } from '../../service/ranking';
 import iconAk47 from '../../assets/iconAk47.svg';
 import iconRp from '../../assets/iconrp.svg';
+import Publicity from '../../components/Publicity/index';
 
 const Home = () =>{
 
@@ -39,6 +40,7 @@ const Home = () =>{
         });
 
         streamer.getAll(limit,page).then( response => {
+            //console.log(response.data.content)
             setStreamers(response.data.content);
         }).catch(e=>{
             console.log(e);
@@ -76,8 +78,8 @@ const Home = () =>{
             console.log(e);
         });
 
-        //My Ranking
-        getRankingById(2).then( response => {
+        //My Ranking, id do primeiro ranking
+        getRankingById(1).then( response => {
             setTopPvp(response.data.melhoresPvp);
             setTopRP(response.data.melhoresRp);
         }).catch(e=>{
@@ -86,13 +88,17 @@ const Home = () =>{
     
     }, [limit,page]);
 
+    
     return(
         <Layout>
             <Container>
                 <div className="cont-slide-principal">
                     <CarouselMain page="streamer"/>
                 </div>
-
+                <Publicity
+                    width={320}
+                    height={100}
+                />
                 <div className="cont-title-ranking">
                     <TitleBar title="OS MELHORES DO PVP"/>
                     <img src={iconAk47} alt="icone ak47"/>
@@ -140,7 +146,7 @@ const Home = () =>{
                         }
                     </CarouselHome>
                 </div>
-
+                
                 <div className="cont-title-ranking">
                     <TitleBar title="STREAMERS MAIS POPULARES"/>
                     <HeartFull />
@@ -302,11 +308,14 @@ const Home = () =>{
                     </CarouselHome>
                 </div>
             
-                <div className="cont-publicity" style={{display: 'none'}}>
-                    <div className="publicity">
-                        Propaganda
-                    </div>
-                </div>
+                {//Bloco de Anuncio do google adsense, 300px por 250px
+                }
+                <Publicity
+                    width={300}
+                    height={250}
+                    quantidade={2}
+                />
+
                 <div className="cont-title">
                     <TitleBar title="CIDADES"/>
                     <div className="cont-ver-todos">

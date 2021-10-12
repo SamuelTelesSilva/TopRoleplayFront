@@ -27,7 +27,7 @@ export const streamersDestaque = [
     id: 3,
     streamer: 'GabePeixe',
     isTwitch: false,
-    imgCapa: 'https://scontent-gru2-2.xx.fbcdn.net/v/t1.6435-9/211403535_342050333950310_1350648798444546705_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=e3f864&_nc_ohc=2J4SLAUvQoIAX9F7HxJ&_nc_ht=scontent-gru2-2.xx&oh=af876de1b0ea225894edbd5ccec569c2&oe=61561D50',
+    imgCapa: 'https://s2.glbimg.com/NnaOntxb0KGSaq7E5xF2nftuDDU=/0x0:600x200/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2021/A/O/0fI03tSAeYaGhLxR4Lpw/cidadealta.jpg',
     link: '/streamer/123'
   },
 ];
