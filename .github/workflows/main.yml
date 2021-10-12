@@ -1,31 +1,27 @@
 on: push
-name: 🚀 Deploy website on push
+name: Build and Publish Website
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2
-    - name: Use Node.js 12
-      uses: actions/setup-node@v2-beta
-      with:
-        node-version: '12'
-      
-    - name: 🔨 Build Project
-      run: |
-        npm install
-        npm run build
-    
-    - name: List output files
-      run: find build/ -print
-      
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.1.0
-      with:
+    - uses: actions/checkout@v1
+    - name: Project setup
+      run: npm install
+    - name: Compile javascript
+      run: npm run build
+    - name: List files
+      run: ls -al
+    - name: Location
+      run: pwd
+    - name : FTP-Deploy
+      uses: SamKirkland/FTP-Deploy-Action@master
+      env: 
         server: ${{ secrets.ftp_host }}
         username: ${{ secrets.ftp_user }}
         password: ${{ secrets.ftp_password }}
         local-dir: build/
         server-dir: public_html/teste/
 
+
+
+        
