@@ -1,25 +1,46 @@
-on: push
-name: Build and Publish Website
+on: 
+  push:
+    branches:
+      - main
+name: 🚀 Deploy website on push
 jobs:
-  build:
+  web-deploy:
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Project clean
+
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+
+    - name: Use Node.js 12
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12'
+
+    - name: 🔨 Removendo os modulos do Project  
+      run: rm -r node_modules
+    
+    - name: 🔨 Removendo arquivos do Project  
+      run: rm package-lock.json yarn.lock
+
+    - name: 🔨 Clean Project
       run: npm cache clean --force
-    - name: Project setup
+    
+    - name: 🔨 instalando o npm Project 
       run: npm install
-    - name: Compile javascript
+
+    - name: 🔨 Build Project
       run: npm run build
-    - name: List files
-      run: ls -al
-    - name: Location
-      run: pwd
-    - name : FTP-Deploy
-      uses: SamKirkland/FTP-Deploy-Action@master
-      env: 
+    
+    - name: List output files
+      run: find build/ -print
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      with:
         server: ${{ secrets.ftp_host }}
         username: ${{ secrets.ftp_user }}
         password: ${{ secrets.ftp_password }}
         local-dir: build/
-        server-dir: public_html/teste/
+        server-dir: public_html/
+        
