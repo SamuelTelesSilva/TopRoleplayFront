@@ -16,9 +16,6 @@ jobs:
       uses: actions/setup-node@v2-beta
       with:
         node-version: '12'
-
-    - name: 🔨 Removendo os modulos do Project  
-      run: rm -r node_modules
     
     - name: 🔨 Removendo arquivos do Project  
       run: rm package-lock.json yarn.lock
