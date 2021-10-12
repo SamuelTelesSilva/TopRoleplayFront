@@ -177,7 +177,7 @@ const Detalhes = (props) => {
                                     />
                                 </div>
                             ))
-                            : <div>Carregando...</div>
+                            : <div>Carregando..</div>
                         }
                     </CarouselHome>
                 </div>
