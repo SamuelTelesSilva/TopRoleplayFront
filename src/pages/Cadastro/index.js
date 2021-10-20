@@ -1,9 +1,13 @@
-import React, {useState} from 'react';
-import {Grid, Main, Header, Footer} from './styles';
-import {Link} from 'react-router-dom';
+import React, { useState } from 'react';
+import { 
+    Grid, 
+    Main, 
+    Header, 
+    Footer
+} from './styles';
+import { Link } from 'react-router-dom';
 import Button from '../../components/Button/index';
-import { criarUsuario } from '../../service/usuarioService';
-import history from '../../history';
+
 
 
 const Cadastro = () =>{
@@ -72,6 +76,7 @@ const Cadastro = () =>{
         }
     }
 
+    /*
     //Função que envia os dados para api
     async function handleSubmit(){
         const data = {
@@ -96,6 +101,7 @@ const Cadastro = () =>{
             validarDadosInput();
         }
     }
+    */
 
     return(
         <Grid>

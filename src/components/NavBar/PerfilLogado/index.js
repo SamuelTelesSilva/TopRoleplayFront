@@ -1,8 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import {Container, SettingsOutlineIcon, CreateIcon} from './styles';
-import {useAuth} from '../../../providers/auth';
-import Button from '../../Button/index';
-import history from '../../../history';
+import React, { useState, useEffect } from 'react';
+import { 
+    Container, 
+    SettingsOutlineIcon, 
+    CreateIcon 
+} from './styles';
+import { useAuth } from '../../../providers/auth';
 import { Link } from 'react-router-dom';
 
 const PerfilLogado = () => {
@@ -19,9 +21,12 @@ const PerfilLogado = () => {
     const urlAvatar = localStorage.getItem('urlAvatar');
     let element;
 
+    /*
     const efetuarLogin = () => {
         history.push('/login');
     }
+    
+
     const sairDoPerfil = () =>{
         localStorage.removeItem('id');
         localStorage.removeItem('token');
@@ -32,6 +37,7 @@ const PerfilLogado = () => {
         window.location.reload(); //fazendo um reload
         history.push('/');
     }
+    */
 
     if(role !== null){
         if(authenticated && role === 'ROLE_USER'){

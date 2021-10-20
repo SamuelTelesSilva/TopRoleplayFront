@@ -94,9 +94,11 @@ const CarouselMain = (props) => {
     slidesToScroll: 1,
     initialSlide: 0,
     className: "carousel",
+    
+
     responsive: [
       {
-        breakpoint: 1025,
+        breakpoint: 1105,
         settings: {
           slidesToShow: 1.0,
           slidesToScroll: 3,

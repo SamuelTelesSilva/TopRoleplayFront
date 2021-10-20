@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { Container } from './styles';
 import Slider from "react-slick";
-import { getAllSelect } from '../../../service/clipeService';
 import useWindowDimensions from '../../useWindowDimensions';
 
 

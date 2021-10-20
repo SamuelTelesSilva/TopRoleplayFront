@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, IconPlay, HeartFull } from './styles';
+import { 
+    Container, 
+    IconPlay 
+} from './styles';
 import Heart from '../Heart/index';
 
 const CardHome = (props) => {
@@ -51,5 +54,3 @@ const CardHome = (props) => {
     );
 }
 export default CardHome;
-
-//

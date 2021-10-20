@@ -18,12 +18,22 @@ export const Container = styled.div`
     }
 
 
-    @media screen and (max-width: 640px){ 
+    @media screen and (max-width: 1200px){ 
         width: 100%;
         height: 260px;
         
         .carousel{
             width: ${props => props.width-30}px;
+
+            .slick-prev {
+                left: 0px;
+                z-index:999;
+            }
+
+            .slick-next {
+                right: 20px;
+            }
+            
         }
 
         .cont-slider{
