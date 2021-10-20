@@ -100,7 +100,7 @@ const Detalhes = ( props ) => {
                 <div className="cont-perfil-streamer">
                     <div className="img-perfil-streamer">
                         <img 
-                            src={streamer.urlImageCard}
+                            src={streamer.urlImageCapa}
                             alt={streamer.nome} 
                         />
                     </div>
@@ -131,6 +131,7 @@ const Detalhes = ( props ) => {
                     <div className="cont-redes-sociais">
                         <a
                             href={streamer.urlFacebook}
+                            target="_blank" rel="noopener noreferrer"
                         >
                             <div className="rede-social">
                                 Facebook
@@ -138,6 +139,7 @@ const Detalhes = ( props ) => {
                         </a>
                         <a
                             href={streamer.urlInstagram}
+                            target="_blank" rel="noopener noreferrer"
                         >
                             <div className="rede-social">
                                 Instagram
@@ -145,6 +147,7 @@ const Detalhes = ( props ) => {
                         </a>
                         <a
                             href={streamer.urlTwitter}
+                            target="_blank" rel="noopener noreferrer"
                         >
                             <div className="rede-social">
                                 Twitter
@@ -152,6 +155,7 @@ const Detalhes = ( props ) => {
                         </a>
                         <a
                             href={streamer.urlPlataformaStream}
+                            target="_blank" rel="noopener noreferrer"
                         >
                             <div className="rede-social">
                                 Stream
@@ -200,7 +204,6 @@ const Detalhes = ( props ) => {
                         }
                     </CarouselHome>
                 </div>
-                
             </Container>
         </Layout>
     );
@@ -220,4 +223,9 @@ Player de video desativado
         />
     </div>
 </div>
+
+
+
+
+                
 */

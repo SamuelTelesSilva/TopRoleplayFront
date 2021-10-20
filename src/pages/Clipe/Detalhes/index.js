@@ -75,7 +75,9 @@ const Detalhes = ( props ) => {
                 </div>
                 <div className="area-button-streamer">     
                     <a 
-                        href={`${clipe.length !== 0 ? clipe.streamer.urlPlataformaStream : '/'}`}>
+                        href={`${clipe.length !== 0 ? clipe.streamer.urlPlataformaStream : '/'}`}
+                        target="_blank" rel="noopener noreferrer"
+                    >
                         <Button title="Conheça o Streamer"/>
                     </a>
                 </div>

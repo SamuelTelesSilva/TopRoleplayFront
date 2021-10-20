@@ -5,7 +5,7 @@ const Footer = () => {
     return(
         <Container>
             <div className="aux-cont">
-                © 2021 TopRoleplay. Todos os Direitos do Código do Site Reservados, by S.Teles!
+                © 2021 TopRoleplay. Todos os direitos reservados.
             </div>
         </Container>
     );

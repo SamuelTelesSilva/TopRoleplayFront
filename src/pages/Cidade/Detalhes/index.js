@@ -95,7 +95,7 @@ const Detalhes = (props) => {
                 <div className="cont-perfil-city">
                     <div className="img-perfil-city">
                         <img 
-                            src={cidade.urlImageCard}
+                            src={cidade.urlImageCapa}
                             alt={cidade.nome} 
                         />
                     </div>
@@ -126,6 +126,7 @@ const Detalhes = (props) => {
                     <div className="cont-redes-sociais">
                         <a
                             href={cidade.urlInstagram}
+                            target="_blank" rel="noopener noreferrer"
                         >
                             <div className="rede-social">
                                 Instagram
@@ -133,6 +134,7 @@ const Detalhes = (props) => {
                         </a>
                         <a
                             href={cidade.urlTwitter}
+                            target="_blank" rel="noopener noreferrer"
                         >
                             <div className="rede-social">
                                 Twitter
@@ -140,6 +142,7 @@ const Detalhes = (props) => {
                         </a>
                         <a
                             href={cidade.urlDiscord}
+                            target="_blank" rel="noopener noreferrer"
                         >
                             <div className="rede-social">
                                 Discord

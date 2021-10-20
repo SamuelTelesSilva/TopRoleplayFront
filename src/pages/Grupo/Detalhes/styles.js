@@ -142,6 +142,18 @@ export const Container = styled.div`
         }
     }
 
+    .area-button-streamer{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+
+        a{
+            width: 100%;
+            max-width: 250px;
+            text-decoration: none;
+        }
+    }
+
 
 
     @media screen and (max-width: 640px){ 

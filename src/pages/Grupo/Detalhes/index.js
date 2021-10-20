@@ -10,6 +10,8 @@ import CarouselHome from '../../../components/Carousels/CarouselHome';
 import CardHome from '../../../components/CardHome';
 import NavegacaoEstrutural from '../../../components/NavegacaoEstrutural';
 import Publicity from '../../../components/Publicity';
+import Button from '../../../components/Button/index';
+
 
 const Detalhes = (props) => {
 
@@ -95,7 +97,7 @@ const Detalhes = (props) => {
                 <div className="cont-perfil-group">
                     <div className="img-perfil-group">
                         <img 
-                            src={grupo.urlImageCard}
+                            src={grupo.urlImageCapa}
                             alt={grupo.nome} 
                         />
                     </div>
@@ -126,11 +128,7 @@ const Detalhes = (props) => {
                     </div>
                 </div>
 
-                <Publicity
-                    width={300}
-                    height={250}
-                    quantidade={2}
-                />
+                <Publicity />
 
                 <div className="area-title-bar">
                     <TitleBar title="Líder"/>
@@ -153,7 +151,7 @@ const Detalhes = (props) => {
                 </div>
 
                 <div className="area-title-bar">
-                    <TitleBar title="Membros"/>
+                    <TitleBar title="Integrantes"/>
                 </div>
                 <div className="area-content-member">
                     {   
@@ -172,6 +170,14 @@ const Detalhes = (props) => {
                     }
                 </div>
                 
+                <div className="area-button-streamer">     
+                    <a 
+                        href="https://docs.google.com/forms/d/1U0TnSqCPw14jJKz-q7URgR7pKJCGZzjXdFLEjHqW0EI/viewform?edit_requested=true"
+                        target="_blank" rel="noopener noreferrer"
+                    >
+                        <Button title="Adicionar um novo integrante"/>
+                    </a>
+                </div>
 
                 <div className="area-title-bar">
                     <TitleBar title="Redes Sociais"/>
@@ -181,6 +187,7 @@ const Detalhes = (props) => {
                     <div className="cont-redes-sociais">
                         <a
                             href={grupo.urlInstagram}
+                            target="_blank" rel="noopener noreferrer"
                         >
                             <div className="rede-social">
                                 Instagram
@@ -188,6 +195,7 @@ const Detalhes = (props) => {
                         </a>
                         <a
                             href={grupo.urlTwitter}
+                            target="_blank" rel="noopener noreferrer"
                         >
                             <div className="rede-social">
                                 Twitter
@@ -195,6 +203,7 @@ const Detalhes = (props) => {
                         </a>
                         <a
                             href={grupo.urlDiscord}
+                            target="_blank" rel="noopener noreferrer"
                         >
                             <div className="rede-social">
                                 Discord
@@ -203,7 +212,6 @@ const Detalhes = (props) => {
                     </div>
                 </div>
                 
-
                 <div className="area-title-bar">
                     <TitleBar title="Seu Grupo Favorito?"/>
                 </div>
@@ -216,7 +224,6 @@ const Detalhes = (props) => {
                         }
                     </div>
                 </div>
-
                 <div className="cont-title">
                     <TitleBar title="Policia/Facção"/>
                     <div className="cont-ver-todos">
@@ -244,7 +251,6 @@ const Detalhes = (props) => {
                         }
                     </CarouselHome>
                 </div>
-            
             </Container>
         </Layout>
     );

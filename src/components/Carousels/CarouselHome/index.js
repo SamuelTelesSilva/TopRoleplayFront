@@ -29,9 +29,11 @@ const CarouselHome = (props) => {
       slidesToScroll: 1,
       initialSlide: 0,
       className: "carousel",
+      arrows: false,
+      
       responsive: [
         {
-          breakpoint: 1025,
+          breakpoint: 1100,
           settings: {
             slidesToShow: 3.5,
             slidesToScroll: 3,
@@ -63,6 +65,8 @@ const CarouselHome = (props) => {
         
       ]
     };
+
+    console.log(width)
 
     return(
       <Container width={ width }>

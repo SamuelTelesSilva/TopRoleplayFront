@@ -11,24 +11,30 @@ export const streamersDestaque = [
     id: 1,
     streamer: 'Coringa',
     isTwitch: true,
-    imgCapa: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400/36852b101728679.5f259b7eed03d.png',
-    link: '/streamer/128'
+    imgCapa: 'https://pbs.twimg.com/profile_banners/212362291/1617404059/1500x500',
+    link: '/streamer/2/LOUD%20Coringa'
   },
 
   {
     id: 2,
-    streamer: 'Gaules',
+    streamer: 'Gabepeixe',
     isTwitch: true,
-    imgCapa: 'https://mir-s3-cdn-cf.behance.net/project_modules/fs/d5c84a103630841.5f510d0e75811.jpg',
-    link: '/streamer/124'
+    imgCapa: 'https://pbs.twimg.com/profile_banners/2885549001/1565001664/1500x500',
+    link: '/streamer/1/Gabepeixe'
   },
   
   {
     id: 3,
-    streamer: 'GabePeixe',
+    streamer: 'Piuzinho',
     isTwitch: false,
-    imgCapa: 'https://s2.glbimg.com/NnaOntxb0KGSaq7E5xF2nftuDDU=/0x0:600x200/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2021/A/O/0fI03tSAeYaGhLxR4Lpw/cidadealta.jpg',
-    link: '/streamer/123'
+    imgCapa: 'https://scontent-gru2-2.xx.fbcdn.net/v/t1.6435-9/131342495_209382564013594_5246409661660566257_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=e3f864&_nc_ohc=c7hkEtfgmRsAX8S9Pct&_nc_ht=scontent-gru2-2.xx&oh=0be57475dae37112dedc2ca90c1797af&oe=618B5C6B',
+    link: '/streamer/4/Piuzinho'
+  },
+  {
+    id: 4,
+    nome: 'Luquet4',
+    imgCapa: 'https://i.postimg.cc/G3j166qB/luqueta.jpg',
+    link: '/streamer/5/Luquet4'
   },
 ];
 
@@ -38,23 +44,15 @@ export const CidadeDestaque = [
   {
     id: 1,
     nome: 'Cidade Alta',
-    imgCapa: 'https://scontent-gru1-2.xx.fbcdn.net/v/t1.6435-9/159958443_268427684735114_1575449350818617925_n.png?_nc_cat=110&ccb=1-5&_nc_sid=e3f864&_nc_ohc=PY0_Y7_4OuQAX-YBG3D&_nc_ht=scontent-gru1-2.xx&oh=b1e0a7942a5d61d08123be630293bc26&oe=615FFB60',
-    link: '/cidade/28'
+    imgCapa: 'https://i.postimg.cc/FKYqRByx/cidade-alta.png',
+    link: '/cidade/1/Cidade%20Alta'
   },
-
   {
     id: 2,
     nome: 'Complexo',
-    imgCapa: 'https://gkpb.com.br/wp-content/uploads/2021/08/gkpb-fluxo-gta-rp.jpg',
-    link: '/cidade/27'
-  },
-  
-  {
-    id: 3,
-    nome: 'Hype',
-    imgCapa: 'https://i.ytimg.com/vi/KaL5v-iI35Q/maxresdefault.jpg',
-    link: '/cidade/22'
-  },
+    imgCapa: 'https://pbs.twimg.com/profile_banners/1426649381000949760/1629475654/1500x500',
+    link: '/cidade/3/Complexo'
+  }
 ];
 
 
@@ -63,21 +61,21 @@ export const GrupoDestaque = [
   {
     id: 1,
     nome: 'Laranjas',
-    imgCapa: 'https://i.ytimg.com/vi/eo_n_-fhOek/maxresdefault.jpg',
-    link: '/grupo/4'
+    imgCapa: 'https://pbs.twimg.com/profile_banners/1422605305922428929/1633309841/1500x500',
+    link: '/grupo/2/Laranjas'
   },
 
   {
     id: 2,
     nome: 'Grota',
-    imgCapa: 'https://gkpb.com.br/wp-content/uploads/2021/08/gkpb-fluxo-gta-rp-696x392.jpg',
-    link: '/grupo/4'
+    imgCapa: 'https://i.postimg.cc/G3j166qB/luqueta.jpg',
+    link: '/grupo/3/GROTA'
   },
   {
     id: 3,
     nome: 'Elements',
     imgCapa: 'https://i.ytimg.com/vi/pBobysZQiBk/maxresdefault.jpg',
-    link: '/grupo/4'
+    link: '/grupo/4/Elements'
   },
 ];
 

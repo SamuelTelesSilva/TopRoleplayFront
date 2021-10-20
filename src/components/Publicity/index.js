@@ -1,39 +1,20 @@
 import React from 'react';
 import { Container } from './styles';
+import AdSense from 'react-adsense';
 
 const Publicity = (props) => {
     return(
-        <Container width={props.width} height={props.height}>
-           <div className="cont-publicity">
-            {
-                props.quantidade === 2 ? (
-                    <div className="cont-adsense">
-                        <div className="publicity">
-                            <script 
-                                async 
-                                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3644361366402429"
-                                crossorigin="anonymous"    
-                            /> 
-                        </div>
-                        <div className="publicity">
-                            <script 
-                                async 
-                                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3644361366402429"
-                                crossorigin="anonymous"    
-                            /> 
-                        </div>
-                    </div>
-                ):(
-                    <div className="publicity">
-                        <script 
-                            async 
-                            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3644361366402429"
-                            crossorigin="anonymous"    
-                        /> 
-                    </div>
-                )
-            }
-            </div>
+        <Container>
+           
+            <AdSense.Google
+                className="publicidade"
+                client='ca-pub-3644361366402429'
+                slot='7676240737'
+                style={{ display: 'block'}}
+                format='auto'
+                responsive='true'
+            />
+          
         </Container>
     );
 }

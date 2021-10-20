@@ -48,6 +48,7 @@ export const Container = styled.div`
     }
 
     .detail-perfil-streamer{
+        
         display: flex;
         align-items: center;
         margin-left: 10px;  
@@ -58,6 +59,7 @@ export const Container = styled.div`
     }
 
     .area-title-bar{
+        width: 50%;
         margin-top: 18px;
     }
 

@@ -95,10 +95,7 @@ const Home = () =>{
                 <div className="cont-slide-principal">
                     <CarouselMain page="streamer"/>
                 </div>
-                <Publicity
-                    width={320}
-                    height={100}
-                />
+                <Publicity/>
                 <div className="cont-title-ranking">
                     <TitleBar title="OS MELHORES DO PVP"/>
                     <img src={iconAk47} alt="icone ak47"/>
