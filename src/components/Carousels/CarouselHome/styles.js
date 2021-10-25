@@ -18,6 +18,15 @@ export const Container = styled.div`
         
         .carousel{
             width: ${props => props.width-50}px;
+
+            .slick-prev {
+                left: 0px;
+                z-index:999;
+            }
+
+            .slick-next {
+                right: 20px;
+            }
         }
 
         .cont-slider{

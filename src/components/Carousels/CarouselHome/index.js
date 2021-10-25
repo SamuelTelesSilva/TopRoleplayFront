@@ -28,7 +28,6 @@ const CarouselHome = (props) => {
       slidesToScroll: 1,
       initialSlide: 0,
       className: "carousel",
-      arrows: false,
       
       responsive: [
         {
